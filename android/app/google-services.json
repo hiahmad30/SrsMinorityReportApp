@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "244698211631",
+    "firebase_url": "https://srsproject-a3dc9.firebaseio.com",
+    "project_id": "srsproject-a3dc9",
+    "storage_bucket": "srsproject-a3dc9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:244698211631:android:c26cfcf4f0b5009f95adda",
+        "android_client_info": {
+          "package_name": "com.EngrA.SRSRatingSystem"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "244698211631-q03mu6ha9hs5m4v0sob110oarulg1rr2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.EngrA.SRSRatingSystem",
+            "certificate_hash": "0d3248154b37638c2f0a0f4f6ee0da4db10f559b"
+          }
+        },
+        {
+          "client_id": "244698211631-ghhds9rbjh97je8sg9aamv6cudqbf8va.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUEHe_cfhdz64mrx5UzqX5FuhB3kQUsuc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "244698211631-ghhds9rbjh97je8sg9aamv6cudqbf8va.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
