@@ -8,9 +8,12 @@ class AboutUsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final policyH = Padding(
       padding: EdgeInsets.all(8.0),
-      child: Text(
-        'About Us',
-        style: TextStyle(fontSize: 28.0, color: Colors.white),
+      child: Padding(
+        padding: const EdgeInsets.only(top: 40.0),
+        child: Text(
+          'About Us',
+          style: TextStyle(fontSize: 28.0, color: Colors.white),
+        ),
       ),
     );
 
@@ -22,11 +25,11 @@ class AboutUsPage extends StatelessWidget {
             height: 30,
           ),
           Text(
-            '      One of the easiest ways to change this is by supporting black owned restaurants. I believe that if people have a place where they can find all the minority owned restaurants in this country, more of us will start to support these small businesses.\n Minority Reports is a black owned Bussiness locator. Our Application features over 2000+ black owned cafes, diners,Police Stations, and restaurants nationwide. Now its easy to find soul food, Bussiness, Police Officer , and African eateries in any place.\nThere\' s only one thing that everyone in this world has in common; we all love great tasting food!',
+            '      Minority Reports is a black owned Bussiness locator. Our Application features over 2000+ black owned cafes, diners,Police Stations, and restaurants nationwide. Now its easy to find soul food, Bussiness, Police Officer , and African eateries in any place.\n',
             style: TextStyle(color: MyColors.listp1Font, fontSize: 16),
           ),
           SizedBox(
-            height: 10,
+            height: 70,
           ),
           Text(
             'Contact info:',
