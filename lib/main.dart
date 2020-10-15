@@ -1,4 +1,3 @@
-
 import 'package:firebase_core/firebase_core.dart';
 
 import 'package:flutter/material.dart';
@@ -8,10 +7,9 @@ import 'Pages/First_Page.dart';
 import 'Pages/ListPage.dart';
 import 'Pages/login_page.dart';
 import 'Pages/signup_page.dart';
-import 'Utils/Consts.dart';
 
 void main() async {
-   //Auth _auth=new Auth();
+  //Auth _auth=new Auth();
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
