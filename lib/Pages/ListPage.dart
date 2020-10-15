@@ -1,4 +1,3 @@
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -16,8 +15,6 @@ class RatingList extends StatefulWidget {
 }
 
 class _RatingListState extends State<RatingList> {
-
-
   final List<Widget> imageSliders = imgList
       .map((item) => Container(
             child: Container(
@@ -130,7 +127,7 @@ class _RatingListState extends State<RatingList> {
                         ),
                         InkWell(
                             onTap: () async {
-                              if (u_id == ""||u_id==null) {
+                              if (u_id == "" || u_id == null) {
                                 await showMyDialog(
                                     context, "Alert", "Please Login First");
                                 Navigator.pushReplacement(
