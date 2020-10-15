@@ -43,7 +43,7 @@ class AboutUsPage extends StatelessWidget {
           ),
           Row(
             children: [
-              Icon(Icons.person),
+              Icon(Icons.person,color: MyColors.listp1Font,),
               Text(
                 '  K. Ivey ',
                 style: TextStyle(
@@ -55,7 +55,7 @@ class AboutUsPage extends StatelessWidget {
           ),
           Row(
             children: [
-              Icon(Icons.map_rounded),
+              Icon(Icons.map_rounded,color: MyColors.listp1Font,),
               Text(
                 '  PO Box 18761 Jacksonville,\n Fl 32229',
                 style: TextStyle(
@@ -67,7 +67,7 @@ class AboutUsPage extends StatelessWidget {
           ),
           Row(
             children: [
-              Icon(Icons.email_rounded),
+              Icon(Icons.email_rounded,color: MyColors.listp1Font,),
               Text(
                 '  minorityreports2020@gmail.com',
                 style: TextStyle(
