@@ -8,13 +8,15 @@ class PrivacyPolicyPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final policyH = Padding(
       padding: EdgeInsets.all(8.0),
-      child: Text(
-        'Privacy Policy',
-        style: TextStyle(fontSize: 28.0, color: Colors.white),
+      child: Center(
+        child: Text(
+          'Privacy Policy',
+          style: TextStyle(fontSize: 30.0, color: Colors.white),
+        ),
       ),
     );
 
-    final lorem = Padding(
+    final privacyWidget = Padding(
       padding: EdgeInsets.all(8.0),
       child: Text(
         PrivacyPolicy,
@@ -34,7 +36,7 @@ class PrivacyPolicyPage extends StatelessWidget {
           ]),
         ),
         child: Column(
-          children: <Widget>[policyH, lorem],
+          children: <Widget>[policyH, privacyWidget],
         ),
       ),
     );

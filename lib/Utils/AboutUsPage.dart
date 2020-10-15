@@ -18,11 +18,62 @@ class AboutUsPage extends StatelessWidget {
       padding: EdgeInsets.all(8.0),
       child: Column(
         children: [
+          SizedBox(
+            height: 30,
+          ),
+          Text(
+            '      One of the easiest ways to change this is by supporting black owned restaurants. I believe that if people have a place where they can find all the minority owned restaurants in this country, more of us will start to support these small businesses.\n Minority Reports is a black owned Bussiness locator. Our Application features over 2000+ black owned cafes, diners,Police Stations, and restaurants nationwide. Now its easy to find soul food, Bussiness, Police Officer , and African eateries in any place.\nThere\' s only one thing that everyone in this world has in common; we all love great tasting food!',
+            style: TextStyle(color: MyColors.listp1Font, fontSize: 16),
+          ),
+          SizedBox(
+            height: 10,
+          ),
           Text(
             'Contact info:',
-            style: TextStyle(fontSize: 16.0, color: Colors.white),
+            style: TextStyle(
+              fontSize: 16.0,
+              color: Colors.white,
+            ),
           ),
-          Text('K. Ivey PO Box 18761 Jacksonville, Fl 32229'),
+          SizedBox(
+            height: 20,
+          ),
+          Row(
+            children: [
+              Icon(Icons.person),
+              Text(
+                '  K. Ivey ',
+                style: TextStyle(
+                  fontSize: 14.0,
+                  color: Colors.white,
+                ),
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              Icon(Icons.map_rounded),
+              Text(
+                '  PO Box 18761 Jacksonville,\n Fl 32229',
+                style: TextStyle(
+                  fontSize: 14.0,
+                  color: Colors.white,
+                ),
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              Icon(Icons.email_rounded),
+              Text(
+                '  minorityreports2020@gmail.com',
+                style: TextStyle(
+                  fontSize: 14.0,
+                  color: Colors.white,
+                ),
+              ),
+            ],
+          ),
         ],
       ),
     );
