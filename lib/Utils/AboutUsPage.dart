@@ -8,17 +8,76 @@ class AboutUsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final policyH = Padding(
       padding: EdgeInsets.all(8.0),
-      child: Text(
-        'About Us',
-        style: TextStyle(fontSize: 28.0, color: Colors.white),
+      child: Padding(
+        padding: const EdgeInsets.only(top: 40.0),
+        child: Text(
+          'About Us',
+          style: TextStyle(fontSize: 28.0, color: Colors.white),
+        ),
       ),
     );
 
     final lorem = Padding(
       padding: EdgeInsets.all(8.0),
-      child: Text(
-        'Lorem Ipsum is simply dummy text of the printing and typesetting industry. The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.',
-        style: TextStyle(fontSize: 16.0, color: Colors.white),
+      child: Column(
+        children: [
+          SizedBox(
+            height: 30,
+          ),
+          Text(
+            '      Minority Reports is a black owned Bussiness locator. Our Application features over 2000+ black owned cafes, diners,Police Stations, and restaurants nationwide. Now its easy to find soul food, Bussiness, Police Officer , and African eateries in any place.\n',
+            style: TextStyle(color: MyColors.listp1Font, fontSize: 16),
+          ),
+          SizedBox(
+            height: 70,
+          ),
+          Text(
+            'Contact info:',
+            style: TextStyle(
+              fontSize: 16.0,
+              color: Colors.white,
+            ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Row(
+            children: [
+              Icon(Icons.person,color: MyColors.listp1Font,),
+              Text(
+                '  K. Ivey ',
+                style: TextStyle(
+                  fontSize: 14.0,
+                  color: Colors.white,
+                ),
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              Icon(Icons.map_rounded,color: MyColors.listp1Font,),
+              Text(
+                '  PO Box 18761 Jacksonville,\n Fl 32229',
+                style: TextStyle(
+                  fontSize: 14.0,
+                  color: Colors.white,
+                ),
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              Icon(Icons.email_rounded,color: MyColors.listp1Font,),
+              Text(
+                '  minorityreports2020@gmail.com',
+                style: TextStyle(
+                  fontSize: 14.0,
+                  color: Colors.white,
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
 
