@@ -121,6 +121,7 @@ class _RatingListState extends State<RatingList> {
                             },
                             child: Icon(
                               Icons.filter_list_rounded,
+                              color: MyColors.PrimaryColor,
                               semanticLabel: "Filter List",
                             ),
                           ),
@@ -138,7 +139,19 @@ class _RatingListState extends State<RatingList> {
                                 Navigator.pushNamed(context, '/AddList');
                               }
                             },
-                            child: Icon(Icons.add_business)),
+                            child: Column(
+                              children: [
+                                Icon(
+                                  Icons.add_business,
+                                  color: MyColors.PrimaryColor,
+                                ),
+                                Text(
+                                  "Add new",
+                                  style: TextStyle(
+                                      color: Colors.grey, fontSize: 9),
+                                ),
+                              ],
+                            )),
                       ],
                     )
                   ],
