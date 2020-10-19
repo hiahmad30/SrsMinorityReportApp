@@ -83,25 +83,19 @@ class FirstPage extends StatelessWidget {
                     ),
                     items: imageSliders,
                   )),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.1,
-              ),
-              MyButtons.myButton("Search Form", context, RatingList()),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.01,
-              ),
-              MyButtons.myButton("Register", context, SignupPage()),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.01,
-              ),
-              MyButtons.myButton("Login", context, LoginPage()),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.01,
-              ),
-              MyButtons.myButton("Anonymous", context, LoginPage()),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.01,
-              ),
+             SingleChildScrollView(
+               child: Column(
+                 children: [
+                 Row(
+
+                   children: [
+
+                   ListTile(
+                     tileColor: Color(0xff59d4e8),
+                   )
+                 ],)
+               ],),
+             ),
 
               //   SizedBox(
               //     height: MediaQuery.of(context).size.height * 0.01,
