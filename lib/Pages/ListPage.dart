@@ -69,13 +69,7 @@ class _RatingListState extends State<RatingList> {
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            // child: InkWell(
-            //     onTap: () {
-            //       if (u_id != null) Navigator.pushNamed(context, '/AddList');
-            //       //  else
-            //       //    Alert(context: context, title: "Login First");
-            //     },
-            //     child: Icon(Icons.add_comment)),
+
           )
         ],
         backgroundColor: MyColors.PrimaryColor,
