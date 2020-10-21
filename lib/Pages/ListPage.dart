@@ -80,105 +80,107 @@ class _RatingListState extends State<RatingList> {
         ],
         backgroundColor: MyColors.PrimaryColor,
       ),
-      body: Container(
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: ListTile(
-            title: CarouselSlider(
-              options: CarouselOptions(
-                autoPlay: true,
-                aspectRatio: 2,
-                enlargeCenterPage: true,
-                enlargeStrategy: CenterPageEnlargeStrategy.scale,
-              ),
-              items: imageSliders,
-            ),
-            subtitle: Column(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                SizedBox(
-                  height: 10,
+      body: SingleChildScrollView(
+        child: Container(
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: ListTile(
+              title: CarouselSlider(
+                options: CarouselOptions(
+                  autoPlay: true,
+                  aspectRatio: 2,
+                  enlargeCenterPage: true,
+                  enlargeStrategy: CenterPageEnlargeStrategy.scale,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Container(
-                        child: Text(
-                      "List of Bussiness",
-                      style:
-                          GoogleFonts.ubuntu(fontSize: 24, color: Colors.black),
-                    )),
-                    Row(
-                      children: [
-                        Container(
-                          width: 50,
-                          child: InkWell(
-                            hoverColor: MyColors.PrimaryColor,
-                            onTap: () async {
-                              await showMyDialog(
-                                  context, "Alert", "Filter is comming soon");
-                            },
-                            child: Icon(
-                              Icons.filter_list_rounded,
-                              color: MyColors.PrimaryColor,
-                              semanticLabel: "Filter List",
+                items: imageSliders,
+              ),
+              subtitle: Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Container(
+                          child: Text(
+                        "List of Bussiness",
+                        style: GoogleFonts.ubuntu(
+                            fontSize: 24, color: Colors.black),
+                      )),
+                      Row(
+                        children: [
+                          Container(
+                            width: 50,
+                            child: InkWell(
+                              hoverColor: MyColors.PrimaryColor,
+                              onTap: () async {
+                                await showMyDialog(
+                                    context, "Alert", "Filter is comming soon");
+                              },
+                              child: Icon(
+                                Icons.filter_list_rounded,
+                                color: MyColors.PrimaryColor,
+                                semanticLabel: "Filter List",
+                              ),
                             ),
                           ),
-                        ),
-                        InkWell(
-                            onTap: () async {
-                              if (u_id == "" || u_id == null) {
-                                await showMyDialog(
-                                    context, "Alert", "Please Login First");
-                                Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => LoginPage()));
-                              } else {
-                                Navigator.pushNamed(context, '/AddList');
-                              }
-                            },
-                            child: Column(
-                              children: [
-                                Icon(
-                                  Icons.add_business,
-                                  color: MyColors.PrimaryColor,
-                                ),
-                                Text(
-                                  "Add new",
-                                  style: TextStyle(
-                                      color: Colors.grey, fontSize: 9),
-                                ),
-                              ],
-                            )),
-                      ],
-                    )
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                SingleChildScrollView(
-                  child: Container(
-                    height: MediaQuery.of(context).size.height * 0.8,
-                    child: StreamBuilder(
-                      stream: Firestore.instance
-                          .collection("Bussiness List")
-                          .snapshots(),
-                      builder: (context, snapshot) {
-                        if (!snapshot.hasData)
-                          return const Text('Loading.....');
-                        return ListView.builder(
-                            itemCount: snapshot.data.documents.length,
-                            itemExtent: 160,
-                            itemBuilder: (context, index) => _CardList(
-                                context, snapshot.data.documents[index]));
-                      },
+                          InkWell(
+                              onTap: () async {
+                                if (u_id == "" || u_id == null) {
+                                  await showMyDialog(
+                                      context, "Alert", "Please Login First");
+                                  Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => LoginPage()));
+                                } else {
+                                  Navigator.pushNamed(context, '/AddList');
+                                }
+                              },
+                              child: Column(
+                                children: [
+                                  Icon(
+                                    Icons.add_business,
+                                    color: MyColors.PrimaryColor,
+                                  ),
+                                  Text(
+                                    "Add new",
+                                    style: TextStyle(
+                                        color: Colors.grey, fontSize: 9),
+                                  ),
+                                ],
+                              )),
+                        ],
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  SingleChildScrollView(
+                    child: Container(
+                      height: MediaQuery.of(context).size.height * 0.8,
+                      child: StreamBuilder(
+                        stream: Firestore.instance
+                            .collection("Bussiness List")
+                            .snapshots(),
+                        builder: (context, snapshot) {
+                          if (!snapshot.hasData)
+                            return const Text('Loading.....');
+                          return ListView.builder(
+                              itemCount: snapshot.data.documents.length,
+                              itemExtent: 160,
+                              itemBuilder: (context, index) => _CardList(
+                                  context, snapshot.data.documents[index]));
+                        },
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

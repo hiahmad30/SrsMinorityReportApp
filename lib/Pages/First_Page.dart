@@ -2,10 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:minorityreport/Utils/Consts.dart';
-import 'DetailPage.dart';
-import 'ListPage.dart';
-import 'login_page.dart';
-import 'signup_page.dart';
 
 final List<String> imgList = [
   'lib/assets/1.jpg',
@@ -81,248 +77,231 @@ class _FirstPageState extends State<FirstPage> {
           ],
           backgroundColor: MyColors.PrimaryColor,
         ),
-        body: Container(
-            child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: ListTile(
-                  title: CarouselSlider(
-                    options: CarouselOptions(
-                      autoPlay: true,
-                      aspectRatio: 2,
-                      enlargeCenterPage: true,
-                      enlargeStrategy: CenterPageEnlargeStrategy.scale,
-                    ),
-                    items: imageSliders,
-                  ),
-                  subtitle: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        body: SingleChildScrollView(
+          child: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Container(
+                    padding: EdgeInsets.only(top: 10, bottom: 10),
+                    height: MediaQuery.of(context).size.height * 0.3,
+                    color: MyColors.PrimaryColor,
+                    child: CarouselSlider(
+                      options: CarouselOptions(
+                        autoPlay: true,
+                        aspectRatio: 2,
+                        enlargeCenterPage: true,
+                        enlargeStrategy: CenterPageEnlargeStrategy.scale,
+                      ),
+                      items: imageSliders,
+                    )),
+
+                SingleChildScrollView(
+                  child: Column(
                     children: [
-                      Container(
-                          padding: EdgeInsets.only(top: 10),
-                          height: MediaQuery.of(context).size.height * 0.3,
-                          color: MyColors.PrimaryColor,
-                          child: CarouselSlider(
-                            options: CarouselOptions(
-                              autoPlay: true,
-                              aspectRatio: 2,
-                              enlargeCenterPage: true,
-                              enlargeStrategy: CenterPageEnlargeStrategy.scale,
-                            ),
-                            items: imageSliders,
-                          )),
-
-                      SingleChildScrollView(
-                        child: Column(
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        children: [
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Text(
+                            "Categories",
+                            style: GoogleFonts.ubuntu(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          )
+                        ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Row(
-                              children: [
-                                SizedBox(
-                                  width: 20,
+                            Container(
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  //  Image.asset(
+                                  //    'lib/assets/police.png',
+                                  //     width: 80,
+                                  //   ),
+                                  Text(
+                                    'Police officers',
+                                    style: GoogleFonts.amiko(),
+                                  )
+                                ],
+                              ),
+                              height: 150,
+                              width: 150,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: Color(
+                                  0xffc5e3f6,
                                 ),
-                                Text(
-                                  "Categories",
-                                  style: GoogleFonts.ubuntu(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold),
-                                )
-                              ],
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 10.0),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Container(
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        Image.asset(
-                                          'lib/assets/police.png',
-                                          width: 80,
-                                        ),
-                                        Text(
-                                          'Police officers',
-                                          style: GoogleFonts.amiko(),
-                                        )
-                                      ],
-                                    ),
-                                    height: 150,
-                                    width: 150,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      color: Color(
-                                        0xffc5e3f6,
-                                      ),
-                                      boxShadow: [
-                                        BoxShadow(
-                                            color: Colors.black,
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.black,
 
-                                            // spreadRadius: 1,
+                                      // spreadRadius: 1,
 
-                                            blurRadius: 5),
-                                      ],
-                                    ),
-                                  ),
-                                  Container(
-                                    height: 150,
-                                    width: 150,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      color: Color(0xffba53de),
-                                      boxShadow: [
-                                        BoxShadow(
-                                            color: Colors.black,
-
-                                            // spreadRadius: 1,
-
-                                            blurRadius: 5),
-                                      ],
-                                    ),
-                                  )
+                                      blurRadius: 5),
                                 ],
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 20.0),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      color: Color(
-                                        0xff5be7c4,
-                                      ),
-                                      boxShadow: [
-                                        BoxShadow(
-                                            color: Colors.black,
+                            Container(
+                              height: 150,
+                              width: 150,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: Color(0xffba53de),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.black,
 
-                                            // spreadRadius: 1,
+                                      // spreadRadius: 1,
 
-                                            blurRadius: 5),
-                                      ],
-                                    ),
-                                    height: 150,
-                                    width: 150,
-                                  ),
-                                  Container(
-                                    height: 150,
-                                    width: 150,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      color: Color(0xffcabbe9),
-                                      boxShadow: [
-                                        BoxShadow(
-                                            color: Colors.black,
-
-                                            // spreadRadius: 1,
-
-                                            blurRadius: 5),
-                                      ],
-                                    ),
-                                  )
+                                      blurRadius: 5),
                                 ],
                               ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 20.0),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      color: Color(0xff30e3ca),
-                                      boxShadow: [
-                                        BoxShadow(
-                                            color: Colors.black,
-
-                                            // spreadRadius: 1,
-
-                                            blurRadius: 5),
-                                      ],
-                                    ),
-                                    height: 150,
-                                    width: 150,
-                                  ),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      color: Color(0xfff8d0b0),
-                                      boxShadow: [
-                                        BoxShadow(
-                                            color: Colors.black,
-
-                                            // spreadRadius: 1,
-
-                                            blurRadius: 5),
-                                      ],
-                                    ),
-                                    height: 150,
-                                    width: 150,
-                                  )
-                                ],
-                              ),
-                            ),
+                            )
                           ],
                         ),
                       ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 20.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: Color(
+                                  0xff5be7c4,
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.black,
 
-                      // SizedBox(
+                                      // spreadRadius: 1,
 
-                      //   height: MediaQuery.of(context).size.height * 0.1,
+                                      blurRadius: 5),
+                                ],
+                              ),
+                              height: 150,
+                              width: 150,
+                            ),
+                            Container(
+                              height: 150,
+                              width: 150,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: Color(0xffcabbe9),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.black,
 
-                      // ),
+                                      // spreadRadius: 1,
 
-                      // MyButtons.myButton("Search Form", context, RatingList()),
+                                      blurRadius: 5),
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 20.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: Color(0xff30e3ca),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.black,
 
-                      // SizedBox(
+                                      // spreadRadius: 1,
 
-                      //   height: MediaQuery.of(context).size.height * 0.01,
+                                      blurRadius: 5),
+                                ],
+                              ),
+                              height: 150,
+                              width: 150,
+                            ),
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: Color(0xfff8d0b0),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.black,
 
-                      // ),
+                                      // spreadRadius: 1,
 
-                      // MyButtons.myButton("Register", context, SignupPage()),
-
-                      // SizedBox(
-
-                      //   height: MediaQuery.of(context).size.height * 0.01,
-
-                      // ),
-
-                      // MyButtons.myButton("Login", context, LoginPage()),
-
-                      // SizedBox(
-
-                      //   height: MediaQuery.of(context).size.height * 0.01,
-
-                      // ),
-
-                      // MyButtons.myButton("Anonymous", context, LoginPage()),
-
-                      // SizedBox(
-
-                      //   height: MediaQuery.of(context).size.height * 0.01,
-
-                      // ),
-
-                      //   SizedBox(
-
-                      //     height: MediaQuery.of(context).size.height * 0.01,
-
-                      //   ),
-
-                      //  // MyButtons.myButton("Imei", context, ImeiPage()),
+                                      blurRadius: 5),
+                                ],
+                              ),
+                              height: 150,
+                              width: 150,
+                            )
+                          ],
+                        ),
+                      ),
                     ],
                   ),
-                ))));
+                ),
+
+                // SizedBox(
+
+                //   height: MediaQuery.of(context).size.height * 0.1,
+
+                // ),
+
+                // MyButtons.myButton("Search Form", context, RatingList()),
+
+                // SizedBox(
+
+                //   height: MediaQuery.of(context).size.height * 0.01,
+
+                // ),
+
+                // MyButtons.myButton("Register", context, SignupPage()),
+
+                // SizedBox(
+
+                //   height: MediaQuery.of(context).size.height * 0.01,
+
+                // ),
+
+                // MyButtons.myButton("Login", context, LoginPage()),
+
+                // SizedBox(
+
+                //   height: MediaQuery.of(context).size.height * 0.01,
+
+                // ),
+
+                // MyButtons.myButton("Anonymous", context, LoginPage()),
+
+                // SizedBox(
+
+                //   height: MediaQuery.of(context).size.height * 0.01,
+
+                // ),
+
+                //   SizedBox(
+
+                //     height: MediaQuery.of(context).size.height * 0.01,
+
+                //   ),
+
+                //  // MyButtons.myButton("Imei", context, ImeiPage()),
+              ]),
+        ));
   }
 }
