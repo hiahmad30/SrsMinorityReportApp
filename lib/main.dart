@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       debugShowCheckedModeBanner: false,
-      initialRoute: '/list',
+      initialRoute: '/homepage',
       routes: <String, WidgetBuilder>{
         // Set routes for using the Navigator.
         '/homepage': (BuildContext context) => new FirstPage(),
