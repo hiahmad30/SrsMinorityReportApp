@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:minorityreport/Pages/ListPage.dart';
 import 'package:minorityreport/Utils/Consts.dart';
 
 final List<String> imgList = [
@@ -16,6 +18,7 @@ class FirstPage extends StatefulWidget {
 }
 
 class _FirstPageState extends State<FirstPage> {
+  TextStyle categoryFontStyle = GoogleFonts.adamina(fontSize: 20);
   final List<Widget> imageSliders = imgList
       .map((item) => Container(
             child: Container(
@@ -119,39 +122,58 @@ class _FirstPageState extends State<FirstPage> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
+                            InkWell(
+                              onTap: () {
+                                Get.to(RatingList());
+                              },
+                              child: Container(
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Image.asset(
+                                      'lib/assets/police.png',
+                                      width: 80,
+                                    ),
+                                    Text(
+                                      'Police officers',
+                                      style: GoogleFonts.amiko(),
+                                    )
+                                  ],
+                                ),
+                                height: 150,
+                                width: 150,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: Color(
+                                    0xffc5e3f6,
+                                  ),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.black,
+
+                                        // spreadRadius: 1,
+
+                                        blurRadius: 5),
+                                  ],
+                                ),
+                              ),
+                            ),
                             Container(
                               child: Column(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceEvenly,
                                 children: [
-                                  //  Image.asset(
-                                  //    'lib/assets/police.png',
-                                  //     width: 80,
-                                  //   ),
+                                  Image.asset(
+                                    'lib/assets/Bank.png',
+                                    width: 80,
+                                  ),
                                   Text(
-                                    'Police officers',
+                                    'Banks',
                                     style: GoogleFonts.amiko(),
                                   )
                                 ],
                               ),
-                              height: 150,
-                              width: 150,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                color: Color(
-                                  0xffc5e3f6,
-                                ),
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: Colors.black,
-
-                                      // spreadRadius: 1,
-
-                                      blurRadius: 5),
-                                ],
-                              ),
-                            ),
-                            Container(
                               height: 150,
                               width: 150,
                               decoration: BoxDecoration(
@@ -176,6 +198,20 @@ class _FirstPageState extends State<FirstPage> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Container(
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Image.asset(
+                                    'lib/assets/police.png',
+                                    width: 80,
+                                  ),
+                                  Text(
+                                    'Police officers',
+                                    style: GoogleFonts.amiko(),
+                                  )
+                                ],
+                              ),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
                                 color: Color(
@@ -194,6 +230,20 @@ class _FirstPageState extends State<FirstPage> {
                               width: 150,
                             ),
                             Container(
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Image.asset(
+                                    'lib/assets/police.png',
+                                    width: 80,
+                                  ),
+                                  Text(
+                                    'Police officers',
+                                    style: GoogleFonts.amiko(),
+                                  )
+                                ],
+                              ),
                               height: 150,
                               width: 150,
                               decoration: BoxDecoration(
@@ -218,6 +268,20 @@ class _FirstPageState extends State<FirstPage> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Container(
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Image.asset(
+                                    'lib/assets/police.png',
+                                    width: 80,
+                                  ),
+                                  Text(
+                                    'Police officers',
+                                    style: GoogleFonts.amiko(),
+                                  )
+                                ],
+                              ),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
                                 color: Color(0xff30e3ca),
@@ -234,6 +298,20 @@ class _FirstPageState extends State<FirstPage> {
                               width: 150,
                             ),
                             Container(
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Image.asset(
+                                    'lib/assets/police.png',
+                                    width: 80,
+                                  ),
+                                  Text(
+                                    'Police officers',
+                                    style: GoogleFonts.amiko(),
+                                  )
+                                ],
+                              ),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
                                 color: Color(0xfff8d0b0),

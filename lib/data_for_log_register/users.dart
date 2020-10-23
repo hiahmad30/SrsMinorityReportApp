@@ -18,7 +18,8 @@ class UserModel {
       this.photoUrl,
       this.geoPoints});
 
-  UserModel.fromDocumentSnapshot({DocumentSnapshot doc}) {
+  UserModel.fromDocumentSnapshot(
+      {DocumentSnapshot doc, DocumentSnapshot documentSnapshot}) {
     uid = doc.id;
     email = doc.get('email');
     accountCreated = doc.get('accountCreated');
