@@ -300,20 +300,6 @@ class _RatingListState extends State<RatingList> {
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.01,
               ),
-              // RaisedButton(
-              //   textColor: MyColors.PrimaryColor,
-              //   onPressed: () {
-              //     // Perform some action
-              //   },
-              //   child: const Text('Edit'),
-              // ),
-              // RaisedButton(
-              //   textColor: MyColors.PrimaryColor,
-              //   onPressed: () {
-              //     // Perform some action
-              //   },
-              //   child: const Text('Rate Business'),
-              // ),
             ],
           ),
           //  Image.asset('assets/card-sample-image.jpg'),

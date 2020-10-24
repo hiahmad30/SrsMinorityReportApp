@@ -1,9 +1,7 @@
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:minorityreport/Utils/Consts.dart';
 import 'package:minorityreport/Utils/loadingScreen.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-
 import 'signup_page.dart';
 import 'package:flutter/material.dart';
 
@@ -117,7 +115,6 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   void initState() {
-    // autoSign();
     super.initState();
   }
 
