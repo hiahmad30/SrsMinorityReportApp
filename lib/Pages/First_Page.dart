@@ -1,13 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:minorityreport/Pages/ListPage.dart';
 import 'package:minorityreport/Utils/Consts.dart';
-import 'DetailPage.dart';
-import 'ListPage.dart';
-import 'login_page.dart';
-import 'signup_page.dart';
 
 final List<String> imgList = [
   'lib/assets/1.jpg',
@@ -22,15 +18,19 @@ class FirstPage extends StatefulWidget {
 }
 
 class _FirstPageState extends State<FirstPage> {
+  TextStyle categoryFontStyle = GoogleFonts.adamina(fontSize: 20);
   final List<Widget> imageSliders = imgList
       .map((item) => Container(
             child: Container(
-              margin: EdgeInsets.all(5),
+              margin: EdgeInsets.all(0),
               child: ClipRRect(
                   borderRadius: BorderRadius.all(Radius.circular(5.0)),
                   child: Stack(
                     children: <Widget>[
-                      Image.asset(item, fit: BoxFit.cover, width: 1000.0),
+                      Image.asset(
+                        item,
+                        fit: BoxFit.cover,
+                      ), // width: 1000.0),
                       Positioned(
                         bottom: 0.0,
                         left: 0.0,
@@ -67,261 +67,319 @@ class _FirstPageState extends State<FirstPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Welcome to Minority Report",
-          style: GoogleFonts.aclonica(fontSize: 20),
+        appBar: AppBar(
+          title: Text(
+            "Welcome to Minority Report",
+            style: GoogleFonts.aclonica(fontSize: 20),
+          ),
+          centerTitle: true,
+          actions: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+            )
+          ],
+          backgroundColor: MyColors.PrimaryColor,
         ),
-        centerTitle: true,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            // child: InkWell(
-            //     onTap: () {
-            //       if (u_id != null) Navigator.pushNamed(context, '/AddList');
-            //       //  else
-            //       //    Alert(context: context, title: "Login First");
-            //     },
-            //     child: Icon(Icons.add_comment)),
-          )
-        ],
-        backgroundColor: MyColors.PrimaryColor,
-      ),
-      body: Container(
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: ListTile(
-            title: CarouselSlider(
-              options: CarouselOptions(
-                autoPlay: true,
-                aspectRatio: 2,
-                enlargeCenterPage: true,
-                enlargeStrategy: CenterPageEnlargeStrategy.scale,
-              ),
-              items: imageSliders,
-            ),
-            subtitle: Column(
+        body: SingleChildScrollView(
+          child: Column(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Container(
-                        child: Text(
-                      "List of Bussiness",
-                      style:
-                          GoogleFonts.ubuntu(fontSize: 24, color: Colors.black),
+                Container(
+                    padding: EdgeInsets.only(top: 10, bottom: 10),
+                    height: MediaQuery.of(context).size.height * 0.3,
+                    color: MyColors.PrimaryColor,
+                    child: CarouselSlider(
+                      options: CarouselOptions(
+                        autoPlay: true,
+                        aspectRatio: 2,
+                        enlargeCenterPage: true,
+                        enlargeStrategy: CenterPageEnlargeStrategy.scale,
+                      ),
+                      items: imageSliders,
                     )),
-                    Row(
-                      children: [
-                        Container(
-                          width: 50,
-                          child: InkWell(
-                            hoverColor: MyColors.PrimaryColor,
-                            onTap: () async {
-                              await showMyDialog(
-                                  context, "Alert", "Filter is comming soon");
-                            },
-                            child: Icon(
-                              Icons.filter_list_rounded,
-                              color: MyColors.PrimaryColor,
-                              semanticLabel: "Filter List",
-                            ),
-                          ),
-                        ),
-                        InkWell(
-                            onTap: () async {
-                              if (u_id == "" || u_id == null) {
-                                await showMyDialog(
-                                    context, "Alert", "Please Login First");
-                                Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => LoginPage()));
-                              } else {
-                                Navigator.pushNamed(context, '/AddList');
-                              }
-                            },
-                            child: Column(
-                              children: [
-                                Icon(
-                                  Icons.add_business,
-                                  color: MyColors.PrimaryColor,
-                                ),
-                                Text(
-                                  "Add new",
-                                  style: TextStyle(
-                                      color: Colors.grey, fontSize: 9),
-                                ),
-                              ],
-                            )),
-                      ],
-                    )
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
+
                 SingleChildScrollView(
-                    child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Container(
-                          height: 40,
-                          color: Color(0xff59d4e8),
-                        ),
-                      ],
-                    ),
-                  ],
-                )),
-              ],
-            ),
-          ),
-        ),
-      ),
-      bottomNavigationBar: MyButtons.footer(context),
-    );
-  }
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        children: [
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Text(
+                            "Categories",
+                            style: GoogleFonts.ubuntu(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          )
+                        ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                Get.to(RatingList());
+                              },
+                              child: Container(
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Image.asset(
+                                      'lib/assets/police.png',
+                                      width: 80,
+                                    ),
+                                    Text(
+                                      'Police officers',
+                                      style: GoogleFonts.amiko(),
+                                    )
+                                  ],
+                                ),
+                                height: 150,
+                                width: 150,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: Color(
+                                    0xffc5e3f6,
+                                  ),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.black,
 
-  Widget _CardList(BuildContext context, DocumentSnapshot document) {
-    var a = document.get("photoUrl");
-    bool avail;
-    if (a != null) {
-      avail = true;
-    } else {
-      avail = false;
-    }
+                                        // spreadRadius: 1,
 
-    return Container(
-      margin: EdgeInsets.all(8),
-      //height: MediaQuery.of(context).size.height * 0.1,
-      decoration: new BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
+                                        blurRadius: 5),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Container(
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Image.asset(
+                                    'lib/assets/Bank.png',
+                                    width: 80,
+                                  ),
+                                  Text(
+                                    'Banks',
+                                    style: GoogleFonts.amiko(),
+                                  )
+                                ],
+                              ),
+                              height: 150,
+                              width: 150,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: Color(0xffba53de),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.black,
 
-        //  color: const Color(0xff7c94b6),
-        image: new DecorationImage(
-          fit: BoxFit.cover,
-          colorFilter: new ColorFilter.mode(
-              Colors.black.withOpacity(0.6), BlendMode.darken),
-          image:
-              new NetworkImage(avail ? document.get("photoUrl") : testImageUrl),
-        ),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          ListTile(
-            //  focusColor: Colors.black,
-            // leading: Icon(Icons.arrow_drop_down_circle),
-            onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) =>
-                        DetailPage(documentSnapshot: document))),
-            title: Column(
-              // mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  document.get("BussinessName").toString(),
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                )
-              ],
-            ),
-            subtitle: Column(
-              children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Icon(
-                      Icons.home,
-                      color: MyColors.listp1Font,
-                    ),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    Flexible(
-                      child: Text(
-                        "Line 1:" + document.get("Address").toString(),
-                        style: TextStyle(
-                          color: MyColors.listp1Font,
-                          fontSize: 16,
+                                      // spreadRadius: 1,
+
+                                      blurRadius: 5),
+                                ],
+                              ),
+                            )
+                          ],
                         ),
                       ),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Icon(
-                      Icons.phone,
-                      color: MyColors.listp1Font,
-                    ),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    Text(
-                      document.get("Contact"),
-                      style: TextStyle(color: MyColors.listp1Font),
-                    )
-                  ],
-                )
-              ],
-            ),
-          ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 20.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Container(
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Image.asset(
+                                    'lib/assets/police.png',
+                                    width: 80,
+                                  ),
+                                  Text(
+                                    'Police officers',
+                                    style: GoogleFonts.amiko(),
+                                  )
+                                ],
+                              ),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: Color(
+                                  0xff5be7c4,
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.black,
 
-          ButtonBar(
-            alignment: MainAxisAlignment.start,
-            children: [
-              SizedBox(
-                width: 5,
-              ),
-              RatingBarIndicator(
-                  rating: double.parse((document.get("rating").toString())),
-                  itemBuilder: (context, index) => Icon(
-                        Icons.star,
-                        color: Colors.amber,
+                                      // spreadRadius: 1,
+
+                                      blurRadius: 5),
+                                ],
+                              ),
+                              height: 150,
+                              width: 150,
+                            ),
+                            Container(
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Image.asset(
+                                    'lib/assets/police.png',
+                                    width: 80,
+                                  ),
+                                  Text(
+                                    'Police officers',
+                                    style: GoogleFonts.amiko(),
+                                  )
+                                ],
+                              ),
+                              height: 150,
+                              width: 150,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: Color(0xffcabbe9),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.black,
+
+                                      // spreadRadius: 1,
+
+                                      blurRadius: 5),
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
                       ),
-                  itemCount: 5,
-                  itemSize: 14.0,
-                  unratedColor: Colors.white10.withAlpha(50),
-                  direction: Axis.horizontal //: Axis.horizontal,
+                      Padding(
+                        padding: const EdgeInsets.only(top: 20.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Container(
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Image.asset(
+                                    'lib/assets/police.png',
+                                    width: 80,
+                                  ),
+                                  Text(
+                                    'Police officers',
+                                    style: GoogleFonts.amiko(),
+                                  )
+                                ],
+                              ),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: Color(0xff30e3ca),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.black,
+
+                                      // spreadRadius: 1,
+
+                                      blurRadius: 5),
+                                ],
+                              ),
+                              height: 150,
+                              width: 150,
+                            ),
+                            Container(
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Image.asset(
+                                    'lib/assets/police.png',
+                                    width: 80,
+                                  ),
+                                  Text(
+                                    'Police officers',
+                                    style: GoogleFonts.amiko(),
+                                  )
+                                ],
+                              ),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: Color(0xfff8d0b0),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.black,
+
+                                      // spreadRadius: 1,
+
+                                      blurRadius: 5),
+                                ],
+                              ),
+                              height: 150,
+                              width: 150,
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.01,
-              ),
-              // RaisedButton(
-              //   textColor: MyColors.PrimaryColor,
-              //   onPressed: () {
-              //     // Perform some action
-              //   },
-              //   child: const Text('Edit'),
-              // ),
-              // RaisedButton(
-              //   textColor: MyColors.PrimaryColor,
-              //   onPressed: () {
-              //     // Perform some action
-              //   },
-              //   child: const Text('Rate Business'),
-              // ),
-            ],
-          ),
-          //  Image.asset('assets/card-sample-image.jpg'),
-          //Image.asset('assets/card-sample-image-2.jpg'),
-        ],
-      ),
-    );
+                ),
+
+                // SizedBox(
+
+                //   height: MediaQuery.of(context).size.height * 0.1,
+
+                // ),
+
+                // MyButtons.myButton("Search Form", context, RatingList()),
+
+                // SizedBox(
+
+                //   height: MediaQuery.of(context).size.height * 0.01,
+
+                // ),
+
+                // MyButtons.myButton("Register", context, SignupPage()),
+
+                // SizedBox(
+
+                //   height: MediaQuery.of(context).size.height * 0.01,
+
+                // ),
+
+                // MyButtons.myButton("Login", context, LoginPage()),
+
+                // SizedBox(
+
+                //   height: MediaQuery.of(context).size.height * 0.01,
+
+                // ),
+
+                // MyButtons.myButton("Anonymous", context, LoginPage()),
+
+                // SizedBox(
+
+                //   height: MediaQuery.of(context).size.height * 0.01,
+
+                // ),
+
+                //   SizedBox(
+
+                //     height: MediaQuery.of(context).size.height * 0.01,
+
+                //   ),
+
+                //  // MyButtons.myButton("Imei", context, ImeiPage()),
+              ]),
+        ));
   }
 }

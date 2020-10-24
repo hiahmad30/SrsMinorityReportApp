@@ -15,47 +15,7 @@ class RatingList extends StatefulWidget {
 }
 
 class _RatingListState extends State<RatingList> {
-  final List<Widget> imageSliders = imgList
-      .map((item) => Container(
-            child: Container(
-              margin: EdgeInsets.all(5),
-              child: ClipRRect(
-                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                  child: Stack(
-                    children: <Widget>[
-                      Image.asset(item, fit: BoxFit.cover, width: 1000.0),
-                      Positioned(
-                        bottom: 0.0,
-                        left: 0.0,
-                        right: 0.0,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              colors: [
-                                Color.fromARGB(200, 0, 0, 0),
-                                Color.fromARGB(0, 0, 0, 0)
-                              ],
-                              begin: Alignment.topCenter,
-                              end: Alignment.topCenter,
-                            ),
-                          ),
-                          padding: EdgeInsets.symmetric(
-                              vertical: 10.0, horizontal: 20.0),
-                          // child: Text(
-                          //   'No. ${imgList.indexOf(item)} image',
-                          //   style: TextStyle(
-                          //     color: Colors.white,
-                          //     fontSize: 20.0,
-                          //     fontWeight: FontWeight.bold,
-                          //   ),
-                          // ),
-                        ),
-                      ),
-                    ],
-                  )),
-            ),
-          ))
-      .toList();
+
 
   @override
   Widget build(BuildContext context) {
@@ -80,105 +40,98 @@ class _RatingListState extends State<RatingList> {
         ],
         backgroundColor: MyColors.PrimaryColor,
       ),
-      body: Container(
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: ListTile(
-            title: CarouselSlider(
-              options: CarouselOptions(
-                autoPlay: true,
-                aspectRatio: 2,
-                enlargeCenterPage: true,
-                enlargeStrategy: CenterPageEnlargeStrategy.scale,
-              ),
-              items: imageSliders,
-            ),
-            subtitle: Column(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Container(
-                        child: Text(
-                      "List of Bussiness",
-                      style:
-                          GoogleFonts.ubuntu(fontSize: 24, color: Colors.black),
-                    )),
-                    Row(
-                      children: [
-                        Container(
-                          width: 50,
-                          child: InkWell(
-                            hoverColor: MyColors.PrimaryColor,
-                            onTap: () async {
-                              await showMyDialog(
-                                  context, "Alert", "Filter is comming soon");
-                            },
-                            child: Icon(
-                              Icons.filter_list_rounded,
-                              color: MyColors.PrimaryColor,
-                              semanticLabel: "Filter List",
+      body: SingleChildScrollView(
+        child: Container(
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: ListTile(
+              subtitle: Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Container(
+                          child: Text(
+                        "List of Bussiness",
+                        style: GoogleFonts.ubuntu(
+                            fontSize: 24, color: Colors.black),
+                      )),
+                      Row(
+                        children: [
+                          Container(
+                            width: 50,
+                            child: InkWell(
+                              hoverColor: MyColors.PrimaryColor,
+                              onTap: () async {
+                                await showMyDialog(
+                                    context, "Alert", "Filter is comming soon");
+                              },
+                              child: Icon(
+                                Icons.filter_list_rounded,
+                                color: MyColors.PrimaryColor,
+                                semanticLabel: "Filter List",
+                              ),
                             ),
                           ),
-                        ),
-                        InkWell(
-                            onTap: () async {
-                              if (u_id == "" || u_id == null) {
-                                await showMyDialog(
-                                    context, "Alert", "Please Login First");
-                                Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => LoginPage()));
-                              } else {
-                                Navigator.pushNamed(context, '/AddList');
-                              }
-                            },
-                            child: Column(
-                              children: [
-                                Icon(
-                                  Icons.add_business,
-                                  color: MyColors.PrimaryColor,
-                                ),
-                                Text(
-                                  "Add new",
-                                  style: TextStyle(
-                                      color: Colors.grey, fontSize: 9),
-                                ),
-                              ],
-                            )),
-                      ],
-                    )
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                SingleChildScrollView(
-                  child: Container(
-                    height: MediaQuery.of(context).size.height * 0.8,
-                    child: StreamBuilder(
-                      stream: Firestore.instance
-                          .collection("Bussiness List")
-                          .snapshots(),
-                      builder: (context, snapshot) {
-                        if (!snapshot.hasData)
-                          return const Text('Loading.....');
-                        return ListView.builder(
-                            itemCount: snapshot.data.documents.length,
-                            itemExtent: 160,
-                            itemBuilder: (context, index) => _CardList(
-                                context, snapshot.data.documents[index]));
-                      },
+                          InkWell(
+                              onTap: () async {
+                                if (u_id == "" || u_id == null) {
+                                  await showMyDialog(
+                                      context, "Alert", "Please Login First");
+                                  Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => LoginPage()));
+                                } else {
+                                  Navigator.pushNamed(context, '/AddList');
+                                }
+                              },
+                              child: Column(
+                                children: [
+                                  Icon(
+                                    Icons.add_business,
+                                    color: MyColors.PrimaryColor,
+                                  ),
+                                  Text(
+                                    "Add new",
+                                    style: TextStyle(
+                                        color: Colors.grey, fontSize: 9),
+                                  ),
+                                ],
+                              )),
+                        ],
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  SingleChildScrollView(
+                    child: Container(
+                      height: MediaQuery.of(context).size.height * 0.8,
+                      child: StreamBuilder(
+                        stream: Firestore.instance
+                            .collection("Bussiness List")
+                            .snapshots(),
+                        builder: (context, snapshot) {
+                          if (!snapshot.hasData)
+                            return const Text('Loading.....');
+                          return ListView.builder(
+                              itemCount: snapshot.data.documents.length,
+                              itemExtent: 160,
+                              itemBuilder: (context, index) => _CardList(
+                                  context, snapshot.data.documents[index]));
+                        },
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
