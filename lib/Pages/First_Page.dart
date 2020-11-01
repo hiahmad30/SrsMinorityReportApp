@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -85,6 +86,7 @@ class _FirstPageState extends State<FirstPage> {
         body: SingleChildScrollView(
           child: Column(
               mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Container(
@@ -101,23 +103,21 @@ class _FirstPageState extends State<FirstPage> {
                       items: imageSliders,
                     )),
 
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    "Categories :",
+                    style: GoogleFonts.ubuntu(
+                        fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                SizedBox(height: 20,),
                 SingleChildScrollView(
-                  child: Column(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
                     children: [
                       SizedBox(
                         height: 20,
-                      ),
-                      Row(
-                        children: [
-                          SizedBox(
-                            width: 20,
-                          ),
-                          Text(
-                            "Categories",
-                            style: GoogleFonts.ubuntu(
-                                fontSize: 20, fontWeight: FontWeight.bold),
-                          )
-                        ],
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 10.0),
@@ -214,7 +214,7 @@ class _FirstPageState extends State<FirstPage> {
                                       MainAxisAlignment.spaceEvenly,
                                   children: [
                                     Image.asset(
-                                      'lib/assets/police.png',
+                                      'lib/assets/bar.png',
                                       width: 80,
                                     ),
                                     Text(
