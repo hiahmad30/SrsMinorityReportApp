@@ -12,7 +12,6 @@ final List<String> imgList = [
   'lib/assets/4.jpg',
   'lib/assets/3.jpg',
   'lib/assets/2.jpg',
-
 ];
 
 class FirstPage extends StatefulWidget {
@@ -162,104 +161,119 @@ class _FirstPageState extends State<FirstPage> {
                                 ),
                               ),
                             ),
-                            Container(
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Image.asset(
-                                    'lib/assets/Bank.png',
-                                    width: 80,
-                                  ),
-                                  Text(
-                                    'Banks',
-                                    style: GoogleFonts.amiko(),
-                                  )
-                                ],
-                              ),
-                              height: 150,
-                              width: 150,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                color: Color(0xffba53de),
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: Colors.black,
-
-                                      // spreadRadius: 1,
-
-                                      blurRadius: 5),
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 20.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Container(
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Image.asset(
-                                    'lib/assets/police.png',
-                                    width: 80,
-                                  ),
-                                  Text(
-                                    'Police officers',
-                                    style: GoogleFonts.amiko(),
-                                  )
-                                ],
-                              ),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                color: Color(
-                                  0xff5be7c4,
+                            InkWell(
+                              onTap: () {
+                                Get.toNamed('/list');
+                              },
+                              child: Container(
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Image.asset(
+                                      'lib/assets/Bank.png',
+                                      width: 80,
+                                    ),
+                                    Text(
+                                      'Banks',
+                                      style: GoogleFonts.amiko(),
+                                    )
+                                  ],
                                 ),
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: Colors.black,
+                                height: 150,
+                                width: 150,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: Color(0xffba53de),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.black,
 
-                                      // spreadRadius: 1,
+                                        // spreadRadius: 1,
 
-                                      blurRadius: 5),
-                                ],
+                                        blurRadius: 5),
+                                  ],
+                                ),
                               ),
-                              height: 150,
-                              width: 150,
-                            ),
-                            Container(
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Image.asset(
-                                    'lib/assets/police.png',
-                                    width: 80,
+                            )
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 20.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                Get.toNamed('/list');
+                              },
+                              child: Container(
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Image.asset(
+                                      'lib/assets/police.png',
+                                      width: 80,
+                                    ),
+                                    Text(
+                                      'Bars',
+                                      style: GoogleFonts.amiko(),
+                                    )
+                                  ],
+                                ),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: Color(
+                                    0xff5be7c4,
                                   ),
-                                  Text(
-                                    'Police officers',
-                                    style: GoogleFonts.amiko(),
-                                  )
-                                ],
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.black,
+
+                                        // spreadRadius: 1,
+
+                                        blurRadius: 5),
+                                  ],
+                                ),
+                                height: 150,
+                                width: 150,
                               ),
-                              height: 150,
-                              width: 150,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                color: Color(0xffcabbe9),
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: Colors.black,
+                            ),
+                            InkWell(
+                              onTap: () {
+                                Get.toNamed('/list');
+                              },
+                              child: Container(
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Image.asset(
+                                      'lib/assets/police.png',
+                                      width: 80,
+                                    ),
+                                    Text(
+                                      'dinners',
+                                      style: GoogleFonts.amiko(),
+                                    )
+                                  ],
+                                ),
+                                height: 150,
+                                width: 150,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: Color(0xffcabbe9),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.black,
 
-                                      // spreadRadius: 1,
+                                        // spreadRadius: 1,
 
-                                      blurRadius: 5),
-                                ],
+                                        blurRadius: 5),
+                                  ],
+                                ),
                               ),
                             )
                           ],
@@ -280,7 +294,7 @@ class _FirstPageState extends State<FirstPage> {
                                     width: 80,
                                   ),
                                   Text(
-                                    'Police officers',
+                                    'Hospitals',
                                     style: GoogleFonts.amiko(),
                                   )
                                 ],
@@ -310,7 +324,7 @@ class _FirstPageState extends State<FirstPage> {
                                     width: 80,
                                   ),
                                   Text(
-                                    'Police officers',
+                                    'Resturant',
                                     style: GoogleFonts.amiko(),
                                   )
                                 ],

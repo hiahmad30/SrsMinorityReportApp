@@ -15,47 +15,7 @@ class RatingList extends StatefulWidget {
 }
 
 class _RatingListState extends State<RatingList> {
-  final List<Widget> imageSliders = imgList
-      .map((item) => Container(
-            child: Container(
-              margin: EdgeInsets.all(5),
-              child: ClipRRect(
-                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                  child: Stack(
-                    children: <Widget>[
-                      Image.asset(item, fit: BoxFit.cover, width: 1000.0),
-                      Positioned(
-                        bottom: 0.0,
-                        left: 0.0,
-                        right: 0.0,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              colors: [
-                                Color.fromARGB(200, 0, 0, 0),
-                                Color.fromARGB(0, 0, 0, 0)
-                              ],
-                              begin: Alignment.topCenter,
-                              end: Alignment.topCenter,
-                            ),
-                          ),
-                          padding: EdgeInsets.symmetric(
-                              vertical: 10.0, horizontal: 20.0),
-                          // child: Text(
-                          //   'No. ${imgList.indexOf(item)} image',
-                          //   style: TextStyle(
-                          //     color: Colors.white,
-                          //     fontSize: 20.0,
-                          //     fontWeight: FontWeight.bold,
-                          //   ),
-                          // ),
-                        ),
-                      ),
-                    ],
-                  )),
-            ),
-          ))
-      .toList();
+
 
   @override
   Widget build(BuildContext context) {
@@ -77,17 +37,8 @@ class _RatingListState extends State<RatingList> {
       body: Container(
         child: Padding(
           padding: const EdgeInsets.all(10.0),
-          child: ListTile(
-            title: CarouselSlider(
-              options: CarouselOptions(
-                autoPlay: true,
-                aspectRatio: 2,
-                enlargeCenterPage: true,
-                enlargeStrategy: CenterPageEnlargeStrategy.scale,
-              ),
-              items: imageSliders,
-            ),
-            subtitle: Column(
+          child: Container(
+            child: Column(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -107,18 +58,7 @@ class _RatingListState extends State<RatingList> {
                       children: [
                         Container(
                           width: 50,
-                          child: InkWell(
-                            hoverColor: MyColors.PrimaryColor,
-                            onTap: () async {
-                              await showMyDialog(
-                                  context, "Alert", "Filter is comming soon");
-                            },
-                            child: Icon(
-                              Icons.filter_list_rounded,
-                              color: MyColors.PrimaryColor,
-                              semanticLabel: "Filter List",
-                            ),
-                          ),
+
                         ),
                         InkWell(
                             onTap: () async {
@@ -155,7 +95,7 @@ class _RatingListState extends State<RatingList> {
                 ),
                 SingleChildScrollView(
                   child: Container(
-                    height: MediaQuery.of(context).size.height * 0.8,
+                    height: MediaQuery.of(context).size.height * 0.7,
                     child: StreamBuilder(
                       stream: Firestore.instance
                           .collection("Bussiness List")
