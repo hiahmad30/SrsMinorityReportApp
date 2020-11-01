@@ -1,23 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-<<<<<<< HEAD
-import 'package:minorityreport/Pages/testPage.dart';
-=======
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:minorityreport/Pages/ListPage.dart';
->>>>>>> 3f75153f2f6af61af8f24e5b73ed12c18c6a0cad
+
 import 'package:minorityreport/Utils/Consts.dart';
+
+import 'ListPage.dart';
 
 final List<String> imgList = [
   'lib/assets/1.jpg',
   'lib/assets/4.jpg',
   'lib/assets/3.jpg',
   'lib/assets/2.jpg',
-<<<<<<< HEAD
-  // 'https://images.unsplash.com/photo-1519985176271-adb1088fa94c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a0c8d632e977f94e5d312d9893258f59&auto=format&fit=crop&w=1355&q=80'
-=======
->>>>>>> 3f75153f2f6af61af8f24e5b73ed12c18c6a0cad
+
 ];
 
 class FirstPage extends StatefulWidget {
