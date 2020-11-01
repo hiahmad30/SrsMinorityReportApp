@@ -1,11 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:minorityreport/Utils/Consts.dart';
 
+import 'DetailPage.dart';
 import 'ListPage.dart';
 
 final List<String> imgList = [
@@ -102,7 +105,6 @@ class _FirstPageState extends State<FirstPage> {
                       ),
                       items: imageSliders,
                     )),
-
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
@@ -111,97 +113,102 @@ class _FirstPageState extends State<FirstPage> {
                         fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                 ),
-                SizedBox(height: 20,),
+                SizedBox(
+                  height: 0,
+                ),
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            InkWell(
-                              onTap: () {
-                                Get.to(RatingList());
-                              },
-                              child: Container(
-                                child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Image.asset(
-                                      'lib/assets/police.png',
-                                      width: 80,
-                                    ),
-                                    Text(
-                                      'Police officers',
-                                      style: GoogleFonts.amiko(),
-                                    )
-                                  ],
-                                ),
-                                height: 150,
-                                width: 150,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  color: Color(
-                                    0xffc5e3f6,
-                                  ),
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: Colors.black,
-
-                                        // spreadRadius: 1,
-
-                                        blurRadius: 5),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            InkWell(
-                              onTap: () {
-                                Get.toNamed('/list');
-                              },
-                              child: Container(
-                                child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Image.asset(
-                                      'lib/assets/Bank.png',
-                                      width: 80,
-                                    ),
-                                    Text(
-                                      'Banks',
-                                      style: GoogleFonts.amiko(),
-                                    )
-                                  ],
-                                ),
-                                height: 150,
-                                width: 150,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  color: Color(0xffba53de),
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: Colors.black,
-
-                                        // spreadRadius: 1,
-
-                                        blurRadius: 5),
-                                  ],
-                                ),
-                              ),
-                            )
-                          ],
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        SizedBox(
+                          width: 20,
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 20.0),
-                        child: Row(
+                        Padding(
+                          padding: const EdgeInsets.only(right: 10.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  Get.to(RatingList());
+                                },
+                                child: Container(
+                                  child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Image.asset(
+                                        'lib/assets/police.png',
+                                        width: 80,
+                                      ),
+                                      Text(
+                                        'Police officers',
+                                        style: GoogleFonts.amiko(),
+                                      )
+                                    ],
+                                  ),
+                                  height: 130,
+                                  width: 130,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    color: Color(
+                                      0xffc5e3f6,
+                                    ),
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Colors.black,
+
+                                          // spreadRadius: 1,
+
+                                          blurRadius: 5),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  Get.toNamed('/list');
+                                },
+                                child: Container(
+                                  child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Image.asset(
+                                        'lib/assets/Bank.png',
+                                        width: 80,
+                                      ),
+                                      Text(
+                                        'Banks',
+                                        style: GoogleFonts.amiko(),
+                                      )
+                                    ],
+                                  ),
+                                  height: 130,
+                                  width: 130,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    color: Color(0xffba53de),
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Colors.black,
+
+                                          // spreadRadius: 1,
+
+                                          blurRadius: 5),
+                                    ],
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                        Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             InkWell(
@@ -237,9 +244,12 @@ class _FirstPageState extends State<FirstPage> {
                                         blurRadius: 5),
                                   ],
                                 ),
-                                height: 150,
-                                width: 150,
+                                height: 130,
+                                width: 130,
                               ),
+                            ),
+                            SizedBox(
+                              width: 10,
                             ),
                             InkWell(
                               onTap: () {
@@ -260,8 +270,8 @@ class _FirstPageState extends State<FirstPage> {
                                     )
                                   ],
                                 ),
-                                height: 150,
-                                width: 150,
+                                height: 130,
+                                width: 130,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(20),
                                   color: Color(0xffcabbe9),
@@ -278,10 +288,10 @@ class _FirstPageState extends State<FirstPage> {
                             )
                           ],
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 20.0),
-                        child: Row(
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Container(
@@ -311,8 +321,11 @@ class _FirstPageState extends State<FirstPage> {
                                       blurRadius: 5),
                                 ],
                               ),
-                              height: 150,
-                              width: 150,
+                              height: 130,
+                              width: 130,
+                            ),
+                            SizedBox(
+                              width: 10,
                             ),
                             Container(
                               child: Column(
@@ -341,62 +354,159 @@ class _FirstPageState extends State<FirstPage> {
                                       blurRadius: 5),
                                 ],
                               ),
-                              height: 150,
-                              width: 150,
+                              height: 130,
+                              width: 130,
                             )
                           ],
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-
-                // SizedBox(
-
-                //   height: MediaQuery.of(context).size.height * 0.1,
-
-                // ),
-
-                // MyButtons.myButton("Search Form", context, RatingList()),
-
-                // SizedBox(
-
-                //   height: MediaQuery.of(context).size.height * 0.01,
-
-                // ),
-
-                // MyButtons.myButton("Register", context, SignupPage()),
-
-                // SizedBox(
-
-                //   height: MediaQuery.of(context).size.height * 0.01,
-
-                // ),
-
-                // MyButtons.myButton("Login", context, LoginPage()),
-
-                // SizedBox(
-
-                //   height: MediaQuery.of(context).size.height * 0.01,
-
-                // ),
-
-                // MyButtons.myButton("Anonymous", context, LoginPage()),
-
-                // SizedBox(
-
-                //   height: MediaQuery.of(context).size.height * 0.01,
-
-                // ),
-
-                //   SizedBox(
-
-                //     height: MediaQuery.of(context).size.height * 0.01,
-
-                //   ),
-
-                //  // MyButtons.myButton("Imei", context, ImeiPage()),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    "List :",
+                    style: GoogleFonts.ubuntu(
+                        fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                Container(
+                  height: MediaQuery.of(context).size.height * 0.3,
+                  child: StreamBuilder(
+                    stream: Firestore.instance
+                        .collection("Bussiness List")
+                        .snapshots(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) return const Text('Loading.....');
+                      return ListView.builder(
+                          itemCount: snapshot.data.documents.length,
+                          itemExtent: 100,
+                          itemBuilder: (context, index) => _CardList(
+                              context, snapshot.data.documents[index]));
+                    },
+                  ),
+                ),
               ]),
         ));
+  }
+
+  Widget _CardList(BuildContext context, DocumentSnapshot document) {
+    var a = document.get("photoUrl");
+    bool avail;
+    if (a != null) {
+      avail = true;
+    } else {
+      avail = false;
+    }
+
+    return Container(
+      margin: EdgeInsets.only(top: 20, left: 20, right: 20),
+      //height: MediaQuery.of(context).size.height * 0.1,
+      decoration: new BoxDecoration(
+        borderRadius: BorderRadius.circular(15),
+
+        //  color: const Color(0xff7c94b6),
+        image: new DecorationImage(
+          fit: BoxFit.cover,
+          colorFilter: new ColorFilter.mode(
+              Colors.black.withOpacity(0.6), BlendMode.darken),
+          image:
+              new NetworkImage(avail ? document.get("photoUrl") : testImageUrl),
+        ),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          ListTile(
+            //  focusColor: Colors.black,
+            // leading: Icon(Icons.arrow_drop_down_circle),
+            onTap: () => Get.to(DetailPage(documentSnapshot: document)),
+            title: Column(
+              // mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Row(
+                  children: [
+                    Text(
+                      document.get("BussinessName").toString(),
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                      ),
+                    ),
+                    RatingBarIndicator(
+                        rating:
+                            double.parse((document.get("rating").toString())),
+                        itemBuilder: (context, index) => Icon(
+                              Icons.star,
+                              color: Colors.amber,
+                            ),
+                        itemCount: 5,
+                        itemSize: 14.0,
+                        unratedColor: Colors.white10.withAlpha(50),
+                        direction: Axis.horizontal //: Axis.horizontal,
+                        ),
+                  ],
+                ),
+                SizedBox(
+                  height: 10,
+                )
+              ],
+            ),
+            subtitle: Column(
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Icon(
+                      Icons.home,
+                      color: MyColors.listp1Font,
+                      size: 12,
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Flexible(
+                      child: Text(
+                        "Line 1:" + document.get("Address").toString(),
+                        style: TextStyle(
+                          color: MyColors.listp1Font,
+                          fontSize: 12,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Icon(
+                      Icons.phone,
+                      color: MyColors.listp1Font,
+                      size: 11,
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      document.get("Contact"),
+                      style:
+                          TextStyle(color: MyColors.listp1Font, fontSize: 11),
+                    )
+                  ],
+                )
+              ],
+            ),
+          ),
+
+          SizedBox(
+            width: MediaQuery.of(context).size.width * 0.01,
+          ),
+          //  Image.asset('assets/card-sample-image.jpg'),
+          //Image.asset('assets/card-sample-image-2.jpg'),
+        ],
+      ),
+    );
   }
 }

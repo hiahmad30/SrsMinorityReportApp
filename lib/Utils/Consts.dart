@@ -16,7 +16,7 @@ bool isLogIn() {
 }
 
 class MyColors {
-  static final Color PrimaryColor = Colors.blue;
+  static final Color PrimaryColor = Color(0xff2f89fc);
   static final Color SecColor = Colors.blue[50];
 
   static final Color listh1Font = Colors.white;

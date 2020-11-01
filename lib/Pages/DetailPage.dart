@@ -4,7 +4,6 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:minorityreport/Utils/Consts.dart';
 //import 'package:google_fonts/google_fonts.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-import 'package:path_provider/path_provider.dart';
 
 import 'login_page.dart';
 

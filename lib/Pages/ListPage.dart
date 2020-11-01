@@ -1,4 +1,3 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -6,7 +5,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:minorityreport/Utils/Consts.dart';
 
 import 'DetailPage.dart';
-import 'First_Page.dart';
 import 'login_page.dart';
 
 class RatingList extends StatefulWidget {
@@ -15,8 +13,6 @@ class RatingList extends StatefulWidget {
 }
 
 class _RatingListState extends State<RatingList> {
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +25,6 @@ class _RatingListState extends State<RatingList> {
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-
           )
         ],
         backgroundColor: MyColors.PrimaryColor,
@@ -58,7 +53,6 @@ class _RatingListState extends State<RatingList> {
                       children: [
                         Container(
                           width: 50,
-
                         ),
                         InkWell(
                             onTap: () async {
