@@ -13,6 +13,7 @@ class RatingList extends StatefulWidget {
 }
 
 class _RatingListState extends State<RatingList> {
+  String _category = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -93,6 +94,7 @@ class _RatingListState extends State<RatingList> {
                     child: StreamBuilder(
                       stream: Firestore.instance
                           .collection("Bussiness List")
+                          .where('Category', isEqualTo: category)
                           .snapshots(),
                       builder: (context, snapshot) {
                         if (!snapshot.hasData)

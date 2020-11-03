@@ -108,7 +108,7 @@ class _FirstPageState extends State<FirstPage> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    "Categories :",
+                    "Categories ",
                     style: GoogleFonts.ubuntu(
                         fontSize: 20, fontWeight: FontWeight.bold),
                   ),
@@ -132,6 +132,7 @@ class _FirstPageState extends State<FirstPage> {
                             children: [
                               InkWell(
                                 onTap: () {
+                                  category = 'police';
                                   Get.to(RatingList());
                                 },
                                 child: Container(
@@ -172,6 +173,7 @@ class _FirstPageState extends State<FirstPage> {
                               ),
                               InkWell(
                                 onTap: () {
+                                  category = 'bank';
                                   Get.toNamed('/list');
                                 },
                                 child: Container(
@@ -213,6 +215,7 @@ class _FirstPageState extends State<FirstPage> {
                           children: [
                             InkWell(
                               onTap: () {
+                                category = 'bar';
                                 Get.toNamed('/list');
                               },
                               child: Container(
@@ -253,6 +256,7 @@ class _FirstPageState extends State<FirstPage> {
                             ),
                             InkWell(
                               onTap: () {
+                                category = 'dinner';
                                 Get.toNamed('/list');
                               },
                               child: Container(
@@ -261,7 +265,7 @@ class _FirstPageState extends State<FirstPage> {
                                       MainAxisAlignment.spaceEvenly,
                                   children: [
                                     Image.asset(
-                                      'lib/assets/police.png',
+                                      'lib/assets/dinner.png',
                                       width: 80,
                                     ),
                                     Text(
@@ -294,68 +298,80 @@ class _FirstPageState extends State<FirstPage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            Container(
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Image.asset(
-                                    'lib/assets/police.png',
-                                    width: 80,
-                                  ),
-                                  Text(
-                                    'Hospitals',
-                                    style: GoogleFonts.amiko(),
-                                  )
-                                ],
-                              ),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                color: Color(0xff30e3ca),
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: Colors.black,
+                            InkWell(
+                              onTap: () {
+                                category = 'hopital';
+                                Get.toNamed('/list');
+                              },
+                              child: Container(
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Image.asset(
+                                      'lib/assets/hospital.png',
+                                      width: 80,
+                                    ),
+                                    Text(
+                                      'Hospitals',
+                                      style: GoogleFonts.amiko(),
+                                    )
+                                  ],
+                                ),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: Color(0xff30e3ca),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.black,
 
-                                      // spreadRadius: 1,
+                                        // spreadRadius: 1,
 
-                                      blurRadius: 5),
-                                ],
+                                        blurRadius: 5),
+                                  ],
+                                ),
+                                height: 130,
+                                width: 130,
                               ),
-                              height: 130,
-                              width: 130,
                             ),
                             SizedBox(
                               width: 10,
                             ),
-                            Container(
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Image.asset(
-                                    'lib/assets/police.png',
-                                    width: 80,
-                                  ),
-                                  Text(
-                                    'Resturant',
-                                    style: GoogleFonts.amiko(),
-                                  )
-                                ],
-                              ),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                color: Color(0xfff8d0b0),
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: Colors.black,
+                            InkWell(
+                              onTap: () {
+                                category = 'Resturant';
+                                Get.toNamed('/list');
+                              },
+                              child: Container(
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Image.asset(
+                                      'lib/assets/resturant.png',
+                                      width: 80,
+                                    ),
+                                    Text(
+                                      'Resturant',
+                                      style: GoogleFonts.amiko(),
+                                    )
+                                  ],
+                                ),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: Color(0xfff8d0b0),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.black,
 
-                                      // spreadRadius: 1,
+                                        // spreadRadius: 1,
 
-                                      blurRadius: 5),
-                                ],
+                                        blurRadius: 5),
+                                  ],
+                                ),
+                                height: 130,
+                                width: 130,
                               ),
-                              height: 130,
-                              width: 130,
                             )
                           ],
                         ),
@@ -364,9 +380,9 @@ class _FirstPageState extends State<FirstPage> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.only(top: 8.0, left: 8),
                   child: Text(
-                    "List :",
+                    "List",
                     style: GoogleFonts.ubuntu(
                         fontSize: 20, fontWeight: FontWeight.bold),
                   ),
@@ -401,7 +417,7 @@ class _FirstPageState extends State<FirstPage> {
     }
 
     return Container(
-      margin: EdgeInsets.only(top: 20, left: 20, right: 20),
+      margin: EdgeInsets.only(bottom: 15, left: 20, right: 20),
       //height: MediaQuery.of(context).size.height * 0.1,
       decoration: new BoxDecoration(
         borderRadius: BorderRadius.circular(15),
