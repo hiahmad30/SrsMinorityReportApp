@@ -25,7 +25,7 @@ class AboutUsPage extends StatelessWidget {
             height: 30,
           ),
           Text(
-            '      Minority Reports is a black owned Bussiness locator. Our Application features over 2000+ black owned cafes, diners,Police Stations, and restaurants nationwide. Now its easy to find soul food, Bussiness, Police Officer , and African eateries in any place.\n',
+            '      Minority Report is a review application geared to AFRICAN-AMERICANS and other people of color to share their experiences at their favorite businesses and service providers. Our platform features restaurants, hotels, grocery stores, hospitals, doctors, Police Stations, Police Officers, and more worldwide. Now it is easy to find businesses that appreciate you, as well as identify those that are less friendly.\n',
             style: TextStyle(color: MyColors.listp1Font, fontSize: 16),
           ),
           SizedBox(
@@ -43,7 +43,10 @@ class AboutUsPage extends StatelessWidget {
           ),
           Row(
             children: [
-              Icon(Icons.person,color: MyColors.listp1Font,),
+              Icon(
+                Icons.person,
+                color: MyColors.listp1Font,
+              ),
               Text(
                 '  K. Ivey ',
                 style: TextStyle(
@@ -55,7 +58,10 @@ class AboutUsPage extends StatelessWidget {
           ),
           Row(
             children: [
-              Icon(Icons.map_rounded,color: MyColors.listp1Font,),
+              Icon(
+                Icons.map_rounded,
+                color: MyColors.listp1Font,
+              ),
               Text(
                 '  PO Box 18761 Jacksonville,\n Fl 32229',
                 style: TextStyle(
@@ -67,7 +73,10 @@ class AboutUsPage extends StatelessWidget {
           ),
           Row(
             children: [
-              Icon(Icons.email_rounded,color: MyColors.listp1Font,),
+              Icon(
+                Icons.email_rounded,
+                color: MyColors.listp1Font,
+              ),
               Text(
                 '  minorityreports2020@gmail.com',
                 style: TextStyle(
