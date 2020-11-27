@@ -24,6 +24,7 @@ class FirstPage extends StatefulWidget {
 }
 
 class _FirstPageState extends State<FirstPage> {
+  bool isload=false;
   TextStyle categoryFontStyle = GoogleFonts.adamina(fontSize: 20);
   final List<Widget> imageSliders = imgList
       .map((item) => Container(
@@ -76,7 +77,7 @@ class _FirstPageState extends State<FirstPage> {
         appBar: AppBar(
           title: Text(
             "Welcome to Minority Report",
-            style: GoogleFonts.aclonica(fontSize: 20),
+            style: GoogleFonts.aclonica(fontSize: 18),
           ),
           centerTitle: true,
           actions: [
@@ -159,7 +160,7 @@ class _FirstPageState extends State<FirstPage> {
                                     ),
                                     boxShadow: [
                                       BoxShadow(
-                                          color: Colors.black,
+                                          color: Colors.grey,
 
                                           // spreadRadius: 1,
 
@@ -195,10 +196,12 @@ class _FirstPageState extends State<FirstPage> {
                                   width: 130,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(20),
-                                    color: Color(0xffba53de),
+                                    color: Color(
+                                      0xffc5e3f6,
+                                    ),
                                     boxShadow: [
                                       BoxShadow(
-                                          color: Colors.black,
+                                          color: Colors.grey,
 
                                           // spreadRadius: 1,
 
@@ -236,11 +239,11 @@ class _FirstPageState extends State<FirstPage> {
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(20),
                                   color: Color(
-                                    0xff5be7c4,
+                                    0xffc5e3f6,
                                   ),
                                   boxShadow: [
                                     BoxShadow(
-                                        color: Colors.black,
+                                        color: Colors.grey,
 
                                         // spreadRadius: 1,
 
@@ -278,10 +281,12 @@ class _FirstPageState extends State<FirstPage> {
                                 width: 130,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(20),
-                                  color: Color(0xffcabbe9),
+                                  color: Color(
+                                    0xffc5e3f6,
+                                  ),
                                   boxShadow: [
                                     BoxShadow(
-                                        color: Colors.black,
+                                        color: Colors.grey,
 
                                         // spreadRadius: 1,
 
@@ -320,10 +325,12 @@ class _FirstPageState extends State<FirstPage> {
                                 ),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(20),
-                                  color: Color(0xff30e3ca),
+                                  color: Color(
+                                    0xffc5e3f6,
+                                  ),
                                   boxShadow: [
                                     BoxShadow(
-                                        color: Colors.black,
+                                        color: Colors.grey,
 
                                         // spreadRadius: 1,
 
@@ -359,10 +366,12 @@ class _FirstPageState extends State<FirstPage> {
                                 ),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(20),
-                                  color: Color(0xfff8d0b0),
+                                  color: Color(
+                                    0xffc5e3f6,
+                                  ),
                                   boxShadow: [
                                     BoxShadow(
-                                        color: Colors.black,
+                                        color: Colors.grey,
 
                                         // spreadRadius: 1,
 

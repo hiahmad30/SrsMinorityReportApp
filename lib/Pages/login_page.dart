@@ -1,4 +1,3 @@
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:minorityreport/Utils/Consts.dart';
 import 'package:minorityreport/Utils/loadingScreen.dart';
@@ -20,6 +19,7 @@ class _LoginPageState extends State<LoginPage> {
 //  String okMsg;
   bool _showPassword = true;
   String okMsg;
+  bool isload = false;
   /////////////////
   ///
 
@@ -202,10 +202,12 @@ class _LoginPageState extends State<LoginPage> {
       children: [
         Text("or"),
         FlatButton(
-          child: Text(
-            'Register',
-            style: TextStyle(color: MyColors.PrimaryColor),
-          ),
+          child: isload
+              ? loadingScreen()
+              : Text(
+                  'Register',
+                  style: TextStyle(color: MyColors.PrimaryColor),
+                ),
           onPressed: () {
             Navigator.pushReplacement(
                 context, MaterialPageRoute(builder: (context) => SignupPage()));
@@ -243,10 +245,10 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget ErrorWidgett() {
+  Widget ErrorWidgett(String s) {
     return AlertDialog(
       title: Text("Alert Dialog"),
-      content: Text("Dialog Content"),
+      content: Text("$s"),
       actions: [
         FlatButton(
           child: Text("Close"),
