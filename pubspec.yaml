@@ -33,9 +33,9 @@ dependencies:
   firebase_core:  any
   firebase_analytics: any
   cloud_firestore: any
-  flutter_rating_bar: ^3.0.1+1
+  flutter_rating_bar: ^3.1.0
   flutter_spinkit: ^4.1.2
-  firebase_storage: any
+  firebase_storage: ^4.0.1
   geolocator: ^6.0.0+4
   file_picker: ^2.0.6
   google_fonts: ^1.1.0
@@ -44,6 +44,10 @@ dependencies:
   rflutter_alert: ^1.1.0
   cupertino_icons: ^0.1.3
   get: ^3.15.0
+  firestore_service:
+    git:
+      url: https://github.com/bizz84/codewithandrea_flutter_packages
+      path: packages/firestore_service
 
 dev_dependencies:
   flutter_test:

@@ -24,7 +24,7 @@ class FirstPage extends StatefulWidget {
 }
 
 class _FirstPageState extends State<FirstPage> {
-  bool isload=false;
+  bool isload = false;
   TextStyle categoryFontStyle = GoogleFonts.adamina(fontSize: 20);
   final List<Widget> imageSliders = imgList
       .map((item) => Container(
@@ -126,263 +126,55 @@ class _FirstPageState extends State<FirstPage> {
                         SizedBox(
                           width: 20,
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(right: 10.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  category = 'police';
-                                  Get.to(RatingList());
-                                },
-                                child: Container(
-                                  child: Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      Image.asset(
-                                        'lib/assets/police.png',
-                                        width: 80,
-                                      ),
-                                      Text(
-                                        'Police officers',
-                                        style: GoogleFonts.amiko(),
-                                      )
-                                    ],
-                                  ),
-                                  height: 130,
-                                  width: 130,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    color: Color(
-                                      0xffc5e3f6,
-                                    ),
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: Colors.grey,
-
-                                          // spreadRadius: 1,
-
-                                          blurRadius: 5),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  category = 'bank';
-                                  Get.toNamed('/list');
-                                },
-                                child: Container(
-                                  child: Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      Image.asset(
-                                        'lib/assets/Bank.png',
-                                        width: 80,
-                                      ),
-                                      Text(
-                                        'Banks',
-                                        style: GoogleFonts.amiko(),
-                                      )
-                                    ],
-                                  ),
-                                  height: 130,
-                                  width: 130,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    color: Color(
-                                      0xffc5e3f6,
-                                    ),
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: Colors.grey,
-
-                                          // spreadRadius: 1,
-
-                                          blurRadius: 5),
-                                    ],
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            InkWell(
-                              onTap: () {
-                                category = 'bar';
-                                Get.toNamed('/list');
-                              },
-                              child: Container(
-                                child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Image.asset(
-                                      'lib/assets/bar.png',
-                                      width: 80,
-                                    ),
-                                    Text(
-                                      'Bars',
-                                      style: GoogleFonts.amiko(),
-                                    )
-                                  ],
-                                ),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  color: Color(
-                                    0xffc5e3f6,
-                                  ),
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: Colors.grey,
-
-                                        // spreadRadius: 1,
-
-                                        blurRadius: 5),
-                                  ],
-                                ),
-                                height: 130,
-                                width: 130,
-                              ),
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            InkWell(
-                              onTap: () {
-                                category = 'dinner';
-                                Get.toNamed('/list');
-                              },
-                              child: Container(
-                                child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Image.asset(
-                                      'lib/assets/dinner.png',
-                                      width: 80,
-                                    ),
-                                    Text(
-                                      'dinners',
-                                      style: GoogleFonts.amiko(),
-                                    )
-                                  ],
-                                ),
-                                height: 130,
-                                width: 130,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  color: Color(
-                                    0xffc5e3f6,
-                                  ),
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: Colors.grey,
-
-                                        // spreadRadius: 1,
-
-                                        blurRadius: 5),
-                                  ],
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
+                        _getCategoriy('bar', 'lib/assets/bar.png', 'Bars'),
                         SizedBox(
                           width: 10,
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            InkWell(
-                              onTap: () {
-                                category = 'hopital';
-                                Get.toNamed('/list');
-                              },
-                              child: Container(
-                                child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Image.asset(
-                                      'lib/assets/hospital.png',
-                                      width: 80,
-                                    ),
-                                    Text(
-                                      'Hospitals',
-                                      style: GoogleFonts.amiko(),
-                                    )
-                                  ],
-                                ),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  color: Color(
-                                    0xffc5e3f6,
-                                  ),
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: Colors.grey,
-
-                                        // spreadRadius: 1,
-
-                                        blurRadius: 5),
-                                  ],
-                                ),
-                                height: 130,
-                                width: 130,
-                              ),
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            InkWell(
-                              onTap: () {
-                                category = 'Resturant';
-                                Get.toNamed('/list');
-                              },
-                              child: Container(
-                                child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Image.asset(
-                                      'lib/assets/resturant.png',
-                                      width: 80,
-                                    ),
-                                    Text(
-                                      'Resturant',
-                                      style: GoogleFonts.amiko(),
-                                    )
-                                  ],
-                                ),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  color: Color(
-                                    0xffc5e3f6,
-                                  ),
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: Colors.grey,
-
-                                        // spreadRadius: 1,
-
-                                        blurRadius: 5),
-                                  ],
-                                ),
-                                height: 130,
-                                width: 130,
-                              ),
-                            )
-                          ],
+                        _getCategoriy('banks', 'lib/assets/Bank.png', 'Banks'),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        _getCategoriy(
+                            'car', 'lib/assets/car.png', 'Car Rentals'),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        _getCategoriy('clothstores', 'lib/assets/store.png',
+                            'Clothing Stores'),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        _getCategoriy('foodTrucks', 'lib/assets/foodTrucks.png',
+                            'Food Trucks'),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        _getCategoriy(
+                            'hotels', 'lib/assets/hotel.png', 'Hotels'),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        _getCategoriy(
+                            'hospital', 'lib/assets/hospital.png', 'Hospitals'),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        _getCategoriy(
+                            'police', 'lib/assets/police.png', 'Police'),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        _getCategoriy(
+                            'transportations',
+                            'lib/assets/transportation.png',
+                            'Public Transport'),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        _getCategoriy('Resturant', 'lib/assets/resturant.png',
+                            'Resturant'),
+                        SizedBox(
+                          width: 10,
                         ),
                       ],
                     ),
@@ -414,6 +206,50 @@ class _FirstPageState extends State<FirstPage> {
                 ),
               ]),
         ));
+  }
+
+  Widget _getCategoriy(
+    String cat,
+    String imageStr,
+    String titleC,
+  ) {
+    return InkWell(
+      onTap: () {
+        category = cat;
+        Get.to(RatingList());
+      },
+      child: Container(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Image.asset(
+              imageStr,
+              width: 80,
+            ),
+            Text(
+              titleC,
+              style: GoogleFonts.amiko(),
+            )
+          ],
+        ),
+        height: 130,
+        width: 130,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          color: Color(
+            0xffc5e3f6,
+          ),
+          boxShadow: [
+            BoxShadow(
+                color: Colors.grey,
+
+                // spreadRadius: 1,
+
+                blurRadius: 5),
+          ],
+        ),
+      ),
+    );
   }
 
   Widget _CardList(BuildContext context, DocumentSnapshot document) {
