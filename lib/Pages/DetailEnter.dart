@@ -17,6 +17,7 @@ class DetailEntry extends StatefulWidget {
 
 class _DetailEntryState extends State<DetailEntry> {
   String _uploadedFileURL;
+  double avgRate;
   TextEditingController _nameC = new TextEditingController();
   TextEditingController _categoryC = new TextEditingController();
   TextEditingController _addressLine1C = new TextEditingController();
@@ -39,7 +40,7 @@ class _DetailEntryState extends State<DetailEntry> {
       _validatedDis = false,
       _validatesD = false,
       _validateEm = false;
-
+  DatabaseService _service = new DatabaseService();
   Future getImage() async {
     File file;
     try {
@@ -134,7 +135,7 @@ class _DetailEntryState extends State<DetailEntry> {
       try {
         _ratingModel = RatingModel(
             bussinessName: _nameC.text,
-            bCategory: _categoryC.text,
+            bCategory: _selectedLocation,
             address: [_addressLine1C.text, _addressLine2C.text],
             city: _cityC.text,
             state: _stateC.text,
@@ -163,6 +164,19 @@ class _DetailEntryState extends State<DetailEntry> {
     }
   }
 
+////////////////////////////////
+  List<String> locations = [
+    'bar',
+    'banks',
+    'car',
+    'FoodTrucks',
+    'car',
+    'Hotels',
+    'Hospital',
+    'Public_Transportations',
+    'Resturant'
+  ];
+  String _selectedLocation = 'bar';
 /////////////////////////////////////////////
   @override
   void dispose() {
@@ -228,24 +242,42 @@ class _DetailEntryState extends State<DetailEntry> {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: TextField(
-                    controller: _categoryC,
-                    decoration: new InputDecoration(
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            color: MyColors.PrimaryColor, width: 1.0),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            color: MyColors.PrimaryColor, width: 1.0),
-                      ),
-                      labelText: 'Business Category ',
-                      hintText:
-                          'Restaurant, Security, Hotel, General Store etc',
-                      hintStyle: TextStyle(fontSize: 12),
-                      errorText: _validateC ? 'Value Can\'t Be Empty' : null,
-                    ),
-                  ),
+                  child: DropdownButton<String>(
+                      value: _selectedLocation,
+                      isExpanded: true,
+                      items: locations.map((String val) {
+                        return new DropdownMenuItem<String>(
+                          value: val,
+                          child: new Text(val),
+                        );
+                      }).toList(),
+                      hint: Text("Please choose a Category of your Business"),
+                      onChanged: (newVal) {
+                        print(newVal);
+                        //   _selectedLocation = newVal;
+                        setState(() {
+                          _selectedLocation = newVal;
+                        });
+                      }),
+
+                  // TextField(
+                  //   controller: _categoryC,
+                  //   decoration: new InputDecoration(
+                  //     focusedBorder: OutlineInputBorder(
+                  //       borderSide: BorderSide(
+                  //           color: MyColors.PrimaryColor, width: 1.0),
+                  //     ),
+                  //     enabledBorder: OutlineInputBorder(
+                  //       borderSide: BorderSide(
+                  //           color: MyColors.PrimaryColor, width: 1.0),
+                  //     ),
+                  //     labelText: 'Business Category ',
+                  //     hintText:
+                  //         'Restaurant, Security, Hotel, General Store etc',
+                  //     hintStyle: TextStyle(fontSize: 12),
+                  //     errorText: _validateC ? 'Value Can\'t Be Empty' : null,
+                  //   ),
+                  // ),
                 ),
                 Text(
                   'Adddress',
@@ -469,7 +501,7 @@ class _DetailEntryState extends State<DetailEntry> {
                     ),
                   ),
                 ),
-                RatingBar(
+                RatingBar.builder(
                   initialRating: 3,
                   minRating: 1,
                   direction: Axis.horizontal,

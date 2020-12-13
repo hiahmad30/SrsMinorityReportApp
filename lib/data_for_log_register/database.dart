@@ -1,7 +1,7 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:minorityreport/Models/ratingModel.dart';
+import 'package:minorityreport/Utils/Consts.dart';
 
 import 'users.dart';
 
@@ -29,9 +29,9 @@ class DatabaseService {
 
   Future<String> createBussinessList(RatingModel bussinesslist) async {
     String retVal = "error";
-
+    var bList = _firestore.collection("Bussiness List");
     try {
-      await _firestore.collection("Bussiness List").doc().set({
+      await bList.doc().set({
         'BussinessName': bussinesslist.bussinessName,
         'email': bussinesslist.email,
         'Address': bussinesslist.address,
@@ -53,11 +53,37 @@ class DatabaseService {
       print(error.toString());
       return null;
     }
-
+    print(bList.doc().id);
     return retVal;
   }
 
-  final String uid;
-
-  DatabaseService({this.uid});
+  double _avgRating = 0;
+  // getReview();
+  Future<void> getReview(
+    String id,
+  ) async {
+    int tem = 0;
+    try {
+      await Firestore.instance
+          .collection("Reviews")
+          .where("BussinessId", isEqualTo: id)
+          .get()
+          .then((value) async => {
+                value.docs.forEach((element) {
+                  var temp = element.data()["Rating"];
+                  _avgRating += temp == null ? 3 : temp;
+                  tem++;
+                }),
+                if (tem != 0) _avgRating = _avgRating / tem,
+                await Firestore.instance
+                    .collection("Bussiness List")
+                    .doc(id)
+                    .update({'rating': _avgRating}),
+                print(value.docs.length.toString()),
+              });
+    } catch (e) {
+      print("Not get reviews");
+      _avgRating = 3;
+    }
+  }
 }

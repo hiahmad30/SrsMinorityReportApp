@@ -1,17 +1,29 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:get/get.dart';
 import 'package:minorityreport/Utils/Consts.dart';
+
 //import 'package:google_fonts/google_fonts.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 import 'login_page.dart';
 
-class DetailPage extends StatelessWidget {
+class DetailPage extends StatefulWidget {
   DocumentSnapshot documentSnapshot;
+  DetailPage({@required this.documentSnapshot});
+
+  @override
+  _DetailPageState createState() => _DetailPageState();
+}
+
+class _DetailPageState extends State<DetailPage> {
   FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
+
   TextEditingController reviewContr = new TextEditingController();
-  double _rating;
+
+  double _rating, _avgRating = 0;
+
   addRev(BuildContext context) {
     return Alert(
         context: context,
@@ -27,8 +39,8 @@ class DetailPage extends StatelessWidget {
                 labelText: 'Add review',
               ),
             ),
-            RatingBar(
-              initialRating: 3,
+            RatingBar.builder(
+              initialRating: 1,
               minRating: 1,
               direction: Axis.horizontal,
               allowHalfRating: true,
@@ -51,6 +63,7 @@ class DetailPage extends StatelessWidget {
             onPressed: () {
               if (reviewContr.text.isNotEmpty) {
                 addNewReviewdb(context);
+                getReview();
               }
             },
             child: Text(
@@ -61,13 +74,38 @@ class DetailPage extends StatelessWidget {
         ]).show();
   }
 
+  getReview() async {
+    int tem = 0;
+    try {
+      await _firebaseFirestore
+          .collection("Reviews")
+          .where("BussinessId", isEqualTo: widget.documentSnapshot.id)
+          .get()
+          .then((value) => {
+                value.docs.forEach((element) {
+                  var temp = element.data()["Rating"];
+                  _avgRating = temp == null ? 3 : temp;
+                  tem++;
+                }),
+                if (tem != 0) _avgRating = _avgRating / tem,
+                setState(() {
+                  print(value.docs.length.toString());
+                }),
+              });
+    } catch (e) {
+      print("Not get reviews");
+      _avgRating = 3;
+    }
+  }
+
   addNewReviewdb(BuildContext context) async {
     try {
       print("Uid " + u_id);
-      await _firebaseFirestore.collection("Reviews").doc(u_id).set({
+      await _firebaseFirestore.collection("Reviews").doc().set({
         "Rating": _rating,
-        "BName": documentSnapshot.get("BussinessName"),
-        "BussinessId": documentSnapshot.id,
+        "BName": widget.documentSnapshot.get("BussinessName"),
+        "BussinessId": widget.documentSnapshot.id,
+        "u_Id": u_id,
         "Reviews": reviewContr.text
       }).then((value) {
         Navigator.pop(context);
@@ -80,18 +118,16 @@ class DetailPage extends StatelessWidget {
     }
   }
 
-  // bool checkReplace() {
-  //   if (_firebaseFirestore.collection("Reviews").doc(u_id).id.isEmpty) {
-  //     return false;
-  //   } else {
-  //     return true;
-  //   }
-  // }
+  @override
+  void initState() {
+    // TODO: implement initState
+    getReview();
+    super.initState();
+  }
 
-  DetailPage({@required this.documentSnapshot});
   @override
   Widget build(BuildContext context) {
-    var a = documentSnapshot.get("photoUrl");
+    var a = widget.documentSnapshot.get("photoUrl");
     bool avail;
     if (a != null) {
       avail = true;
@@ -107,7 +143,7 @@ class DetailPage extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Text(
-          documentSnapshot.get("BussinessName"),
+          widget.documentSnapshot.get("BussinessName"),
           // style:
           //  GoogleFonts.breeSerif(fontSize: 20, fontWeight: FontWeight.bold),
           style: TextStyle(
@@ -121,7 +157,7 @@ class DetailPage extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Text(
-          documentSnapshot.get("DetailedDiscription"),
+          widget.documentSnapshot.get("DetailedDiscription"),
           style: TextStyle(color: MyColors.p1FontBalck),
         ),
       ),
@@ -151,7 +187,7 @@ class DetailPage extends StatelessWidget {
               ,
               child: RatingBarIndicator(
                   rating:
-                      double.parse((documentSnapshot.get("rating").toString())),
+                      _avgRating, // double.parse((documentSnapshot.get("rating").toString())),
                   itemBuilder: (context, index) => Icon(
                         Icons.star,
                         color: Colors.amber,
@@ -183,7 +219,7 @@ class DetailPage extends StatelessWidget {
                 SizedBox(
                   width: 10,
                 ),
-                Text(documentSnapshot.get("email")),
+                Text(widget.documentSnapshot.get("email")),
               ],
             ),
             Row(
@@ -192,7 +228,7 @@ class DetailPage extends StatelessWidget {
                 SizedBox(
                   width: 10,
                 ),
-                Text(documentSnapshot.get("Contact")),
+                Text(widget.documentSnapshot.get("Contact")),
               ],
             ),
             Row(
@@ -201,9 +237,9 @@ class DetailPage extends StatelessWidget {
                 SizedBox(
                   width: 10,
                 ),
-                Text(documentSnapshot.get("Address")[0].toString() +
+                Text(widget.documentSnapshot.get("Address")[0].toString() +
                     ", " +
-                    documentSnapshot.get("Address")[1].toString()),
+                    widget.documentSnapshot.get("Address")[1].toString()),
               ],
             ),
             Row(
@@ -212,7 +248,7 @@ class DetailPage extends StatelessWidget {
                 SizedBox(
                   width: 10,
                 ),
-                Text(documentSnapshot.get("Country")),
+                Text(widget.documentSnapshot.get("Country")),
               ],
             ),
             SizedBox(

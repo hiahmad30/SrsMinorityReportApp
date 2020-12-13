@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:get/get.dart';
 import 'package:minorityreport/Utils/Consts.dart';
 import 'package:minorityreport/Utils/loadingScreen.dart';
+import 'package:minorityreport/ViewModel/loadinWidget.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 import 'signup_page.dart';
@@ -17,7 +19,7 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController _pass = TextEditingController();
 
 //  String okMsg;
-  bool _showPassword = true;
+  bool _showPassword = true, isSignedIn = false;
   String okMsg;
   bool isload = false;
   /////////////////
@@ -57,6 +59,7 @@ class _LoginPageState extends State<LoginPage> {
     User user;
     String errorMessage;
     FirebaseAuth _auth = FirebaseAuth.instance;
+    isSignedIn = true;
     try {
       UserCredential result = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
@@ -101,13 +104,11 @@ class _LoginPageState extends State<LoginPage> {
     if (errorMessage != null) {
       return Future.error(errorMessage);
     }
-    Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(builder: (context) => loadingScreen()),
-        (route) => false);
-    if (u_id != null)
-      Navigator.pushReplacementNamed(context, "/list");
-    else {
+    if (u_id != null) {
+      isSignedIn = false;
+
+      Get.toNamed("/list");
+    } else {
       Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(builder: (context) => loadingScreen()),
@@ -202,8 +203,8 @@ class _LoginPageState extends State<LoginPage> {
       children: [
         Text("or"),
         FlatButton(
-          child: isload
-              ? loadingScreen()
+          child: isSignedIn
+              ? LoadingWidget()
               : Text(
                   'Register',
                   style: TextStyle(color: MyColors.PrimaryColor),
@@ -245,7 +246,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget ErrorWidgett(String s) {
+  Widget errorWidgett(String s) {
     return AlertDialog(
       title: Text("Alert Dialog"),
       content: Text("$s"),

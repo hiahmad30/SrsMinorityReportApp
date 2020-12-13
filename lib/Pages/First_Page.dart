@@ -126,46 +126,46 @@ class _FirstPageState extends State<FirstPage> {
                         SizedBox(
                           width: 20,
                         ),
-                        _getCategoriy('bar', 'lib/assets/bar.png', 'Bars'),
+                        _getCategoriy('Bar', 'lib/assets/bar.png', 'Bars'),
                         SizedBox(
                           width: 10,
                         ),
-                        _getCategoriy('banks', 'lib/assets/Bank.png', 'Banks'),
+                        _getCategoriy('Banks', 'lib/assets/Bank.png', 'Banks'),
                         SizedBox(
                           width: 10,
                         ),
                         _getCategoriy(
-                            'car', 'lib/assets/car.png', 'Car Rentals'),
+                            'Car', 'lib/assets/car.png', 'Car Rentals'),
                         SizedBox(
                           width: 10,
                         ),
-                        _getCategoriy('clothstores', 'lib/assets/store.png',
+                        _getCategoriy('Clothstores', 'lib/assets/store.png',
                             'Clothing Stores'),
                         SizedBox(
                           width: 10,
                         ),
-                        _getCategoriy('foodTrucks', 'lib/assets/foodTrucks.png',
+                        _getCategoriy('FoodTrucks', 'lib/assets/foodTrucks.png',
                             'Food Trucks'),
                         SizedBox(
                           width: 10,
                         ),
                         _getCategoriy(
-                            'hotels', 'lib/assets/hotel.png', 'Hotels'),
+                            'Hotels', 'lib/assets/hotel.png', 'Hotels'),
                         SizedBox(
                           width: 10,
                         ),
                         _getCategoriy(
-                            'hospital', 'lib/assets/hospital.png', 'Hospitals'),
+                            'Hospital', 'lib/assets/hospital.png', 'Hospitals'),
                         SizedBox(
                           width: 10,
                         ),
                         _getCategoriy(
-                            'police', 'lib/assets/police.png', 'Police'),
+                            'Police', 'lib/assets/police.png', 'Police'),
                         SizedBox(
                           width: 10,
                         ),
                         _getCategoriy(
-                            'transportations',
+                            'Public_Transportations',
                             'lib/assets/transportation.png',
                             'Public Transport'),
                         SizedBox(
@@ -182,10 +182,21 @@ class _FirstPageState extends State<FirstPage> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 8.0, left: 8),
-                  child: Text(
-                    "List",
-                    style: GoogleFonts.ubuntu(
-                        fontSize: 20, fontWeight: FontWeight.bold),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "List",
+                        style: GoogleFonts.ubuntu(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                      IconButton(
+                          icon: Icon(Icons.more_horiz_outlined),
+                          onPressed: () {
+                            category = '';
+                            Get.to(RatingList());
+                          })
+                    ],
                   ),
                 ),
                 Container(
