@@ -30,6 +30,7 @@ class AuthController extends GetxController {
       return FirstPage();
     } else {
       firebaseUser = firebaseAuth.currentUser;
+      u_id = firebaseUser.uid;
       update();
       return FirstPage();
     }

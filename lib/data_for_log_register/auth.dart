@@ -52,15 +52,18 @@ class AuthService {
     return user?.user.uid;
   }
 
-  Future<bool> signInWithEmail(String em, String ps) async {
-    UserCredential re =
-        await _firebaseAuth.signInWithEmailAndPassword(email: em, password: ps);
-    if (re.user != null) {
-      u_id = re.user.uid;
-      return true;
-    } else
-      return false;
+  Future<void> currentUserLoggedIn() {
+    u_id = _auth.currentUser.uid;
   }
+  // Future<bool> signInWithEmail(String em, String ps) async {
+  //   UserCredential re =
+  //       await _firebaseAuth.signInWithEmailAndPassword(email: em, password: ps);
+  //   if (re.user != null) {
+  //     u_id = re.user.uid;
+  //     return true;
+  //   } else
+  //     return false;
+  // }
 
   // String phoneNo;
   // String smsOTP;

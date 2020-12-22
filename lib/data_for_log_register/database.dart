@@ -1,7 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:minorityreport/Models/ratingModel.dart';
-import 'package:minorityreport/Utils/Consts.dart';
 
 import 'users.dart';
 

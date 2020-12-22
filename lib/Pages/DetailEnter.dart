@@ -259,25 +259,6 @@ class _DetailEntryState extends State<DetailEntry> {
                           _selectedLocation = newVal;
                         });
                       }),
-
-                  // TextField(
-                  //   controller: _categoryC,
-                  //   decoration: new InputDecoration(
-                  //     focusedBorder: OutlineInputBorder(
-                  //       borderSide: BorderSide(
-                  //           color: MyColors.PrimaryColor, width: 1.0),
-                  //     ),
-                  //     enabledBorder: OutlineInputBorder(
-                  //       borderSide: BorderSide(
-                  //           color: MyColors.PrimaryColor, width: 1.0),
-                  //     ),
-                  //     labelText: 'Business Category ',
-                  //     hintText:
-                  //         'Restaurant, Security, Hotel, General Store etc',
-                  //     hintStyle: TextStyle(fontSize: 12),
-                  //     errorText: _validateC ? 'Value Can\'t Be Empty' : null,
-                  //   ),
-                  // ),
                 ),
                 Text(
                   'Adddress',

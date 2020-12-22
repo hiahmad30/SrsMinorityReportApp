@@ -25,32 +25,32 @@ class _LoginPageState extends State<LoginPage> {
   /////////////////
   ///
 
-  ///
   Future<void> _showMyDialog(String a) async {
-    return showDialog<void>(
-        context: context,
-        barrierDismissible: false, // user must tap button!
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('Authentication Error'),
-            content: SingleChildScrollView(
-              child: ListBody(
-                children: <Widget>[
-                  Text(''),
-                  Text(a),
-                ],
-              ),
-            ),
-            actions: <Widget>[
-              FlatButton(
-                child: Text('ok'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          );
-        });
+    // return showDialog<void>(
+    //     context: context,
+    //     barrierDismissible: false, // user must tap button!
+    //     builder: (BuildContext context) {
+    //       return AlertDialog(
+    //         title: Text('Authentication Error'),
+    //         content: SingleChildScrollView(
+    //           child: ListBody(
+    //             children: <Widget>[
+    //               Text(''),
+    //               Text(a),
+    //             ],
+    //           ),
+    //         ),
+    //         actions: <Widget>[
+    //           FlatButton(
+    //             child: Text('ok'),
+    //             onPressed: () {
+    //               Navigator.of(context).pop();
+    //             },
+    //           ),
+    //         ],
+    //       );
+    //     });
+    Get.snackbar("Logon Error", a.toString());
   }
 
   ///
@@ -66,10 +66,10 @@ class _LoginPageState extends State<LoginPage> {
       user = result.user;
       u_id = user.uid;
     } catch (error) {
-      Alert(
-        context: context,
-        title: "SignIn Error",
-      );
+      // Alert(
+      //   context: context,
+      //   title: "SignIn Error",
+      // );
       switch (error.toString()) {
         case "ERROR_INVALID_EMAIL":
           errorMessage = "Your email address appears to be malformed.";

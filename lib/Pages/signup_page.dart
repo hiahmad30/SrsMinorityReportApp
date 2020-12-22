@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:get/get.dart';
 import 'package:minorityreport/Utils/Consts.dart';
 import 'package:minorityreport/Utils/loadingScreen.dart';
+import 'package:minorityreport/ViewModel/loadinWidget.dart';
 import 'package:minorityreport/ViewModel/locationService.dart';
 import 'package:minorityreport/data_for_log_register/auth.dart';
 
@@ -38,22 +40,21 @@ class _SignupPageState extends State<SignupPage> {
   void _signUpUser(String email, String password, BuildContext context,
       String displayName, String phoneNumber) async {
     position = await location.getlastPosition();
-
     geoPoints =
         "" + position.latitude.toString() + " " + position.longitude.toString();
     try {
+      Get.to(LoadingWidget());
       String _returnString = await _auth.signUpUser(
           email, password, displayName, phoneNumber, photoUrl, geoPoints);
 
       if (_returnString == "success") {
-        Navigator.pushReplacementNamed(context, "/loginpage");
+        Get.back();
+        Get.offAllNamed("/loginpage");
       } else {}
     } catch (error) {
       print(error.toString());
       return null;
     }
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => loadingScreen()));
   }
 
   @override
@@ -138,8 +139,7 @@ class _SignupPageState extends State<SignupPage> {
             _signUpUser(_emailController.text, _passwordController.text,
                 context, _displayNameController.text, _phoneController.text);
           } else {
-            await showMyDialog(
-                context, "FillOut Error", "All Fields are Naccessory");
+            Get.snackbar('Fill all fields', "All Fields are Naccessory");
           }
         },
         padding: EdgeInsets.all(12),
