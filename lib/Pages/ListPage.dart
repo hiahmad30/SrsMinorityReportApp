@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:minorityreport/Utils/Consts.dart';
+import 'package:minorityreport/controller/AuthController.dart';
 
 import 'DetailPage.dart';
 import 'login_page.dart';
@@ -13,6 +15,7 @@ class RatingList extends StatefulWidget {
 }
 
 class _RatingListState extends State<RatingList> {
+  final auth = Get.put(AuthController());
   String _category = '';
 
   @override
@@ -21,13 +24,18 @@ class _RatingListState extends State<RatingList> {
       appBar: AppBar(
         title: Text(
           "Welcome to Minority Report",
-          style: GoogleFonts.aclonica(fontSize: 20),
+          style: GoogleFonts.roboto(fontSize: 18),
         ),
         centerTitle: true,
         actions: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-          )
+          u_id != null
+              ? IconButton(
+                  tooltip: 'SignOut',
+                  icon: Icon(Icons.login_outlined),
+                  onPressed: () {
+                    auth.signouUser();
+                  })
+              : Container(),
         ],
         backgroundColor: MyColors.PrimaryColor,
       ),
@@ -89,28 +97,24 @@ class _RatingListState extends State<RatingList> {
                 SizedBox(
                   height: 10,
                 ),
-                SingleChildScrollView(
-                  child: Container(
-                    height: MediaQuery.of(context).size.height * 0.7,
-                    child: StreamBuilder(
-                      stream: category == ''
-                          ? Firestore.instance
-                              .collection("Bussiness List")
-                              .snapshots()
-                          : Firestore.instance
-                              .collection("Bussiness List")
-                              .where('Category', isEqualTo: category)
-                              .snapshots(),
-                      builder: (context, snapshot) {
-                        if (!snapshot.hasData)
-                          return const Text('Loading.....');
-                        return ListView.builder(
-                            itemCount: snapshot.data.documents.length,
-                            itemExtent: 160,
-                            itemBuilder: (context, index) => _CardList(
-                                context, snapshot.data.documents[index]));
-                      },
-                    ),
+                Flexible(
+                  child: StreamBuilder(
+                    stream: category == ''
+                        ? Firestore.instance
+                            .collection("Bussiness List")
+                            .snapshots()
+                        : Firestore.instance
+                            .collection("Bussiness List")
+                            .where('Category', isEqualTo: category)
+                            .snapshots(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) return const Text('Loading.....');
+                      return ListView.builder(
+                          itemCount: snapshot.data.documents.length,
+                          itemExtent: 160,
+                          itemBuilder: (context, index) => _CardList(
+                              context, snapshot.data.documents[index]));
+                    },
                   ),
                 ),
               ],

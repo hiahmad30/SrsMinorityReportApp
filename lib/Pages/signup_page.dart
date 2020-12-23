@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
-import 'package:minorityreport/Utils/Consts.dart';
-import 'package:minorityreport/Utils/loadingScreen.dart';
 import 'package:minorityreport/ViewModel/loadinWidget.dart';
 import 'package:minorityreport/ViewModel/locationService.dart';
 import 'package:minorityreport/data_for_log_register/auth.dart';
@@ -43,7 +41,7 @@ class _SignupPageState extends State<SignupPage> {
     geoPoints =
         "" + position.latitude.toString() + " " + position.longitude.toString();
     try {
-      Get.to(LoadingWidget());
+      Get.dialog(Center(child: LoadingWidget()), barrierDismissible: false);
       String _returnString = await _auth.signUpUser(
           email, password, displayName, phoneNumber, photoUrl, geoPoints);
 
@@ -54,6 +52,19 @@ class _SignupPageState extends State<SignupPage> {
     } catch (error) {
       print(error.toString());
       return null;
+    }
+  }
+
+  String passError = null;
+  checkPass(String pass1, String pass2) {
+    if (pass1 == pass2) {
+      passError = null;
+      setState(() {});
+      return true;
+    } else {
+      passError = 'password does not match';
+      setState(() {});
+      return false;
     }
   }
 
@@ -69,7 +80,7 @@ class _SignupPageState extends State<SignupPage> {
       tag: 'hero',
       child: CircleAvatar(
         backgroundColor: Colors.transparent,
-        radius: 48.0,
+        radius: 120.0,
         child: Image.asset('lib/assets/logo.png'),
       ),
     );
@@ -108,6 +119,7 @@ class _SignupPageState extends State<SignupPage> {
       obscureText: _showPassword,
       controller: _confirmPasswordController,
       decoration: InputDecoration(
+        errorText: passError,
         hintText: 'Confirm Password',
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
@@ -134,10 +146,13 @@ class _SignupPageState extends State<SignupPage> {
               _passwordController.text.isNotEmpty &&
               _phoneController.text.isNotEmpty &&
               _displayNameController.text.isNotEmpty) {
-            print(
-                "Values: " + _emailController.text + _passwordController.text);
-            _signUpUser(_emailController.text, _passwordController.text,
-                context, _displayNameController.text, _phoneController.text);
+            if (checkPass(
+                _passwordController.text, _confirmPasswordController.text)) {
+              _signUpUser(_emailController.text, _passwordController.text,
+                  context, _displayNameController.text, _phoneController.text);
+            } else {
+              Get.snackbar("Password error", "Password does not macth");
+            }
           } else {
             Get.snackbar('Fill all fields', "All Fields are Naccessory");
           }

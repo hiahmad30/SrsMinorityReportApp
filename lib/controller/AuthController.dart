@@ -53,7 +53,7 @@ class AuthController extends GetxController {
     } catch (ex) {
       print(ex.toString());
       Get.back();
-      Get.snackbar('Sign In Error', 'Error Signing in with email and password',
+      Get.snackbar('Sign In Error', 'Recheck your email and password',
           duration: Duration(seconds: 5),
           backgroundColor: Colors.black,
           colorText: Colors.white,
@@ -65,21 +65,23 @@ class AuthController extends GetxController {
     }
   }
 
-  void createUser(
-      String name, String email, String password, String phone) async {
+  void createUser(String name, String email, String password, String phone,
+      String geo) async {
     try {
       CollectionReference reference =
-          FirebaseFirestore.instance.collection("Admins");
+          FirebaseFirestore.instance.collection("users");
       Map<String, String> userdata = {
         "Name": name,
         "CreatedAt": DateTime.now().toLocal().toString(),
         "Email": email,
-        "Phone": phone
+        "Phone": phone,
+        'GeoLocation': geo
       };
 
       await firebaseAuth
           .createUserWithEmailAndPassword(email: email, password: password)
           .then((value) {
+        u_id = value.user.uid;
         reference
             .doc(value.user.uid)
             .set(userdata)
@@ -93,5 +95,12 @@ class AuthController extends GetxController {
       Get.back();
       Get.snackbar("Error while creating account ", err.message);
     }
+  }
+
+  signouUser() async {
+    await firebaseAuth.signOut();
+    u_id = null;
+    update();
+    Get.offAll(FirstPage());
   }
 }

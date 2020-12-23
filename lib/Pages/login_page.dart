@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:minorityreport/Utils/Consts.dart';
 import 'package:minorityreport/Utils/loadingScreen.dart';
 import 'package:minorityreport/ViewModel/loadinWidget.dart';
+import 'package:minorityreport/controller/AuthController.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 import 'signup_page.dart';
@@ -15,6 +16,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final auth = Get.put(AuthController());
   TextEditingController _email = TextEditingController();
   TextEditingController _pass = TextEditingController();
 
@@ -25,96 +27,7 @@ class _LoginPageState extends State<LoginPage> {
   /////////////////
   ///
 
-  Future<void> _showMyDialog(String a) async {
-    // return showDialog<void>(
-    //     context: context,
-    //     barrierDismissible: false, // user must tap button!
-    //     builder: (BuildContext context) {
-    //       return AlertDialog(
-    //         title: Text('Authentication Error'),
-    //         content: SingleChildScrollView(
-    //           child: ListBody(
-    //             children: <Widget>[
-    //               Text(''),
-    //               Text(a),
-    //             ],
-    //           ),
-    //         ),
-    //         actions: <Widget>[
-    //           FlatButton(
-    //             child: Text('ok'),
-    //             onPressed: () {
-    //               Navigator.of(context).pop();
-    //             },
-    //           ),
-    //         ],
-    //       );
-    //     });
-    Get.snackbar("Logon Error", a.toString());
-  }
-
   ///
-
-  void signIn(String email, String password) async {
-    User user;
-    String errorMessage;
-    FirebaseAuth _auth = FirebaseAuth.instance;
-    isSignedIn = true;
-    try {
-      UserCredential result = await _auth.signInWithEmailAndPassword(
-          email: email, password: password);
-      user = result.user;
-      u_id = user.uid;
-    } catch (error) {
-      // Alert(
-      //   context: context,
-      //   title: "SignIn Error",
-      // );
-      switch (error.toString()) {
-        case "ERROR_INVALID_EMAIL":
-          errorMessage = "Your email address appears to be malformed.";
-          _showMyDialog(
-              "Your email address appears to be not in correct form.");
-          break;
-        case "ERROR_WRONG_PASSWORD":
-          errorMessage = "Your password is wrong.";
-          _showMyDialog("Your password is wrong.");
-          break;
-        case "ERROR_USER_NOT_FOUND":
-          errorMessage = "User with this email doesn't exist.";
-          _showMyDialog("User with this email doesn't exist.");
-          break;
-        case "ERROR_USER_DISABLED":
-          errorMessage = "User with this email has been disabled.";
-          _showMyDialog("User with this email has been disabled.");
-          break;
-        case "ERROR_TOO_MANY_REQUESTS":
-          errorMessage = "Too many requests. Try again later.";
-          _showMyDialog("Too many requests. Try again later.");
-          break;
-        case "ERROR_OPERATION_NOT_ALLOWED":
-          errorMessage = "Signing in with Email and Password is not enabled.";
-          _showMyDialog("Signing in with Email and Password is not enabled.");
-          break;
-        default:
-          errorMessage = "An undefined Error happened.";
-      }
-    }
-
-    if (errorMessage != null) {
-      return Future.error(errorMessage);
-    }
-    if (u_id != null) {
-      isSignedIn = false;
-
-      Get.toNamed("/list");
-    } else {
-      Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (context) => loadingScreen()),
-          (route) => false);
-    }
-  }
 
   @override
   void initState() {
@@ -135,7 +48,7 @@ class _LoginPageState extends State<LoginPage> {
       tag: 'hero',
       child: CircleAvatar(
         backgroundColor: Colors.transparent,
-        radius: 48.0,
+        radius: 120.0,
         child: Image.asset('lib/assets/logo.png'),
       ),
     );
@@ -194,7 +107,8 @@ class _LoginPageState extends State<LoginPage> {
             borderRadius: BorderRadius.circular(24),
           ),
           onPressed: () async {
-            signIn(_email.text, _pass.text);
+            auth.signInwithEmail(_email.text, _pass.text);
+            _pass.clear();
           },
         ));
     final signupLbl = Center(
@@ -203,15 +117,12 @@ class _LoginPageState extends State<LoginPage> {
       children: [
         Text("or"),
         FlatButton(
-          child: isSignedIn
-              ? LoadingWidget()
-              : Text(
-                  'Register',
-                  style: TextStyle(color: MyColors.PrimaryColor),
-                ),
+          child: Text(
+            'Register',
+            style: TextStyle(color: MyColors.PrimaryColor),
+          ),
           onPressed: () {
-            Navigator.pushReplacement(
-                context, MaterialPageRoute(builder: (context) => SignupPage()));
+            Get.to(SignupPage());
           },
         ),
       ],

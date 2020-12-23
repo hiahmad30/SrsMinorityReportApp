@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:minorityreport/Utils/Consts.dart';
 import 'database.dart';
 import 'users.dart';
@@ -22,7 +23,7 @@ class AuthService {
       // await _auth.verifyPhoneNumber(phoneNumber: phoneNumber, verificationCompleted: , verificationFailed: null, codeSent: null, codeAutoRetrievalTimeout: null)
       UserCredential _authResult = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
-      updatePhone(phoneNumber);
+      //updatePhone(phoneNumber);
       UserModel _user = UserModel(
           uid: _authResult.user.uid,
           email: _authResult.user.email,
@@ -38,7 +39,10 @@ class AuthService {
     } on PlatformException catch (e) {
       retVal = e.message;
     } catch (error) {
-      print(error.toString());
+      print("Error is of firebase" + error.toString());
+      Get.back();
+      Get.snackbar("Error", error.toString());
+
       return null;
     }
     return retVal;
@@ -52,24 +56,6 @@ class AuthService {
     return user?.user.uid;
   }
 
-  Future<void> currentUserLoggedIn() {
-    u_id = _auth.currentUser.uid;
-  }
-  // Future<bool> signInWithEmail(String em, String ps) async {
-  //   UserCredential re =
-  //       await _firebaseAuth.signInWithEmailAndPassword(email: em, password: ps);
-  //   if (re.user != null) {
-  //     u_id = re.user.uid;
-  //     return true;
-  //   } else
-  //     return false;
-  // }
-
-  // String phoneNo;
-  // String smsOTP;
-  // String verificationId;
-  // String errorMessage = '';
-  //////////////////////////////////////////////////////
   updatePhone(String ph) {
     _auth.verifyPhoneNumber(
         phoneNumber: ph,
@@ -88,6 +74,8 @@ class AuthService {
         },
         codeAutoRetrievalTimeout: null);
   }
+
+  /////////////////////////
 
 ////////////////////////////////////////////////////////////////
   // void verifyPhone(

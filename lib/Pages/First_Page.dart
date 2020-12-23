@@ -126,7 +126,7 @@ class _FirstPageState extends State<FirstPage> {
                         SizedBox(
                           width: 20,
                         ),
-                        _getCategoriy('Bar', 'lib/assets/bar.png', 'Bars'),
+                        _getCategoriy('Bars', 'lib/assets/bar.png', 'Bars'),
                         SizedBox(
                           width: 10,
                         ),
@@ -135,11 +135,11 @@ class _FirstPageState extends State<FirstPage> {
                           width: 10,
                         ),
                         _getCategoriy(
-                            'Car', 'lib/assets/car.png', 'Car Rentals'),
+                            'Car_Rentals', 'lib/assets/car.png', 'Car Rentals'),
                         SizedBox(
                           width: 10,
                         ),
-                        _getCategoriy('Clothstores', 'lib/assets/store.png',
+                        _getCategoriy('Clothing_Store', 'lib/assets/store.png',
                             'Clothing Stores'),
                         SizedBox(
                           width: 10,
