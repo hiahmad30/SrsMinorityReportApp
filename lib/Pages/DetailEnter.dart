@@ -66,11 +66,10 @@ class _DetailEntryState extends State<DetailEntry> {
       String imageLocation = 'images/image${randomNumber}.jpg';
 
       // Upload image to firebase.
-      final StorageReference storageReference =
+      final Reference storageReference =
           FirebaseStorage().ref().child(imageLocation);
-      final StorageUploadTask uploadTask = storageReference.putFile(image);
-      await uploadTask.onComplete;
-      _addPathToDatabase(imageLocation);
+      final UploadTask uploadTask = storageReference.putFile(image);
+      await uploadTask.whenComplete(() => {_addPathToDatabase(imageLocation)});
     } catch (e) {
       print(e.message);
     }
