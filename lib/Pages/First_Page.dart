@@ -125,6 +125,9 @@ class _FirstPageState extends State<FirstPage> {
                       children: [
                         SizedBox(
                           width: 20,
+                        ), _getCategoriy('Airlines', 'lib/assets/Airlines.png', 'Airlines'),
+                        SizedBox(
+                          width: 10,
                         ),
                         _getCategoriy('Bars', 'lib/assets/bar.png', 'Bars'),
                         SizedBox(
@@ -144,7 +147,11 @@ class _FirstPageState extends State<FirstPage> {
                         SizedBox(
                           width: 10,
                         ),
-                        _getCategoriy('FoodTrucks', 'lib/assets/foodTrucks.png',
+                        _getCategoriy('Emergency_Services', 'lib/assets/Emergency_Services.png' ,
+                            'Emergency Services'),
+                        SizedBox(
+                          width: 10,
+                        ),_getCategoriy('FoodTrucks', 'lib/assets/foodTrucks.png',
                             'Food Trucks'),
                         SizedBox(
                           width: 10,
@@ -156,6 +163,14 @@ class _FirstPageState extends State<FirstPage> {
                         ),
                         _getCategoriy(
                             'Hospital', 'lib/assets/hospital.png', 'Hospitals'),
+                        SizedBox(
+                          width: 10,
+                        ),_getCategoriy(
+                            'Medical_Facilities', 'lib/assets/Medical_Facilities.png', 'Medical Facilities'),
+                        SizedBox(
+                          width: 10,
+                        ),_getCategoriy(
+                            'New_and_used_car_lots', 'lib/assets/New_and_used_car_lots.png', 'Medical Facilities'),
                         SizedBox(
                           width: 10,
                         ),

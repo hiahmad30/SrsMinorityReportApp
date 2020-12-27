@@ -1,11 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:minorityreport/Utils/Consts.dart';
-import 'package:minorityreport/Utils/loadingScreen.dart';
-import 'package:minorityreport/ViewModel/loadinWidget.dart';
 import 'package:minorityreport/controller/AuthController.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
-
 import 'signup_page.dart';
 import 'package:flutter/material.dart';
 

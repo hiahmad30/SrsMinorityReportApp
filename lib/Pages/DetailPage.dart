@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:get/get.dart';
 import 'package:minorityreport/Utils/Consts.dart';
 
 //import 'package:google_fonts/google_fonts.dart';
@@ -60,10 +59,10 @@ class _DetailPageState extends State<DetailPage> {
         ),
         buttons: [
           DialogButton(
-            onPressed: () {
+            onPressed: () async{
               if (reviewContr.text.isNotEmpty) {
                 addNewReviewdb(context);
-                getReview();
+               await getReview();
               }
             },
             child: Text(
@@ -74,7 +73,7 @@ class _DetailPageState extends State<DetailPage> {
         ]).show();
   }
 
-  getReview() async {
+ Future<void> getReview() async {
     int tem = 0;
     try {
       await _firebaseFirestore
@@ -84,10 +83,11 @@ class _DetailPageState extends State<DetailPage> {
           .then((value) => {
                 value.docs.forEach((element) {
                   var temp = element.data()["Rating"];
-                  _avgRating = temp == null ? 3 : temp;
+                  _avgRating += temp == null ? 3 : temp;
                   tem++;
                 }),
                 if (tem != 0) _avgRating = _avgRating / tem,
+                updatereview(),
                 setState(() {
                   print(value.docs.length.toString());
                 }),
@@ -97,8 +97,12 @@ class _DetailPageState extends State<DetailPage> {
       _avgRating = 3;
     }
   }
-
-  addNewReviewdb(BuildContext context) async {
+Future<void>updatereview() async {
+await _firebaseFirestore.collection("Bussiness List")
+                    .doc(widget.documentSnapshot.id)
+                    .update({'rating': _avgRating});
+}
+Future<void>  addNewReviewdb(BuildContext context) async {
     try {
       print("Uid " + u_id);
       await _firebaseFirestore.collection("Reviews").doc().set({

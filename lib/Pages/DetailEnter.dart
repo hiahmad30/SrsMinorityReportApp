@@ -165,18 +165,24 @@ class _DetailEntryState extends State<DetailEntry> {
 
 ////////////////////////////////
   List<String> locations = [
+    'Airlines',
     'Bars',
     'Banks',
     'Car_Rentals',
     'Clothing_Store',
+    'Emergency_Services',
     'FoodTrucks',
     'Hotels',
     'Hospital',
+    'Medical_Faceilities',
+    'New_and_used_car_lots',
     'Police',
     'Public_Transportations',
-    'Resturant'
+    'Resturant',
+    '',
+    ''
   ];
-  String _selectedLocation = 'Bars';
+  String _selectedLocation = 'Airlines';
 /////////////////////////////////////////////
   @override
   void dispose() {
