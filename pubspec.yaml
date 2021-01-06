@@ -29,9 +29,8 @@ dependencies:
 
   http: ^0.12.2
 
-  firebase_auth: 
-  firebase_core:  
-  
+  firebase_auth: ^0.18.4+1
+  firebase_core: ^0.5.3
   cloud_firestore: ^0.14.4
   flutter_rating_bar: ^3.2.0+1
   flutter_spinkit: ^4.1.2
