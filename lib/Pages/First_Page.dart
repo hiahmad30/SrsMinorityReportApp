@@ -151,7 +151,7 @@ class _FirstPageState extends State<FirstPage> {
                             'Emergency Services'),
                         SizedBox(
                           width: 10,
-                        ),_getCategoriy('FoodTrucks', 'lib/assets/foodTrucks.png',
+                        ),_getCategoriy('Food_Trucks', 'lib/assets/foodTrucks.png',
                             'Food Trucks'),
                         SizedBox(
                           width: 10,
@@ -170,7 +170,7 @@ class _FirstPageState extends State<FirstPage> {
                         SizedBox(
                           width: 10,
                         ),_getCategoriy(
-                            'New_and_used_car_lots', 'lib/assets/New_and_used_car_lots.png', 'Medical Facilities'),
+                            'New_and_used_car_lots', 'lib/assets/New_and_used_car_lots.png', ' New & used car lots'),
                         SizedBox(
                           width: 10,
                         ),
@@ -216,6 +216,7 @@ class _FirstPageState extends State<FirstPage> {
                 ),
                 Container(
                   height: MediaQuery.of(context).size.height * 0.3,
+                  
                   child: StreamBuilder(
                     stream: Firestore.instance
                         .collection("Bussiness List")
@@ -247,10 +248,11 @@ class _FirstPageState extends State<FirstPage> {
       child: Container(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Image.asset(
               imageStr,
-              width: 80,
+              width: 70,
             ),
             Text(
               titleC,

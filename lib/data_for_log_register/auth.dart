@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:minorityreport/Utils/Consts.dart';
 import 'database.dart';
 import 'users.dart';
 
@@ -16,6 +15,7 @@ class AuthService {
     String phoneNumber,
     String photo,
     String geoPoint,
+    [RecaptchaVerifier verifier]
   ) async {
     String retVal = "error";
 
@@ -23,7 +23,13 @@ class AuthService {
       // await _auth.verifyPhoneNumber(phoneNumber: phoneNumber, verificationCompleted: , verificationFailed: null, codeSent: null, codeAutoRetrievalTimeout: null)
       UserCredential _authResult = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
+          
+        //  _auth.signInWithCredential(credential)
       //updatePhone(phoneNumber);
+      assert(phoneNumber != null);
+  assert(phoneNumber.isNotEmpty);
+  verifier ??= RecaptchaVerifier();
+      await _authResult.user.linkWithPhoneNumber(phoneNumber, verifier);
       UserModel _user = UserModel(
           uid: _authResult.user.uid,
           email: _authResult.user.email,

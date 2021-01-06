@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:minorityreport/Utils/Consts.dart';
 import 'package:minorityreport/controller/AuthController.dart';
+import 'forgetpassword.dart';
 import 'signup_page.dart';
 import 'package:flutter/material.dart';
 
@@ -127,7 +128,7 @@ class _LoginPageState extends State<LoginPage> {
         'Forgot password?',
         style: TextStyle(color: Colors.black54),
       ),
-      onPressed: () {},
+      onPressed: () {Get.to(ForgetpasswordPage());},
     );
 
     return Scaffold(
