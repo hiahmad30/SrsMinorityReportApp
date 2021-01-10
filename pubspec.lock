@@ -119,35 +119,7 @@ packages:
       name: file_picker
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.4"
-  firebase:
-    dependency: transitive
-    description:
-      name: firebase
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "7.3.3"
-  firebase_analytics:
-    dependency: "direct main"
-    description:
-      name: firebase_analytics
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "6.3.0"
-  firebase_analytics_platform_interface:
-    dependency: transitive
-    description:
-      name: firebase_analytics_platform_interface
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.3"
-  firebase_analytics_web:
-    dependency: transitive
-    description:
-      name: firebase_analytics_web
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.1"
+    version: "2.1.5"
   firebase_auth:
     dependency: "direct main"
     description:
@@ -211,15 +183,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.1+1"
-  firestore_service:
-    dependency: "direct main"
-    description:
-      path: "packages/firestore_service"
-      ref: HEAD
-      resolved-ref: b3a1d31adcf43378781ca4314d0a98923b65b1b4
-      url: "https://github.com/bizz84/codewithandrea_flutter_packages"
-    source: git
-    version: "0.1.0"
   flutter:
     dependency: "direct main"
     description: flutter
