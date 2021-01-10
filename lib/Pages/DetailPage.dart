@@ -83,7 +83,7 @@ class _DetailPageState extends State<DetailPage> {
           .then((value) => {
                 value.docs.forEach((element) {
                   var temp = element.data()["Rating"];
-                  _avgRating += temp == null ? 3 : temp;
+                  _avgRating +=  temp;
                   tem++;
                 }),
                 if (tem != 0) _avgRating = _avgRating / tem,
@@ -105,11 +105,11 @@ await _firebaseFirestore.collection("Bussiness List")
 Future<void>  addNewReviewdb(BuildContext context) async {
     try {
       print("Uid " + u_id);
-      await _firebaseFirestore.collection("Reviews").doc().set({
+      await _firebaseFirestore.collection("Reviews").doc(u_id).set({
         "Rating": _rating,
         "BName": widget.documentSnapshot.get("BussinessName"),
         "BussinessId": widget.documentSnapshot.id,
-        "u_Id": u_id,
+        
         "Reviews": reviewContr.text
       }).then((value) {
         Navigator.pop(context);

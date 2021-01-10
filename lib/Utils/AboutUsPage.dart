@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 class AboutUsPage extends StatelessWidget {
   static String tag = 'AboutUsPage';
-
   @override
   Widget build(BuildContext context) {
     final policyH = Padding(
@@ -62,13 +61,13 @@ class AboutUsPage extends StatelessWidget {
                 Icons.map_rounded,
                 color: MyColors.listp1Font,
               ),
-              Text(
-                '  PO Box 18761 Jacksonville,\n Fl 32229',
-                style: TextStyle(
-                  fontSize: 14.0,
-                  color: Colors.white,
-                ),
-              ),
+              // Text(
+              //   '  PO Box 18761 Jacksonville,\n Fl 32229',
+              //   style: TextStyle(
+              //     fontSize: 14.0,
+              //     color: Colors.white,
+              //   ),
+              // ),
             ],
           ),
           Row(

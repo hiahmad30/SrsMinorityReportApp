@@ -138,20 +138,20 @@ class _FirstPageState extends State<FirstPage> {
                           width: 10,
                         ),
                         _getCategoriy(
-                            'Car_Rentals', 'lib/assets/car.png', 'Car Rentals'),
+                            'Car Rentals', 'lib/assets/car.png', 'Car Rentals'),
                         SizedBox(
                           width: 10,
                         ),
-                        _getCategoriy('Clothing_Store', 'lib/assets/store.png',
+                        _getCategoriy('Clothing Store', 'lib/assets/store.png',
                             'Clothing Stores'),
                         SizedBox(
                           width: 10,
                         ),
-                        _getCategoriy('Emergency_Services', 'lib/assets/Emergency_Services.png' ,
+                        _getCategoriy('Emergency Services', 'lib/assets/Emergency_Services.png' ,
                             'Emergency Services'),
                         SizedBox(
                           width: 10,
-                        ),_getCategoriy('Food_Trucks', 'lib/assets/foodTrucks.png',
+                        ),_getCategoriy('Food Trucks', 'lib/assets/foodTrucks.png',
                             'Food Trucks'),
                         SizedBox(
                           width: 10,
@@ -166,11 +166,11 @@ class _FirstPageState extends State<FirstPage> {
                         SizedBox(
                           width: 10,
                         ),_getCategoriy(
-                            'Medical_Facilities', 'lib/assets/Medical_Facilities.png', 'Medical Facilities'),
+                            'Medical Facilities', 'lib/assets/Medical_Facilities.png', 'Medical Facilities'),
                         SizedBox(
                           width: 10,
                         ),_getCategoriy(
-                            'New_and_used_car_lots', 'lib/assets/New_and_used_car_lots.png', ' New & used car lots'),
+                            'New and used car lots', 'lib/assets/New_and_used_car_lots.png', ' New & used car lots'),
                         SizedBox(
                           width: 10,
                         ),
@@ -180,7 +180,7 @@ class _FirstPageState extends State<FirstPage> {
                           width: 10,
                         ),
                         _getCategoriy(
-                            'Public_Transportations',
+                            'Public Transportations',
                             'lib/assets/transportation.png',
                             'Public Transport'),
                         SizedBox(
@@ -255,7 +255,7 @@ class _FirstPageState extends State<FirstPage> {
               width: 70,
             ),
             Text(
-              titleC,
+              titleC,textAlign: TextAlign.center,
               style: GoogleFonts.amiko(),
             )
           ],

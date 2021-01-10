@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart'; // For File Upload To Firestore
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:get/get.dart';
 import 'package:minorityreport/Models/ratingModel.dart';
 import 'package:minorityreport/Utils/Consts.dart';
 import 'package:minorityreport/data_for_log_register/database.dart';
@@ -69,7 +70,11 @@ class _DetailEntryState extends State<DetailEntry> {
       final Reference storageReference =
           FirebaseStorage().ref().child(imageLocation);
       final UploadTask uploadTask = storageReference.putFile(image);
-      await uploadTask.whenComplete(() => {_addPathToDatabase(imageLocation)});
+      await uploadTask.whenComplete(() {_addPathToDatabase(imageLocation);if(mounted){
+        setState(() {
+          
+        });
+      }});
     } catch (e) {
       print(e.message);
     }
@@ -117,10 +122,10 @@ class _DetailEntryState extends State<DetailEntry> {
       _stateC.text.isEmpty ? _validatest = true : _validatest = false;
       _countryC.text.isEmpty ? _validateC = true : _validate = false;
       _zipC.text.isEmpty ? _validateZ = true : _validate = false;
-      _phoneC.text.isEmpty ? _validateP = true : _validate = false;
-      _dDiscriptionC.text.isEmpty ? _validatedDis = true : _validate = false;
+    //  _phoneC.text.isEmpty ? _validateP = true : _validate = false;
+   //   _dDiscriptionC.text.isEmpty ? _validatedDis = true : _validate = false;
       _sDiscriptionC.text.isEmpty ? _validatesD = true : _validate = false;
-      _emailC.text.isEmpty ? _validateEm = true : _validate = false;
+   //   _emailC.text.isEmpty ? _validateEm = true : _validate = false;
       // _categoryC.text.isEmpty ? _validateca = true : _validate = false;
     });
     if (!_validate &&
@@ -128,9 +133,10 @@ class _DetailEntryState extends State<DetailEntry> {
         !_validateC &&
         !_validateZ &&
         !_validateP &&
-        !_validatedDis &&
-        !_validatesD &&
-        !_validateEm) {
+      //  !_validatedDis &&
+        !_validatesD //&&
+      //  !_validateEm
+        ) {
       try {
         _ratingModel = RatingModel(
             bussinessName: _nameC.text,
@@ -159,7 +165,7 @@ class _DetailEntryState extends State<DetailEntry> {
       Navigator.pushReplacementNamed(context, '/list');
     } else {
       //  clearAllTxt();
-      await showMyDialog(context, "Alert", "Data not Saved . please try again");
+       Get.snackbar( "Error", "Data not Saved .Fill required fields ands try again");
     }
   }
 
@@ -168,16 +174,16 @@ class _DetailEntryState extends State<DetailEntry> {
     'Airlines',
     'Bars',
     'Banks',
-    'Car_Rentals',
-    'Clothing_Store',
-    'Emergency_Services',
-    'FoodTrucks',
+    'Car Rentals',
+    'Clothing Store',
+    'Emergency Services',
+    'Food Trucks',
     'Hotels',
     'Hospital',
-    'Medical_Faceilities',
-    'New_and_used_car_lots',
+    'Medical Faceilities',
+    'New and used car lots',
     'Police',
-    'Public_Transportations',
+    'Public Transportations',
     'Resturant',
     '',
     ''
@@ -219,7 +225,7 @@ class _DetailEntryState extends State<DetailEntry> {
                   padding: const EdgeInsets.only(top: 20.0),
                   child: Center(
                     child: Text(
-                      'Details of Bussiness',
+                      'Details of Business',
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
@@ -242,7 +248,7 @@ class _DetailEntryState extends State<DetailEntry> {
                               color: MyColors.PrimaryColor, width: 1.0),
                         ),
                         labelText: 'Business Name',
-                        hintText: 'Write name of bussiness',
+                        hintText: 'Write name of business',
                         hintStyle: TextStyle(fontSize: 12)),
                   ),
                 ),
@@ -462,7 +468,7 @@ class _DetailEntryState extends State<DetailEntry> {
                             color: MyColors.PrimaryColor, width: 1.0),
                       ),
                       labelText: 'Short Description ',
-                      errorText: _validatesD ? 'Value Can\'t Be Empty' : null,
+                     // errorText: _validatesD ? 'Value Can\'t Be Empty' : null,
                       hintText: '..',
                     ),
                   ),

@@ -49,7 +49,7 @@ class AuthController extends GetxController {
       u_id = firebaseUser.uid;
        update();
       Get.back();
-      Get.to(RatingList());
+      Get.off(RatingList());
     } catch (ex) {
       print(ex.toString());
       Get.back();

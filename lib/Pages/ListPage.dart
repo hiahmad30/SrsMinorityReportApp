@@ -166,7 +166,7 @@ class _RatingListState extends State<RatingList> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  document.get("BussinessName").toString(),
+                  document.get("BusinessName").toString(),
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 20,
