@@ -180,7 +180,7 @@ class _DetailEntryState extends State<DetailEntry> {
     'Food Trucks',
     'Hotels',
     'Hospital',
-    'Medical Faceilities',
+    'Medical Facilities',
     'New and used car lots',
     'Police',
     'Public Transportations',
@@ -225,7 +225,7 @@ class _DetailEntryState extends State<DetailEntry> {
                   padding: const EdgeInsets.only(top: 20.0),
                   child: Center(
                     child: Text(
-                      'Details of Business',
+                      'Detail of Business',
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),

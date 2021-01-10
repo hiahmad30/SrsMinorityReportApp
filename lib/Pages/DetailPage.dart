@@ -26,7 +26,7 @@ class _DetailPageState extends State<DetailPage> {
   addRev(BuildContext context) {
     return Alert(
         context: context,
-        title: "Rate this Bussiness",
+        title: "Rate this Business",
         content: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
