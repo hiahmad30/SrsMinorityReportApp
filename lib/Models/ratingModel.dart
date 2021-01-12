@@ -7,7 +7,7 @@ class RatingModel {
   String docId;
   String bussinessName;
   String bCategory;
-  var address;
+  String address;
   String city;
   String state;
   String country;
@@ -63,9 +63,9 @@ class RatingModel {
 class Restaurant {
   const Restaurant(
       {@required this.id,
-        @required this.name,
-        @required this.numRatings,
-        this.avgRating});
+      @required this.name,
+      @required this.numRatings,
+      this.avgRating});
   final String id;
   final String name;
   final int numRatings;

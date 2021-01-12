@@ -22,7 +22,7 @@ class _DetailEntryState extends State<DetailEntry> {
   TextEditingController _nameC = new TextEditingController();
   TextEditingController _categoryC = new TextEditingController();
   TextEditingController _addressLine1C = new TextEditingController();
-  TextEditingController _addressLine2C = new TextEditingController();
+  // TextEditingController _addressLine2C = new TextEditingController();
   TextEditingController _cityC = new TextEditingController();
   TextEditingController _stateC = new TextEditingController();
   TextEditingController _countryC = new TextEditingController();
@@ -70,11 +70,12 @@ class _DetailEntryState extends State<DetailEntry> {
       final Reference storageReference =
           FirebaseStorage().ref().child(imageLocation);
       final UploadTask uploadTask = storageReference.putFile(image);
-      await uploadTask.whenComplete(() {_addPathToDatabase(imageLocation);if(mounted){
-        setState(() {
-          
-        });
-      }});
+      await uploadTask.whenComplete(() {
+        _addPathToDatabase(imageLocation);
+        if (mounted) {
+          setState(() {});
+        }
+      });
     } catch (e) {
       print(e.message);
     }
@@ -102,7 +103,7 @@ class _DetailEntryState extends State<DetailEntry> {
     _nameC.clear();
     _categoryC.clear();
     _addressLine1C.clear();
-    _addressLine2C.clear();
+    //  _addressLine2C.clear();
     _cityC.clear();
     _stateC.clear();
     _countryC.clear();
@@ -122,26 +123,26 @@ class _DetailEntryState extends State<DetailEntry> {
       _stateC.text.isEmpty ? _validatest = true : _validatest = false;
       _countryC.text.isEmpty ? _validateC = true : _validate = false;
       _zipC.text.isEmpty ? _validateZ = true : _validate = false;
-    //  _phoneC.text.isEmpty ? _validateP = true : _validate = false;
-   //   _dDiscriptionC.text.isEmpty ? _validatedDis = true : _validate = false;
+      //  _phoneC.text.isEmpty ? _validateP = true : _validate = false;
+      //   _dDiscriptionC.text.isEmpty ? _validatedDis = true : _validate = false;
       _sDiscriptionC.text.isEmpty ? _validatesD = true : _validate = false;
-   //   _emailC.text.isEmpty ? _validateEm = true : _validate = false;
+      //   _emailC.text.isEmpty ? _validateEm = true : _validate = false;
       // _categoryC.text.isEmpty ? _validateca = true : _validate = false;
     });
     if (!_validate &&
-        !_validatest &&
-        !_validateC &&
-        !_validateZ &&
-        !_validateP &&
-      //  !_validatedDis &&
-        !_validatesD //&&
-      //  !_validateEm
+            !_validatest &&
+            !_validateC &&
+            !_validateZ &&
+            !_validateP &&
+            //  !_validatedDis &&
+            !_validatesD //&&
+        //  !_validateEm
         ) {
       try {
         _ratingModel = RatingModel(
             bussinessName: _nameC.text,
             bCategory: _selectedLocation,
-            address: [_addressLine1C.text, _addressLine2C.text],
+            address: _addressLine1C.text,
             city: _cityC.text,
             state: _stateC.text,
             country: _countryC.text,
@@ -165,7 +166,8 @@ class _DetailEntryState extends State<DetailEntry> {
       Navigator.pushReplacementNamed(context, '/list');
     } else {
       //  clearAllTxt();
-       Get.snackbar( "Error", "Data not Saved .Fill required fields ands try again");
+      Get.snackbar(
+          "Error", "Data not Saved .Fill required fields ands try again");
     }
   }
 
@@ -184,9 +186,7 @@ class _DetailEntryState extends State<DetailEntry> {
     'New and used car lots',
     'Police',
     'Public Transportations',
-    'Resturant',
-    '',
-    ''
+    'Restaurants',
   ];
   String _selectedLocation = 'Airlines';
 /////////////////////////////////////////////
@@ -195,7 +195,7 @@ class _DetailEntryState extends State<DetailEntry> {
     _nameC.dispose();
     _categoryC.dispose();
     _addressLine1C.dispose();
-    _addressLine2C.dispose();
+    //  _addressLine2C.dispose();
     _cityC.dispose();
     _stateC.dispose();
     _countryC.dispose();
@@ -297,22 +297,23 @@ class _DetailEntryState extends State<DetailEntry> {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: TextField(
-                    controller: _addressLine2C,
-                    decoration: new InputDecoration(
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            color: MyColors.PrimaryColor, width: 1.0),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            color: MyColors.PrimaryColor, width: 1.0),
-                      ),
-                      labelText: 'Line 2 ',
-                      hintText: 'Adress line 2',
-                      hintStyle: TextStyle(fontSize: 12),
-                    ),
-                  ),
+                  //   child: TextField(
+
+                  // //    controller: _addressLine2C,
+                  //     decoration: new InputDecoration(
+                  //       focusedBorder: OutlineInputBorder(
+                  //         borderSide: BorderSide(
+                  //             color: MyColors.PrimaryColor, width: 1.0),
+                  //       ),
+                  //       enabledBorder: OutlineInputBorder(
+                  //         borderSide: BorderSide(
+                  //             color: MyColors.PrimaryColor, width: 1.0),
+                  //       ),
+                  //       labelText: 'Line 2 ',
+                  //       hintText: 'Adress line 2',
+                  //       hintStyle: TextStyle(fontSize: 12),
+                  //     ),
+                  //   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -468,7 +469,7 @@ class _DetailEntryState extends State<DetailEntry> {
                             color: MyColors.PrimaryColor, width: 1.0),
                       ),
                       labelText: 'Short Description ',
-                     // errorText: _validatesD ? 'Value Can\'t Be Empty' : null,
+                      // errorText: _validatesD ? 'Value Can\'t Be Empty' : null,
                       hintText: '..',
                     ),
                   ),
