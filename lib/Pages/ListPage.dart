@@ -55,7 +55,7 @@ class _RatingListState extends State<RatingList> {
                   children: [
                     Container(
                         child: Text(
-                      "List of Bussiness",
+                      "List of Business",
                       style:
                           GoogleFonts.ubuntu(fontSize: 24, color: Colors.black),
                     )),

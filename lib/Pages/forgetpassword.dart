@@ -1,9 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:minorityreport/controller/AuthController.dart';
 
+import 'package:minorityreport/Utils/Consts.dart';
 
 class ForgetpasswordPage extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -18,7 +18,7 @@ class ForgetpasswordPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     // backgroundColor: myResources.backgroundColor,
+      // backgroundColor: myResources.backgroundColor,
       appBar: AppBar(
         title: Container(
           child: Text(
@@ -38,7 +38,7 @@ class ForgetpasswordPage extends StatelessWidget {
                 padding: EdgeInsets.only(top: 20, bottom: 0),
                 child: Container(
                   child: Image.asset(
-                    "assets/logo.png",
+                    "lib/assets/logo.png",
                     width: 300,
                     height: 200,
                   ),
@@ -49,7 +49,7 @@ class ForgetpasswordPage extends StatelessWidget {
                 child: Center(
                   child: Text(
                     "Forgot Password?",
-                  //  style: myResources.appHeadingStyleLogin,
+                    style: TextStyle(fontSize: 18),
                   ),
                 ),
               ),
@@ -57,7 +57,7 @@ class ForgetpasswordPage extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 20.0, left: 10, right: 10),
                 child: Text(
                   "Enter the email address associated with your account.",
-            //      style: myResources.appTextStyle,
+                  //      style: myResources.appTextStyle,
                 ),
               ),
               Padding(
@@ -79,7 +79,7 @@ class ForgetpasswordPage extends StatelessWidget {
                   decoration: InputDecoration(
                     //Add th Hint text here.
                     hintText: "Email",
-                  //  hintStyle: myResources.hintfontStyle,
+                    //  hintStyle: myResources.hintfontStyle,
                     prefixIcon: Icon(Icons.email),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),

@@ -59,10 +59,11 @@ class _DetailPageState extends State<DetailPage> {
         ),
         buttons: [
           DialogButton(
-            onPressed: () async{
+            onPressed: () async {
               if (reviewContr.text.isNotEmpty) {
                 addNewReviewdb(context);
-               await getReview();
+                _avgRating = _rating;
+                await updatereview();
               }
             },
             child: Text(
@@ -73,43 +74,49 @@ class _DetailPageState extends State<DetailPage> {
         ]).show();
   }
 
- Future<void> getReview() async {
+  Future<void> getReview() async {
     int tem = 0;
     try {
+      _avgRating =
+          double.parse((widget.documentSnapshot.get("rating").toString()));
       await _firebaseFirestore
           .collection("Reviews")
           .where("BussinessId", isEqualTo: widget.documentSnapshot.id)
           .get()
-          .then((value) => {
-                value.docs.forEach((element) {
-                  var temp = element.data()["Rating"];
-                  _avgRating +=  temp;
-                  tem++;
-                }),
-                if (tem != 0) _avgRating = _avgRating / tem,
-                updatereview(),
-                setState(() {
-                  print(value.docs.length.toString());
-                }),
-              });
+          .then((value) async {
+        value.docs.forEach((element) {
+          var temp = element.data()["Rating"];
+          if (_avgRating != 0 && tem > 0) _avgRating += temp;
+          tem++;
+        });
+        if (tem != 0) _avgRating = _avgRating / tem;
+        await updatereview();
+        setState(() {
+          print(value.docs.length.toString());
+        });
+      });
     } catch (e) {
       print("Not get reviews");
       _avgRating = 3;
     }
   }
-Future<void>updatereview() async {
-await _firebaseFirestore.collection("Bussiness List")
-                    .doc(widget.documentSnapshot.id)
-                    .update({'rating': _avgRating});
-}
-Future<void>  addNewReviewdb(BuildContext context) async {
+
+  Future<void> updatereview() async {
+    await _firebaseFirestore
+        .collection("Bussiness List")
+        .doc(widget.documentSnapshot.id)
+        .update({'rating': _avgRating});
+  }
+
+  Future<void> addNewReviewdb(BuildContext context) async {
     try {
+      _avgRating =
+          double.parse((widget.documentSnapshot.get("rating").toString()));
       print("Uid " + u_id);
       await _firebaseFirestore.collection("Reviews").doc(u_id).set({
         "Rating": _rating,
         "BName": widget.documentSnapshot.get("BussinessName"),
         "BussinessId": widget.documentSnapshot.id,
-        
         "Reviews": reviewContr.text
       }).then((value) {
         Navigator.pop(context);
