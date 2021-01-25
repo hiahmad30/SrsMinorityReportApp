@@ -166,7 +166,7 @@ class _RatingListState extends State<RatingList> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  document.get("BusinessName").toString(),
+                  document.get("BussinessName").toString(),
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 20,
@@ -218,7 +218,6 @@ class _RatingListState extends State<RatingList> {
               ],
             ),
           ),
-
           ButtonBar(
             alignment: MainAxisAlignment.start,
             children: [
@@ -239,7 +238,6 @@ class _RatingListState extends State<RatingList> {
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.01,
               ),
-              
             ],
           ),
         ],
