@@ -8,10 +8,14 @@ import 'package:firebase_storage/firebase_storage.dart'; // For File Upload To F
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:minorityreport/Models/ratingModel.dart';
+import 'package:minorityreport/Pages/ListPage.dart';
 import 'package:minorityreport/Utils/Consts.dart';
 import 'package:minorityreport/data_for_log_register/database.dart';
 
 class DetailEntry extends StatefulWidget {
+  final categoryEntry;
+
+  const DetailEntry({Key key, this.categoryEntry}) : super(key: key);
   @override
   _DetailEntryState createState() => _DetailEntryState();
 }
@@ -41,9 +45,8 @@ class _DetailEntryState extends State<DetailEntry> {
       _validateZ = false,
       _validateP = false,
       _validatedDis = false,
-      _validatesD = false,
       _validateEm = false;
-  DatabaseService _service = new DatabaseService();
+
   File pic;
   Future getImage() async {
     File _file;
@@ -54,12 +57,8 @@ class _DetailEntryState extends State<DetailEntry> {
       if (result != null) {
         _file = File(result.files.single.path);
         pic = _file;
-        await _uploadImageToFirebase(_file);
+        if (mounted) setState(() {});
       }
-      await _uploadImageToFirebase(_file);
-
-      if (!mounted) return;
-      setState(() {});
     } catch (e) {
       AlertDialog(
         title: Text("Please Select Image"),
@@ -83,6 +82,11 @@ class _DetailEntryState extends State<DetailEntry> {
     } catch (e) {
       print(e.message);
     }
+  }
+
+  Future<void> deletPic() {
+    pic = null;
+    if (mounted) setState(() {});
   }
 
   Future<void> _addPathToDatabase(String text) async {
@@ -115,7 +119,7 @@ class _DetailEntryState extends State<DetailEntry> {
     _dDiscriptionC.clear();
   }
 
-  getAllData() async {
+  Future getAllData() async {
     String result;
 
     setState(() {
@@ -127,7 +131,6 @@ class _DetailEntryState extends State<DetailEntry> {
       _zipC.text.isEmpty ? _validateZ = true : _validateZ = false;
       //  _phoneC.text.isEmpty ? _validateP = true : _validate = false;
       //   _dDiscriptionC.text.isEmpty ? _validatedDis = true : _validate = false;
-      _sDiscriptionC.text.isEmpty ? _validatesD = true : _validate = false;
       //   _emailC.text.isEmpty ? _validateEm = true : _validate = false;
       // _categoryC.text.isEmpty ? _validateca = true : _validate = false;
     });
@@ -160,9 +163,13 @@ class _DetailEntryState extends State<DetailEntry> {
       }
     }
     if (result == "success") {
-      clearAllTxt();
-      await showMyDialog(context, "Success", "Data is saved successfully");
-      Navigator.pushReplacementNamed(context, '/list');
+      await _uploadImageToFirebase(pic).then((value) async {
+        clearAllTxt();
+        await showMyDialog(context, "Success", "Data is saved successfully");
+        Get.off(RatingList(
+          category: widget.categoryEntry,
+        ));
+      });
     } else {
       //  clearAllTxt();
       Get.snackbar(
@@ -189,6 +196,14 @@ class _DetailEntryState extends State<DetailEntry> {
   ];
   String _selectedLocation = 'Airlines';
 /////////////////////////////////////////////
+  @override
+  void initState() {
+    _selectedLocation =
+        widget.categoryEntry == '' ? 'Airlines' : widget.categoryEntry;
+
+    super.initState();
+  }
+
   @override
   void dispose() {
     _nameC.dispose();
@@ -494,6 +509,7 @@ class _DetailEntryState extends State<DetailEntry> {
                   ),
                 ),
                 RatingBar.builder(
+                  itemSize: 20,
                   initialRating: 3,
                   minRating: 1,
                   direction: Axis.horizontal,
@@ -513,24 +529,36 @@ class _DetailEntryState extends State<DetailEntry> {
                 Center(
                   child: Column(
                     children: <Widget>[
-                      RaisedButton(
-                        child: Icon(Icons.add_a_photo),
-                        onPressed: () async {
-                          await getImage();
-                        },
-                        color: Colors.cyan,
+                      SizedBox(
+                        height: 20,
                       ),
-                      Text('Uploaded Image'),
-                      pic.isBlank
-                          ? Image.file(
-                              pic,
-                              height: 150,
+                      !pic.isNull
+                          ? ListTile(
+                              title: Image.file(
+                                pic,
+                                height: 150,
+                              ),
+                              subtitle: IconButton(
+                                onPressed: () async {
+                                  await deletPic();
+                                },
+                                icon: Icon(
+                                  Icons.delete,
+                                  color: Colors.red,
+                                ),
+                              ),
                             )
-                          : Container(),
+                          : RaisedButton(
+                              child: Icon(Icons.add_a_photo),
+                              onPressed: () async {
+                                await getImage();
+                              },
+                              color: Colors.cyan,
+                            ),
                       RaisedButton(
                         child: Text("Submit"),
-                        onPressed: () {
-                          getAllData();
+                        onPressed: () async {
+                          await getAllData();
                         },
                       )
                     ],

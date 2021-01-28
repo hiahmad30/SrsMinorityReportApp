@@ -10,7 +10,7 @@ import 'Terms_and_Conditions.dart';
 
 String u_id;
 String testImageUrl = "https://www.gstatic.com/webp/gallery/3.webp";
-String category = "";
+
 bool isLogIn() {
   if (u_id == null)
     return false;

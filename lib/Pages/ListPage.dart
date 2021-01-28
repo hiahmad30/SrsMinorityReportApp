@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:minorityreport/Pages/DetailEnter.dart';
 import 'package:minorityreport/Utils/Consts.dart';
 import 'package:minorityreport/controller/AuthController.dart';
 
@@ -10,16 +11,19 @@ import 'DetailPage.dart';
 import 'login_page.dart';
 
 class RatingList extends StatefulWidget {
+  final String category;
+
+  const RatingList({Key key, this.category}) : super(key: key);
   @override
   _RatingListState createState() => _RatingListState();
 }
 
 class _RatingListState extends State<RatingList> {
   final auth = Get.put(AuthController());
-  String _category = '';
 
   @override
   Widget build(BuildContext context) {
+    String category = widget.category != null ? widget.category : "";
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -69,12 +73,11 @@ class _RatingListState extends State<RatingList> {
                               if (u_id == "" || u_id == null) {
                                 await showMyDialog(
                                     context, "Alert", "Please Login First");
-                                Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => LoginPage()));
+                                Get.to(LoginPage());
                               } else {
-                                Navigator.pushNamed(context, '/AddList');
+                                Get.to(DetailEntry(
+                                  categoryEntry: category,
+                                ));
                               }
                             },
                             child: Column(
@@ -99,7 +102,7 @@ class _RatingListState extends State<RatingList> {
                 ),
                 Flexible(
                   child: StreamBuilder(
-                    stream: category == ''
+                    stream: widget.category == null
                         ? Firestore.instance
                             .collection("Bussiness List")
                             .snapshots()
@@ -191,7 +194,7 @@ class _RatingListState extends State<RatingList> {
                     ),
                     Flexible(
                       child: Text(
-                        "Line 1:" + document.get("Address").toString(),
+                        document.get("Address").toString(),
                         style: TextStyle(
                           color: MyColors.listp1Font,
                           fontSize: 16,
@@ -236,7 +239,7 @@ class _RatingListState extends State<RatingList> {
                   direction: Axis.horizontal //: Axis.horizontal,
                   ),
               SizedBox(
-                width: MediaQuery.of(context).size.width * 0.01,
+                width: Get.width * 0.01,
               ),
             ],
           ),

@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:get/get.dart';
+import 'package:minorityreport/Pages/DetailEnter.dart';
 import 'package:minorityreport/Utils/Consts.dart';
 
 //import 'package:google_fonts/google_fonts.dart';
@@ -293,7 +295,9 @@ class _DetailPageState extends State<DetailPage> {
                 Navigator.pushReplacement(context,
                     MaterialPageRoute(builder: (context) => LoginPage()));
               } else {
-                Navigator.pushNamed(context, '/AddList');
+                Get.to(DetailEntry(
+                  categoryEntry: "",
+                ));
               }
             },
             child: Text("Add New"),

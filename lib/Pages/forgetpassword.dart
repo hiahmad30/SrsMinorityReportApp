@@ -7,9 +7,6 @@ import 'package:minorityreport/Utils/Consts.dart';
 
 class ForgetpasswordPage extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  ////////////////////////////////////----------------------------
-
-  bool _autoValidate = false;
   String emailfp;
   ///////////////////////////////////--------------------------------
   TextEditingController emailControllerfp = TextEditingController();

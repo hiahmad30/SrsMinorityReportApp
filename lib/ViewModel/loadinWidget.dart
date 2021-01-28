@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 class LoadingWidget extends StatelessWidget {
   const LoadingWidget({Key key}) : super(key: key);
   @override
@@ -13,7 +14,9 @@ class LoadingWidget extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          CircularProgressIndicator(),
+          CircularProgressIndicator(
+            semanticsLabel: 'Loading',
+          ),
         ],
       ),
     );

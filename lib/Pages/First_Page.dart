@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:minorityreport/Utils/Consts.dart';
+import 'package:minorityreport/ViewModel/loadinWidget.dart';
 
 import 'DetailPage.dart';
 import 'ListPage.dart';
@@ -77,7 +78,7 @@ class _FirstPageState extends State<FirstPage> {
         appBar: AppBar(
           title: Text(
             "Welcome to Minority Report",
-            style: GoogleFonts.aclonica(fontSize: 18),
+            style: GoogleFonts.ubuntu(fontSize: 18),
           ),
           centerTitle: true,
           actions: [
@@ -219,7 +220,6 @@ class _FirstPageState extends State<FirstPage> {
                       IconButton(
                           icon: Icon(Icons.more_horiz_outlined),
                           onPressed: () {
-                            category = '';
                             Get.to(RatingList());
                           })
                     ],
@@ -232,7 +232,8 @@ class _FirstPageState extends State<FirstPage> {
                         .collection("Bussiness List")
                         .snapshots(),
                     builder: (context, snapshot) {
-                      if (!snapshot.hasData) return const Text('Loading.....');
+                      if (!snapshot.hasData)
+                        return Center(child: const LoadingWidget());
                       return ListView.builder(
                           itemCount: snapshot.data.documents.length,
                           itemExtent: 100,
@@ -252,8 +253,9 @@ class _FirstPageState extends State<FirstPage> {
   ) {
     return InkWell(
       onTap: () {
-        category = cat;
-        Get.to(RatingList());
+        Get.to(RatingList(
+          category: cat,
+        ));
       },
       child: Container(
         child: Column(
@@ -370,7 +372,7 @@ class _FirstPageState extends State<FirstPage> {
                     ),
                     Flexible(
                       child: Text(
-                        "Line 1:" + document.get("Address").toString(),
+                        document.get("Address").toString(),
                         style: TextStyle(
                           color: MyColors.listp1Font,
                           fontSize: 12,
