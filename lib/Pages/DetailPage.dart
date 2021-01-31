@@ -4,6 +4,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:minorityreport/Pages/DetailEnter.dart';
 import 'package:minorityreport/Utils/Consts.dart';
+import 'package:minorityreport/controller/dbController.dart';
 
 //import 'package:google_fonts/google_fonts.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
@@ -76,8 +77,9 @@ class _DetailPageState extends State<DetailPage> {
         ]).show();
   }
 
+  final dbController = Get.put(DatabaseController());
   Future<void> getReview() async {
-    int tem = 0;
+    int tem = 0; //await dbController.getReview(widget.documentSnapshot.id);
     try {
       _avgRating =
           double.parse((widget.documentSnapshot.get("rating").toString()));
@@ -115,10 +117,14 @@ class _DetailPageState extends State<DetailPage> {
       _avgRating =
           double.parse((widget.documentSnapshot.get("rating").toString()));
       print("Uid " + u_id);
-      await _firebaseFirestore.collection("Reviews").doc(u_id).set({
+      await _firebaseFirestore
+          .collection("Reviews")
+          .doc(u_id + widget.documentSnapshot.id)
+          .set({
         "Rating": _rating,
         "BName": widget.documentSnapshot.get("BussinessName"),
         "BussinessId": widget.documentSnapshot.id,
+        "UuserId": u_id,
         "Reviews": reviewContr.text
       }).then((value) {
         Navigator.pop(context);

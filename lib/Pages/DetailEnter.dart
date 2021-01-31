@@ -10,7 +10,7 @@ import 'package:get/get.dart';
 import 'package:minorityreport/Models/ratingModel.dart';
 import 'package:minorityreport/Pages/ListPage.dart';
 import 'package:minorityreport/Utils/Consts.dart';
-import 'package:minorityreport/data_for_log_register/database.dart';
+import 'package:minorityreport/controller/dbController.dart';
 
 class DetailEntry extends StatefulWidget {
   final categoryEntry;
@@ -74,7 +74,7 @@ class _DetailEntryState extends State<DetailEntry> {
 
       // Upload image to firebase.
       final Reference storageReference =
-          FirebaseStorage().ref().child(imageLocation);
+          FirebaseStorage.instance.ref().child(imageLocation);
       final UploadTask uploadTask = storageReference.putFile(image);
       await uploadTask.whenComplete(() {
         _addPathToDatabase(imageLocation);
@@ -92,7 +92,7 @@ class _DetailEntryState extends State<DetailEntry> {
   Future<void> _addPathToDatabase(String text) async {
     try {
       // Get image URL from firebase
-      final ref = FirebaseStorage().ref().child(text);
+      final ref = FirebaseStorage.instance.ref().child(text);
       _uploadedFileURL = await ref.getDownloadURL();
       if (!mounted) return;
       setState(() {});
@@ -102,7 +102,7 @@ class _DetailEntryState extends State<DetailEntry> {
   }
 
   RatingModel _ratingModel = new RatingModel();
-  DatabaseService _databaseService = new DatabaseService();
+  DatabaseController _databaseService = new DatabaseController();
   clearAllTxt() {
     _nameC.clear();
     _categoryC.clear();

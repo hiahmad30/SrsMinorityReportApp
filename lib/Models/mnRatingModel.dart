@@ -7,7 +7,6 @@ class RestaurantRating {
   const RestaurantRating({@required this.restaurantId, this.rating});
   final String restaurantId;
   final double rating;
-
   factory RestaurantRating.fromMap(
       Map<String, dynamic> data, String documentId) {
     if (data == null) {
@@ -22,4 +21,5 @@ class RestaurantRating {
       restaurantId: documentId,
       rating: rating,
     );
-  }}
+  }
+}

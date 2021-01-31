@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:minorityreport/Pages/DetailEnter.dart';
 import 'package:minorityreport/Utils/Consts.dart';
+import 'package:minorityreport/Utils/loadingScreen.dart';
 import 'package:minorityreport/controller/AuthController.dart';
 
 import 'DetailPage.dart';
@@ -20,6 +21,13 @@ class RatingList extends StatefulWidget {
 
 class _RatingListState extends State<RatingList> {
   final auth = Get.put(AuthController());
+  TextEditingController searchController = TextEditingController();
+  String searchString = "";
+  Map<String, dynamic> resultList = Map<String, dynamic>();
+  bool isSearchable = false;
+  AsyncSnapshot<dynamic> resultListGet(AsyncSnapshot<dynamic> initString) {
+    // resultList = initString;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +53,7 @@ class _RatingListState extends State<RatingList> {
       ),
       body: Container(
         child: Padding(
-          padding: const EdgeInsets.all(10.0),
+          padding: const EdgeInsets.only(right: 20.0, left: 20),
           child: Container(
             child: Column(
               mainAxisSize: MainAxisSize.max,
@@ -54,12 +62,34 @@ class _RatingListState extends State<RatingList> {
                 SizedBox(
                   height: 10,
                 ),
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: TextFormField(
+                    keyboardType: TextInputType.text,
+                    autofocus: false,
+                    controller: searchController,
+                    //autovalidate: true,
+                    onChanged: (value) => {searchString = value},
+                    decoration: InputDecoration(
+                      hintText: 'Search',
+                      hintStyle: TextStyle(color: Colors.blue),
+                      prefixIcon: Icon(
+                        Icons.search,
+                        color: Colors.blue,
+                      ),
+                      contentPadding:
+                          EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(32.0)),
+                    ),
+                  ),
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Container(
                         child: Text(
-                      "List of Business",
+                      "Listing",
                       style:
                           GoogleFonts.ubuntu(fontSize: 24, color: Colors.black),
                     )),
@@ -103,20 +133,23 @@ class _RatingListState extends State<RatingList> {
                 Flexible(
                   child: StreamBuilder(
                     stream: widget.category == null
-                        ? Firestore.instance
+                        ? FirebaseFirestore.instance
                             .collection("Bussiness List")
                             .snapshots()
-                        : Firestore.instance
+                        : FirebaseFirestore.instance
                             .collection("Bussiness List")
                             .where('Category', isEqualTo: category)
                             .snapshots(),
                     builder: (context, snapshot) {
-                      if (!snapshot.hasData) return const Text('Loading.....');
+                      searchController.text.isEmpty
+                          ? resultList = snapshot.data.docs
+                          : resultListGet(snapshot.data.docs);
+                      if (!snapshot.hasData) return loadingScreen();
                       return ListView.builder(
-                          itemCount: snapshot.data.documents.length,
+                          itemCount: snapshot.data.docs.length,
                           itemExtent: 160,
-                          itemBuilder: (context, index) => _CardList(
-                              context, snapshot.data.documents[index]));
+                          itemBuilder: (context, index) =>
+                              _CardList(context, snapshot.data.docs[index]));
                     },
                   ),
                 ),
@@ -132,11 +165,7 @@ class _RatingListState extends State<RatingList> {
   Widget _CardList(BuildContext context, DocumentSnapshot document) {
     var a = document.get("photoUrl");
     bool avail;
-    if (a != null) {
-      avail = true;
-    } else {
-      avail = false;
-    }
+    a ? avail = true : avail = false;
 
     return Container(
       margin: EdgeInsets.all(8),

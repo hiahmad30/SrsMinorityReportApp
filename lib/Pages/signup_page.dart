@@ -1,10 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
+import 'package:minorityreport/Pages/ListPage.dart';
+import 'package:minorityreport/Pages/PhoneLogin.dart';
 import 'package:minorityreport/ViewModel/loadinWidget.dart';
 import 'package:minorityreport/ViewModel/locationService.dart';
-import 'package:minorityreport/data_for_log_register/auth.dart';
+import 'package:minorityreport/controller/AuthController.dart';
 
 import 'login_page.dart';
 
@@ -25,7 +28,7 @@ class _SignupPageState extends State<SignupPage> {
   TextEditingController _phoneController = TextEditingController();
 
 //final action
-  final AuthService _auth = AuthService();
+  final _auth = Get.put(AuthController());
   final formKey = GlobalKey<FormState>();
   bool loading = false;
   bool _showPassword = true;
@@ -46,9 +49,14 @@ class _SignupPageState extends State<SignupPage> {
           email, password, displayName, phoneNumber, photoUrl, geoPoints);
 
       if (_returnString == "success") {
+        {
+          Get.back();
+          Get.offAll(RatingList());
+        }
+      } else {
+        await FirebaseAuth.instance.currentUser.delete();
         Get.back();
-        Get.offAllNamed("/loginpage");
-      } else {}
+      }
     } catch (error) {
       print(error.toString());
       return null;
@@ -127,6 +135,7 @@ class _SignupPageState extends State<SignupPage> {
     );
     final phoneNo = TextFormField(
       autofocus: false,
+      keyboardType: TextInputType.phone,
       controller: _phoneController,
       decoration: InputDecoration(
         hintText: 'Phone',
@@ -135,31 +144,46 @@ class _SignupPageState extends State<SignupPage> {
       ),
     );
 
-    final loginButton = Padding(
-      padding: EdgeInsets.symmetric(vertical: 16.0),
-      child: RaisedButton(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(24),
-        ),
-        onPressed: () async {
-          if (_emailController.text.isNotEmpty &&
-              _passwordController.text.isNotEmpty &&
-              _phoneController.text.isNotEmpty &&
-              _displayNameController.text.isNotEmpty) {
-            if (checkPass(
-                _passwordController.text, _confirmPasswordController.text)) {
-              _signUpUser(_emailController.text, _passwordController.text,
-                  context, _displayNameController.text, _phoneController.text);
-            } else {
-              Get.snackbar("Password error", "Password does not macth");
-            }
+    final loginButton = RaisedButton(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+      onPressed: () async {
+        if (_emailController.text.isNotEmpty &&
+            _passwordController.text.isNotEmpty &&
+            _phoneController.text.isNotEmpty &&
+            _displayNameController.text.isNotEmpty) {
+          if (checkPass(
+              _passwordController.text, _confirmPasswordController.text)) {
+            _signUpUser(_emailController.text, _passwordController.text,
+                context, _displayNameController.text, _phoneController.text);
           } else {
-            Get.snackbar('Fill all fields', "All Fields are Naccessory");
+            Get.snackbar("Password error", "Password does not macth");
           }
-        },
-        padding: EdgeInsets.all(12),
-        color: Colors.lightBlueAccent,
-        child: Text('Register', style: TextStyle(color: Colors.white)),
+        } else {
+          Get.snackbar('Fill all fields', "All Fields are Naccessory");
+        }
+      },
+      padding: EdgeInsets.all(12),
+      color: Colors.lightBlueAccent,
+      child: Text('Register', style: TextStyle(color: Colors.white)),
+    );
+    final loginButton2 = RaisedButton(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(24),
+      ),
+      onPressed: () {
+        Get.to(PhoneLogin(title: "PhoneAuth"));
+      },
+      padding: EdgeInsets.all(12),
+      color: Colors.blue[100],
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(Icons.phone_android_outlined),
+          Text('    Or Rigister with Phone',
+              style: TextStyle(color: Colors.black)),
+        ],
       ),
     );
 
@@ -173,8 +197,7 @@ class _SignupPageState extends State<SignupPage> {
             style: TextStyle(color: Colors.lightBlueAccent),
           ),
           onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => LoginPage()));
+            Get.to(LoginPage());
           },
         )
       ],
@@ -200,6 +223,8 @@ class _SignupPageState extends State<SignupPage> {
             phoneNo,
             SizedBox(height: 24.0),
             loginButton,
+            // SizedBox(height: 8.0),
+            // loginButton2,
             forgotLabel
           ],
         ),

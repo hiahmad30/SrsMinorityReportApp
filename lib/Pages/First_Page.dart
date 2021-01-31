@@ -228,17 +228,18 @@ class _FirstPageState extends State<FirstPage> {
                 Container(
                   height: MediaQuery.of(context).size.height * 0.3,
                   child: StreamBuilder(
-                    stream: Firestore.instance
+                    stream: FirebaseFirestore.instance
                         .collection("Bussiness List")
                         .snapshots(),
                     builder: (context, snapshot) {
                       if (!snapshot.hasData)
                         return Center(child: const LoadingWidget());
                       return ListView.builder(
-                          itemCount: snapshot.data.documents.length,
+                          reverse: true,
+                          itemCount: snapshot.data.docs.length,
                           itemExtent: 100,
-                          itemBuilder: (context, index) => _CardList(
-                              context, snapshot.data.documents[index]));
+                          itemBuilder: (context, index) =>
+                              _CardList(context, snapshot.data.docs[index]));
                     },
                   ),
                 ),

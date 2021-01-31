@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:minorityreport/Pages/LoginEmailOrPhone.dart';
 import 'package:minorityreport/Utils/Consts.dart';
 import 'package:minorityreport/controller/AuthController.dart';
 import 'forgetpassword.dart';
@@ -118,7 +119,7 @@ class _LoginPageState extends State<LoginPage> {
             style: TextStyle(color: MyColors.PrimaryColor),
           ),
           onPressed: () {
-            Get.to(SignupPage());
+            Get.to(LoginemailorPhone());
           },
         ),
       ],
@@ -128,7 +129,9 @@ class _LoginPageState extends State<LoginPage> {
         'Forgot password?',
         style: TextStyle(color: Colors.black54),
       ),
-      onPressed: () {Get.to(ForgetpasswordPage());},
+      onPressed: () {
+        Get.to(ForgetpasswordPage());
+      },
     );
 
     return Scaffold(
@@ -150,19 +153,6 @@ class _LoginPageState extends State<LoginPage> {
           ],
         ),
       ),
-    );
-  }
-
-  Widget errorWidgett(String s) {
-    return AlertDialog(
-      title: Text("Alert Dialog"),
-      content: Text("$s"),
-      actions: [
-        FlatButton(
-          child: Text("Close"),
-          onPressed: () => Navigator.canPop(context),
-        )
-      ],
     );
   }
 }
