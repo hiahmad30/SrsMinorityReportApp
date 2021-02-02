@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:minorityreport/Utils/Consts.dart';
+import 'package:minorityreport/Utils/loadingScreen.dart';
 import 'package:minorityreport/ViewModel/loadinWidget.dart';
 
 import 'DetailPage.dart';
@@ -238,8 +239,8 @@ class _FirstPageState extends State<FirstPage> {
                           reverse: true,
                           itemCount: snapshot.data.docs.length,
                           itemExtent: 100,
-                          itemBuilder: (context, index) =>
-                              _CardList(context, snapshot.data.docs[index]));
+                          itemBuilder: (context, index) => snapshot.data
+                              ._CardList(context, snapshot.data.docs[index]));
                     },
                   ),
                 ),
@@ -324,7 +325,7 @@ class _FirstPageState extends State<FirstPage> {
           ListTile(
             //  focusColor: Colors.black,
             // leading: Icon(Icons.arrow_drop_down_circle),
-            onTap: () => Get.to(DetailPage(documentSnapshot: document)),
+            //  onTap: () => Get.to(DetailPage(documentSnapshot: document)),
             title: Column(
               // mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,

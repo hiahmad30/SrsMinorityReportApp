@@ -6,7 +6,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:minorityreport/Pages/DetailEnter.dart';
 import 'package:minorityreport/Utils/Consts.dart';
 import 'package:minorityreport/Utils/loadingScreen.dart';
+import 'package:minorityreport/ViewModel/loadinWidget.dart';
 import 'package:minorityreport/controller/AuthController.dart';
+import 'package:minorityreport/controller/ListController.dart';
+import 'package:minorityreport/controller/dbController.dart';
 
 import 'DetailPage.dart';
 import 'login_page.dart';
@@ -21,12 +24,30 @@ class RatingList extends StatefulWidget {
 
 class _RatingListState extends State<RatingList> {
   final auth = Get.put(AuthController());
+  final db = Get.put(DatabaseController());
   TextEditingController searchController = TextEditingController();
   String searchString = "";
   Map<String, dynamic> resultList = Map<String, dynamic>();
   bool isSearchable = false;
   AsyncSnapshot<dynamic> resultListGet(AsyncSnapshot<dynamic> initString) {
     // resultList = initString;
+  }
+  _onSearchChanged() {
+    print(searchController.text);
+  }
+
+  @override
+  void initState() {
+    searchController.addListener(_onSearchChanged);
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    searchController.dispose();
+    // TODO: implement dispose
+    super.dispose();
   }
 
   @override
@@ -131,27 +152,51 @@ class _RatingListState extends State<RatingList> {
                   height: 10,
                 ),
                 Flexible(
-                  child: StreamBuilder(
-                    stream: widget.category == null
-                        ? FirebaseFirestore.instance
-                            .collection("Bussiness List")
-                            .snapshots()
-                        : FirebaseFirestore.instance
-                            .collection("Bussiness List")
-                            .where('Category', isEqualTo: category)
-                            .snapshots(),
-                    builder: (context, snapshot) {
-                      searchController.text.isEmpty
-                          ? resultList = snapshot.data.docs
-                          : resultListGet(snapshot.data.docs);
-                      if (!snapshot.hasData) return loadingScreen();
-                      return ListView.builder(
-                          itemCount: snapshot.data.docs.length,
-                          itemExtent: 160,
-                          itemBuilder: (context, index) =>
-                              _CardList(context, snapshot.data.docs[index]));
+                  child: GetX<ListController>(
+                    init: Get.put<ListController>(ListController()),
+                    builder: (ListController listController) {
+                      //   matchController.refreshDate();
+                      if (listController != null &&
+                          listController.rating != null) {
+                        return ListView.builder(
+                            itemCount: listController.rating.docs.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return _CardList(
+                                context,
+                                listController.rating.docs[index],
+                              );
+                            });
+                      } else {
+                        return Container(
+                          child: LoadingWidget(),
+                        );
+                      }
                     },
                   ),
+                  //  StreamBuilder(
+                  //   stream: widget.category == null
+                  //       ? FirebaseFirestore.instance
+                  //           .collection("Bussiness List")
+                  //           .where(
+                  //             "BussinessName",
+                  //           )
+                  //           .snapshots()
+                  //       : FirebaseFirestore.instance
+                  //           .collection("Bussiness List")
+                  //           .where('Category', isEqualTo: category)
+                  //           .snapshots(),
+                  //   builder: (context, snapshot) {
+                  //     // searchController.text.isEmpty
+                  //     //     ? resultList = snapshot.data.docs
+                  //     //     : resultListGet(snapshot.data.docs);
+                  //     if (!snapshot.hasData) return loadingScreen();
+                  //     return ListView.builder(
+                  //         itemCount: snapshot.data.docs.length,
+                  //         itemExtent: 160,
+                  //         itemBuilder: (context, index) =>
+                  //             _CardList(context, snapshot.data.docs[index]));
+                  //   },
+                  // ),
                 ),
               ],
             ),
@@ -164,8 +209,8 @@ class _RatingListState extends State<RatingList> {
 
   Widget _CardList(BuildContext context, DocumentSnapshot document) {
     var a = document.get("photoUrl");
-    bool avail;
-    a ? avail = true : avail = false;
+    // double radioGroupV = db.calculateBlackExp(
+    //     int.parse(document.get("blackExperience").toString()));
 
     return Container(
       margin: EdgeInsets.all(8),
@@ -178,8 +223,7 @@ class _RatingListState extends State<RatingList> {
           fit: BoxFit.cover,
           colorFilter: new ColorFilter.mode(
               Colors.black.withOpacity(0.6), BlendMode.darken),
-          image:
-              new NetworkImage(avail ? document.get("photoUrl") : testImageUrl),
+          image: new NetworkImage(a != null ? a : testImageUrl),
         ),
       ),
       child: Column(

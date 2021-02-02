@@ -15,14 +15,6 @@ void main() {
   runApp(
     GetMaterialApp(
       title: 'Minority Report', home: MyApp(), // initialRoute: '/homepage',
-      routes: <String, WidgetBuilder>{
-        // Set routes for using the Navigator.
-        '/homepage': (BuildContext context) => new FirstPage(),
-        '/loginpage': (BuildContext context) => new LoginPage(),
-        '/list': (BuildContext context) => new RatingList(),
-        '/Register': (BuildContext context) => new SignupPage(),
-        '/AddList': (BuildContext context) => new DetailEntry()
-      },
     ),
   );
 }

@@ -36,6 +36,7 @@ class _DetailEntryState extends State<DetailEntry> {
   TextEditingController _websiteC = new TextEditingController();
   TextEditingController _sDiscriptionC = new TextEditingController();
   TextEditingController _dDiscriptionC = new TextEditingController();
+  int _radiogropValue = 1;
   double _rating = 0;
   bool _validate = false,
       _validateAdd = false,
@@ -156,6 +157,7 @@ class _DetailEntryState extends State<DetailEntry> {
             shortDisc: _sDiscriptionC.text,
             detailDescription: _dDiscriptionC.text,
             photoUrl: _uploadedFileURL,
+            blackExperience: _radiogropValue,
             ratingBar: _rating);
         result = await _databaseService.createBussinessList(_ratingModel);
       } catch (e) {
@@ -466,6 +468,73 @@ class _DetailEntryState extends State<DetailEntry> {
                       hintStyle: TextStyle(fontSize: 12),
                     ),
                   ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text("Black Experience"),
+                ),
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        "Low",
+                        style: TextStyle(color: Colors.red),
+                      ),
+                    ),
+                    Radio(
+                      value: 1,
+                      groupValue: _radiogropValue,
+                      onChanged: (value) {
+                        setState(() {
+                          _radiogropValue = value;
+                        });
+                      },
+                    ),
+                    Radio(
+                      value: 2,
+                      groupValue: _radiogropValue,
+                      onChanged: (value) {
+                        setState(() {
+                          _radiogropValue = value;
+                        });
+                      },
+                    ),
+                    Radio(
+                      value: 3,
+                      groupValue: _radiogropValue,
+                      onChanged: (value) {
+                        setState(() {
+                          _radiogropValue = value;
+                        });
+                      },
+                    ),
+                    Radio(
+                      value: 4,
+                      groupValue: _radiogropValue,
+                      onChanged: (value) {
+                        setState(() {
+                          _radiogropValue = value;
+                        });
+                      },
+                    ),
+                    Radio(
+                      value: 5,
+                      groupValue: _radiogropValue,
+                      onChanged: (value) {
+                        setState(() {
+                          _radiogropValue = value;
+                        });
+                      },
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        "High",
+                        style: TextStyle(color: Colors.green),
+                      ),
+                    ),
+                  ],
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
