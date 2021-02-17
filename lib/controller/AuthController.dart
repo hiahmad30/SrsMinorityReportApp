@@ -32,14 +32,11 @@ class AuthController extends GetxController {
       firebaseAuth = FirebaseAuth.instance;
       update();
     }
-    if (firebaseAuth.currentUser == null) {
-      return FirstPage();
-    } else {
-      firebaseUser = firebaseAuth.currentUser;
-      u_id = firebaseUser.uid;
-      update();
-      return FirstPage();
-    }
+
+    firebaseUser = firebaseAuth.currentUser;
+    u_id = firebaseUser.uid;
+    update();
+    return FirstPage();
   }
 
   ////////////////////////////////////////////////////////////Auth with email////////////////////////

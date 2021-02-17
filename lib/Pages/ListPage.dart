@@ -40,6 +40,7 @@ class _RatingListState extends State<RatingList> {
   void initState() {
     searchController.addListener(_onSearchChanged);
     // TODO: implement initState
+
     super.initState();
   }
 
@@ -89,8 +90,9 @@ class _RatingListState extends State<RatingList> {
                     keyboardType: TextInputType.text,
                     autofocus: false,
                     controller: searchController,
+
                     //autovalidate: true,
-                    onChanged: (value) => {searchString = value},
+                    onChanged: (value) => {if (mounted) setState(() {})},
                     decoration: InputDecoration(
                       hintText: 'Search',
                       hintStyle: TextStyle(color: Colors.blue),
@@ -161,10 +163,16 @@ class _RatingListState extends State<RatingList> {
                         return ListView.builder(
                             itemCount: listController.rating.docs.length,
                             itemBuilder: (BuildContext context, int index) {
-                              return _CardList(
-                                context,
-                                listController.rating.docs[index],
-                              );
+                              return listController.rating.docs[index]
+                                      .get('BussinessName')
+                                      .toLowerCase()
+                                      .contains(
+                                          searchController.text.toLowerCase())
+                                  ? _CardList(
+                                      context,
+                                      listController.rating.docs[index],
+                                    )
+                                  : Container();
                             });
                       } else {
                         return Container(
@@ -173,30 +181,6 @@ class _RatingListState extends State<RatingList> {
                       }
                     },
                   ),
-                  //  StreamBuilder(
-                  //   stream: widget.category == null
-                  //       ? FirebaseFirestore.instance
-                  //           .collection("Bussiness List")
-                  //           .where(
-                  //             "BussinessName",
-                  //           )
-                  //           .snapshots()
-                  //       : FirebaseFirestore.instance
-                  //           .collection("Bussiness List")
-                  //           .where('Category', isEqualTo: category)
-                  //           .snapshots(),
-                  //   builder: (context, snapshot) {
-                  //     // searchController.text.isEmpty
-                  //     //     ? resultList = snapshot.data.docs
-                  //     //     : resultListGet(snapshot.data.docs);
-                  //     if (!snapshot.hasData) return loadingScreen();
-                  //     return ListView.builder(
-                  //         itemCount: snapshot.data.docs.length,
-                  //         itemExtent: 160,
-                  //         itemBuilder: (context, index) =>
-                  //             _CardList(context, snapshot.data.docs[index]));
-                  //   },
-                  // ),
                 ),
               ],
             ),

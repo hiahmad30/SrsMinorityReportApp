@@ -239,8 +239,8 @@ class _FirstPageState extends State<FirstPage> {
                           reverse: true,
                           itemCount: snapshot.data.docs.length,
                           itemExtent: 100,
-                          itemBuilder: (context, index) => snapshot.data
-                              ._CardList(context, snapshot.data.docs[index]));
+                          itemBuilder: (context, index) =>
+                              _CardList(context, snapshot.data.docs[index]));
                     },
                   ),
                 ),
@@ -327,33 +327,27 @@ class _FirstPageState extends State<FirstPage> {
             // leading: Icon(Icons.arrow_drop_down_circle),
             //  onTap: () => Get.to(DetailPage(documentSnapshot: document)),
             title: Column(
-              // mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Row(
-                  children: [
-                    Text(
-                      document.get("BussinessName").toString(),
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                      ),
-                    ),
-                    RatingBarIndicator(
-                        rating:
-                            double.parse((document.get("rating").toString())),
-                        itemBuilder: (context, index) => Icon(
-                              Icons.star,
-                              color: Colors.amber,
-                            ),
-                        itemCount: 5,
-                        itemSize: 14.0,
-                        unratedColor: Colors.white10.withAlpha(50),
-                        direction: Axis.horizontal //: Axis.horizontal,
-                        ),
-                  ],
+                Text(
+                  document.get("BussinessName").toString(),
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                  ),
                 ),
+                RatingBarIndicator(
+                    rating: double.parse((document.get("rating").toString())),
+                    itemBuilder: (context, index) => Icon(
+                          Icons.star,
+                          color: Colors.amber,
+                        ),
+                    itemCount: 5,
+                    itemSize: 14.0,
+                    unratedColor: Colors.white10.withAlpha(50),
+                    direction: Axis.horizontal //: Axis.horizontal,
+                    ),
                 SizedBox(
                   height: 10,
                 )
