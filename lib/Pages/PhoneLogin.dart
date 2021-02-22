@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:minorityreport/Pages/ListPage.dart';
 import 'package:minorityreport/Utils/Consts.dart';
 import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/style.dart';
@@ -124,8 +125,10 @@ class _PhoneLoginState extends State<PhoneLogin> {
       final UserCredential user = await _auth.signInWithCredential(credential);
       final User currentUser = FirebaseAuth.instance.currentUser;
       assert(user.user.uid == currentUser.uid);
-      Navigator.of(context).pop();
-      Navigator.of(context).pushReplacementNamed('/homepage');
+      u_id = user.user.uid;
+      Get.back();
+
+      Get.to(RatingList());
     } catch (e) {
       handleError(e);
     }

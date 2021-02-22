@@ -1,19 +1,23 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
-class ListRController extends GetxController {
-  // Rx<QuerySnapshot> querySnapshot = ?.obs;
+class ListController extends GetxController {
+  Rx<QuerySnapshot> ratingList = Rx<QuerySnapshot>();
+  QuerySnapshot get rating => ratingList.value;
+
   @override
-  void onInit() {
-    //  businessList.bindStream(getRatingStream());
-    // TODO: implement onInit
+  Future<void> onInit() async {
+    // await db.open();
+    // String id = Get.find<AuthController>().firebaseUser.uid;
+    ratingList.bindStream(FirebaseFirestore.instance
+        .collection("Bussiness List")
+        .snapshots()); //id)); //Stream Comming from
     super.onInit();
   }
 
-  Stream<QuerySnapshot> getRatingStream() {
-    print('[MinorityReport] : stream is going on');
-    return (FirebaseFirestore.instance
-        .collection("Bussiness List")
-        .snapshots());
+  @override
+  void onClose() {
+    // db.close();
+    super.onClose();
   }
 }

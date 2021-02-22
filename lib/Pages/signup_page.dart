@@ -173,7 +173,7 @@ class _SignupPageState extends State<SignupPage> {
         borderRadius: BorderRadius.circular(24),
       ),
       onPressed: () {
-        Get.to(PhoneLogin(title: "PhoneAuth"));
+        Get.to(PhoneLogin(title: "Sign in with Phone"));
       },
       padding: EdgeInsets.all(12),
       color: Colors.blue[100],

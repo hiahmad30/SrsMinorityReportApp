@@ -83,4 +83,8 @@ class DatabaseController extends GetxController {
     }
     return _avgRating;
   }
+
+  double calculateBlackExp(int rValue) {
+    return (rValue / 5) * 100;
+  }
 }

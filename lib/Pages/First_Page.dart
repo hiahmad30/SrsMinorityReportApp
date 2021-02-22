@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:minorityreport/Utils/Consts.dart';
+import 'package:minorityreport/Utils/loadingScreen.dart';
 import 'package:minorityreport/ViewModel/loadinWidget.dart';
 
 import 'DetailPage.dart';
@@ -324,35 +325,29 @@ class _FirstPageState extends State<FirstPage> {
           ListTile(
             //  focusColor: Colors.black,
             // leading: Icon(Icons.arrow_drop_down_circle),
-            onTap: () => Get.to(DetailPage(documentSnapshot: document)),
+            //  onTap: () => Get.to(DetailPage(documentSnapshot: document)),
             title: Column(
-              // mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Row(
-                  children: [
-                    Text(
-                      document.get("BussinessName").toString(),
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                      ),
-                    ),
-                    RatingBarIndicator(
-                        rating:
-                            double.parse((document.get("rating").toString())),
-                        itemBuilder: (context, index) => Icon(
-                              Icons.star,
-                              color: Colors.amber,
-                            ),
-                        itemCount: 5,
-                        itemSize: 14.0,
-                        unratedColor: Colors.white10.withAlpha(50),
-                        direction: Axis.horizontal //: Axis.horizontal,
-                        ),
-                  ],
+                Text(
+                  document.get("BussinessName").toString(),
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                  ),
                 ),
+                RatingBarIndicator(
+                    rating: double.parse((document.get("rating").toString())),
+                    itemBuilder: (context, index) => Icon(
+                          Icons.star,
+                          color: Colors.amber,
+                        ),
+                    itemCount: 5,
+                    itemSize: 14.0,
+                    unratedColor: Colors.white10.withAlpha(50),
+                    direction: Axis.horizontal //: Axis.horizontal,
+                    ),
                 SizedBox(
                   height: 10,
                 )
