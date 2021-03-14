@@ -146,7 +146,8 @@ const spinkit = SpinKitRotatingCircle(
   size: 50.0,
 );
 String PrivacyPolicy =
-    "Minority app was built as a free app. This service is provided at no cost and is intended for use as is. This page is used to inform visitors regarding policies with the collection, use, and disclosure of personal information if anyone decided to use this service.\n"
+    "Minority app was built as a free app. This service is provided at no cost and is"
+    " intended for use as is. This page is used to inform visitors regarding policies with the collection, use, and disclosure of personal information if anyone decided to use this service.\n"
     "This page is used to inform visitors regarding my policies with the collection, use, and disclosure of Personal Information if anyone decided to use my Service.\n"
     "If you choose to use the Service, then you agree to the collection and use of information in relation to this policy. The Personal Information that is collected is used for providing and improving the Service. We will not use or share your information with anyone except as described in this Privacy Policy.\n"
     "The terms used in this Privacy Policy have the same meanings as in our Terms and Conditions, which is accessible at Minority Report unless otherwise defined in this Privacy Policy.\n"

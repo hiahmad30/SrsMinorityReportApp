@@ -1,3 +1,5 @@
+import 'package:get/get.dart';
+
 import 'Consts.dart';
 import 'package:flutter/material.dart';
 
@@ -92,8 +94,8 @@ class AboutUsPage extends StatelessWidget {
     final body = SafeArea(
         child: SingleChildScrollView(
       child: Container(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
+        width: Get.width,
+        height: Get.height,
         padding: EdgeInsets.all(28.0),
         decoration: BoxDecoration(
           gradient: LinearGradient(colors: [
