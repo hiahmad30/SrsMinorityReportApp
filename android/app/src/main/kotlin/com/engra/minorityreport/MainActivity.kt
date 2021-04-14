@@ -1,4 +1,4 @@
-package com.engra.minorityreport
+package com.EngrA.SRSRatingSystem
 
 import io.flutter.embedding.android.FlutterActivity
 

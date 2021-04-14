@@ -34,6 +34,12 @@
 @import firebase_storage;
 #endif
 
+#if __has_include(<flutter_statusbarcolor/FlutterStatusbarcolorPlugin.h>)
+#import <flutter_statusbarcolor/FlutterStatusbarcolorPlugin.h>
+#else
+@import flutter_statusbarcolor;
+#endif
+
 #if __has_include(<geolocator/GeolocatorPlugin.h>)
 #import <geolocator/GeolocatorPlugin.h>
 #else
@@ -54,6 +60,7 @@
   [FLTFirebaseAuthPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTFirebaseAuthPlugin"]];
   [FLTFirebaseCorePlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTFirebaseCorePlugin"]];
   [FLTFirebaseStoragePlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTFirebaseStoragePlugin"]];
+  [FlutterStatusbarcolorPlugin registerWithRegistrar:[registry registrarForPlugin:@"FlutterStatusbarcolorPlugin"]];
   [GeolocatorPlugin registerWithRegistrar:[registry registrarForPlugin:@"GeolocatorPlugin"]];
   [FLTPathProviderPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTPathProviderPlugin"]];
 }
