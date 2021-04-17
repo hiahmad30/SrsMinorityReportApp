@@ -305,8 +305,9 @@ class _FirstPageState extends State<FirstPage> {
     }
 
     return Container(
-      margin: EdgeInsets.only(bottom: 15, left: 20, right: 20),
-      //height: MediaQuery.of(context).size.height * 0.1,
+      margin: EdgeInsets.only(bottom: 10, left: 20, right: 20),
+      constraints: BoxConstraints(minHeight: 400),
+      // height: MediaQuery.of(context).size.height * 0.3,
       decoration: new BoxDecoration(
         borderRadius: BorderRadius.circular(15),
 
@@ -323,18 +324,21 @@ class _FirstPageState extends State<FirstPage> {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           ListTile(
-            //  focusColor: Colors.black,
-            // leading: Icon(Icons.arrow_drop_down_circle),
-            //  onTap: () => Get.to(DetailPage(documentSnapshot: document)),
+            focusColor: Colors.black,
+            leading: Icon(Icons.arrow_drop_down_circle),
+            onTap: () => Get.to(DetailPage(documentSnapshot: document)),
             title: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Text(
-                  document.get("BussinessName").toString(),
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
+                Container(
+                  child: Text(
+                    document.get("BussinessName").toString(),
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                    ),
                   ),
                 ),
                 RatingBarIndicator(

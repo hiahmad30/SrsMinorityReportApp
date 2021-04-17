@@ -189,7 +189,7 @@ class _PhoneLoginState extends State<PhoneLogin> {
                       Icons.phone_android_outlined,
                       color: Colors.black,
                     ),
-                    hintText: 'Enter Phone Eg. +10000000000',
+                    hintText: 'Enter Phone Eg. +1745855421',
                     contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(32.0)),
@@ -220,7 +220,7 @@ class _PhoneLoginState extends State<PhoneLogin> {
                         borderRadius: BorderRadius.circular(24),
                       ),
                       onPressed: () async {
-                        verifyPhone();
+                        await verifyPhone();
                       },
                     )),
               ),
