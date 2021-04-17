@@ -4,13 +4,10 @@ import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 import 'package:get/get.dart';
 import 'package:minorityreport/Pages/First_Page.dart';
 
-import 'ViewModel/loadinWidget.dart';
-import 'controller/AuthController.dart';
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  FlutterStatusbarcolor.setStatusBarColor(Colors.white);
+  FlutterStatusbarcolor.setStatusBarColor(Colors.transparent);
   runApp(
     GetMaterialApp(
       title: 'Minority Report', home: MyApp(), // initialRoute: '/homepage',

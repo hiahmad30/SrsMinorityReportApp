@@ -167,7 +167,7 @@ class AuthController extends GetxController {
     }
   }
 
-  signouUser() async {
+  Future<void> signouUser() async {
     await firebaseAuth.signOut();
     u_id = null;
     update();

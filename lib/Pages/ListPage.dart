@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:minorityreport/Pages/DetailEnter.dart';
 import 'package:minorityreport/Utils/Consts.dart';
-import 'package:minorityreport/Utils/loadingScreen.dart';
 import 'package:minorityreport/ViewModel/loadinWidget.dart';
 import 'package:minorityreport/controller/AuthController.dart';
 import 'package:minorityreport/controller/ListController.dart';
@@ -66,8 +65,8 @@ class _RatingListState extends State<RatingList> {
               ? IconButton(
                   tooltip: 'SignOut',
                   icon: Icon(Icons.login_outlined),
-                  onPressed: () {
-                    auth.signouUser();
+                  onPressed: () async {
+                    await auth.signouUser();
                   })
               : Container(),
         ],
@@ -157,22 +156,27 @@ class _RatingListState extends State<RatingList> {
                   child: GetX<ListController>(
                     init: Get.put<ListController>(ListController()),
                     builder: (ListController listController) {
-                      //   matchController.refreshDate();
                       if (listController != null &&
                           listController.rating != null) {
                         return ListView.builder(
                             itemCount: listController.rating.docs.length,
                             itemBuilder: (BuildContext context, int index) {
-                              return listController.rating.docs[index]
-                                      .get('BussinessName')
-                                      .toLowerCase()
-                                      .contains(
-                                          searchController.text.toLowerCase())
-                                  ? _CardList(
-                                      context,
-                                      listController.rating.docs[index],
-                                    )
-                                  : Container();
+                              if (listController.rating.docs[index]
+                                  .get('BussinessName')
+                                  .toLowerCase()
+                                  .contains(widget.category.toLowerCase())) {
+                                return listController.rating.docs[index]
+                                        .get('BussinessName')
+                                        .toLowerCase()
+                                        .contains(
+                                            searchController.text.toLowerCase())
+                                    ? _CardList(
+                                        context,
+                                        listController.rating.docs[index],
+                                      )
+                                    : Container();
+                              } else
+                                Container();
                             });
                       } else {
                         return Container(
