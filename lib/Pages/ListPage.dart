@@ -164,7 +164,7 @@ class _RatingListState extends State<RatingList> {
                               if (listController.rating.docs[index]
                                   .get('BussinessName')
                                   .toLowerCase()
-                                  .contains(widget.category.toLowerCase())) {
+                                  .contains(category.toLowerCase())) {
                                 return listController.rating.docs[index]
                                         .get('BussinessName')
                                         .toLowerCase()
