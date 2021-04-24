@@ -41,8 +41,7 @@ class _SignupPageState extends State<SignupPage> {
   void _signUpUser(String email, String password, BuildContext context,
       String displayName, String phoneNumber) async {
     position = await location.getlastPosition();
-    geoPoints =
-        "" + position.latitude.toString() + " " + position.longitude.toString();
+
     try {
       Get.dialog(Center(child: LoadingWidget()), barrierDismissible: false);
       String _returnString = await _auth.signUpUser(
@@ -51,7 +50,7 @@ class _SignupPageState extends State<SignupPage> {
       if (_returnString == "success") {
         {
           Get.back();
-          Get.offAll(RatingList());
+          Get.offAll(() => RatingList());
         }
       } else {
         await FirebaseAuth.instance.currentUser.delete();
@@ -74,12 +73,6 @@ class _SignupPageState extends State<SignupPage> {
       setState(() {});
       return false;
     }
-  }
-
-  @override
-  void setState(fn) async {
-    // TODO: implement setState
-    super.setState(fn);
   }
 
   @override
