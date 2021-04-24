@@ -105,7 +105,9 @@ class _PhoneLoginState extends State<PhoneLogin> {
                   final user = FirebaseAuth.instance.currentUser;
 
                   if (user != null) {
+                    u_id = FirebaseAuth.instance.currentUser.uid;
                     print("[Minority Report]   verified");
+                    Get.offAll(RatingList());
                   } else {
                     signIn();
                   }

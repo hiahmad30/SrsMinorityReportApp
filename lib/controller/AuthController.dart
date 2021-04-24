@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -16,6 +18,11 @@ import 'package:otp_text_field/style.dart';
 import 'dbController.dart';
 
 class AuthController extends GetxController {
+  @override
+  void onClose() {
+    super.onClose();
+  }
+
   // Intilize the flutter app
   FirebaseApp firebaseApp;
   User firebaseUser;
@@ -34,7 +41,7 @@ class AuthController extends GetxController {
     }
 
     firebaseUser = firebaseAuth.currentUser;
-    u_id = firebaseUser.uid;
+
     update();
     return FirstPage();
   }
@@ -51,11 +58,11 @@ class AuthController extends GetxController {
       u_id = firebaseUser.uid;
       update();
       Get.back();
-      Get.off(RatingList());
+      Get.back();
     } catch (ex) {
       print(ex.toString());
       Get.back();
-      Get.snackbar('Sign In Error', 'Recheck your email and password',
+      Get.snackbar('Error', '${ex.message}',
           duration: Duration(seconds: 5),
           backgroundColor: Colors.black,
           colorText: Colors.white,
@@ -67,6 +74,7 @@ class AuthController extends GetxController {
     }
   }
 
+  Timer timer;
   Future<String> signUpUser(
     String email,
     String password,
@@ -84,70 +92,93 @@ class AuthController extends GetxController {
       await _authResult.user.updateProfile(
         displayName: displayName,
       );
-      await FirebaseAuth.instance.verifyPhoneNumber(
-          phoneNumber: phoneNumber,
-          verificationCompleted: (phoneCredential) async {
-            String smsCode = 'xxxx';
-            Get.back();
-            // Create a PhoneAuthCredential with the code
+      await _authResult.user.sendEmailVerification();
 
-            await _authResult.user.updatePhoneNumber(phoneCredential);
-          },
-          verificationFailed: (FirebaseAuthException e) {
-            if (e.code == 'invalid-phone-number') {
-              print('The provided phone number is not valid.');
+      //TODO
+      // await FirebaseAuth.instance.verifyPhoneNumber(
+      //     phoneNumber: phoneNumber,
+      //     verificationCompleted: (phoneCredential) async {
+      //       String smsCode = 'xxxx';
+      //      // Get.back();
+      //       // Create a PhoneAuthCredential with the code
 
-              print(">>>>>>>>>>" + e.toString());
-            }
-          },
-          codeSent: (String verificationId, int resendToken) async {
-            String smsCode = 'xxxx';
-            Get.back();
-            await Get.defaultDialog(
-                barrierDismissible: false,
-                title: "Enter Code",
-                content: Center(
-                  child: OTPTextField(
-                    length: 5,
-                    width: Get.width,
-                    fieldWidth: 80,
-                    style: TextStyle(fontSize: 17),
-                    textFieldAlignment: MainAxisAlignment.spaceAround,
-                    fieldStyle: FieldStyle.underline,
-                    onCompleted: (pin) {
-                      print("Completed: " + pin);
-                      smsCode = pin;
-                      Get.back();
-                    },
-                  ),
-                ));
-            // Create a PhoneAuthCredential with the code
-            PhoneAuthCredential phoneAuthCredential =
-                PhoneAuthProvider.credential(
-                    verificationId: verificationId, smsCode: smsCode);
-          },
-          timeout: const Duration(minutes: 1),
-          codeAutoRetrievalTimeout: (String verificationId) {});
+      //       await _authResult.user.updatePhoneNumber(phoneCredential);
+      //     },
+      //     verificationFailed: (FirebaseAuthException e) {
+      //       if (e.code == 'invalid-phone-number') {
+      //         print('The provided phone number is not valid.');
 
-      UserModel _user = UserModel(
-          uid: _authResult.user.uid,
-          email: _authResult.user.email,
-          displayName: displayName,
-          phoneNumber: phoneNumber,
-          photoUrl: null,
-          accountCreated: Timestamp.now(),
-          geoPoints: geoPoint);
-      String _returnString = await dbController.createUser(_user);
-      if (_returnString == "success") {
-        retVal = "success";
-      }
+      //         print(">>>>>>>>>>" + e.toString());
+      //       }
+      //     },
+      //     codeSent: (String verificationId, int resendToken) async {
+      //       String smsCode = 'xxxx';
+      //       Get.back();
+      //       await Get.defaultDialog(
+      //           barrierDismissible: false,
+      //           title: "Enter Code",
+      //           content: Center(
+      //             child: OTPTextField(
+      //               length: 5,
+      //               width: Get.width,
+      //               fieldWidth: 80,
+      //               style: TextStyle(fontSize: 17),
+      //               textFieldAlignment: MainAxisAlignment.spaceAround,
+      //               fieldStyle: FieldStyle.underline,
+      //               onCompleted: (pin) {
+      //                 print("Completed: " + pin);
+      //                 smsCode = pin;
+      //                 Get.back();
+      //               },
+      //             ),
+      //           ));
+      //       // Create a PhoneAuthCredential with the code
+      //       PhoneAuthCredential phoneAuthCredential =
+      //           PhoneAuthProvider.credential(
+      //               verificationId: verificationId, smsCode: smsCode);
+      //     },
+      //     timeout: const Duration(minutes: 1),
+      //     codeAutoRetrievalTimeout: (String verificationId) {});
+      Get.back();
+      Get.snackbar('Email Sent', 'Verification link is sent to $email',
+          duration: Duration(seconds: 10));
+      timer = Timer.periodic(Duration(seconds: 30), (timer) async {
+        if (_authResult.user.emailVerified) {
+          timer.cancel();
+          await _authResult.user.reload();
+          UserModel _user = UserModel(
+              uid: _authResult.user.uid,
+              email: _authResult.user.email,
+              displayName: displayName,
+              phoneNumber: phoneNumber,
+              photoUrl: null,
+              accountCreated: Timestamp.now(),
+              geoPoints: geoPoint);
+          String _returnString = await dbController.createUser(_user);
+          if (_returnString == "success") {
+            retVal = "success";
+            u_id = FirebaseAuth.instance.currentUser.uid;
+          }
+        } else {
+          // timer.cancel();
+          // _authResult.user.delete();
+          // Get.defaultDialog(
+          //     title: 'Email verification failed',
+          //     content: Padding(
+          //       padding: const EdgeInsets.all(10.0),
+          //       child: Text(
+          //           'Your email can not be verified. please type correct email.'),
+          //     ));
+        }
+      });
     } on PlatformException catch (e) {
       retVal = e.message;
     } catch (error) {
       print("Error is of firebase" + error.toString());
       Get.back();
-      Get.snackbar("Error", error.toString());
-
+      Get.snackbar("Error", error.message.toString(),
+          snackPosition: SnackPosition.BOTTOM);
+      timer.cancel();
       return null;
     }
     return retVal;
@@ -168,9 +199,11 @@ class AuthController extends GetxController {
   }
 
   Future<void> signouUser() async {
-    await firebaseAuth.signOut();
+    await FirebaseAuth.instance.signOut();
     u_id = null;
     update();
     Get.offAll(FirstPage());
   }
+
+  Future verifyEmail() {}
 }

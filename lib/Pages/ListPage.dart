@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
@@ -52,7 +53,7 @@ class _RatingListState extends State<RatingList> {
 
   @override
   Widget build(BuildContext context) {
-    String category = widget.category != null ? widget.category : "";
+    String category = widget.category != null ? widget.category : '';
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -125,7 +126,9 @@ class _RatingListState extends State<RatingList> {
                               if (u_id == "" || u_id == null) {
                                 await showMyDialog(
                                     context, "Alert", "Please Login First");
-                                Get.to(LoginPage());
+                                await Get.to(LoginPage()).then((value) {
+                                  setState(() {});
+                                });
                               } else {
                                 Get.to(DetailEntry(
                                   categoryEntry: category,
@@ -162,9 +165,8 @@ class _RatingListState extends State<RatingList> {
                             itemCount: listController.rating.docs.length,
                             itemBuilder: (BuildContext context, int index) {
                               if (listController.rating.docs[index]
-                                  .get('BussinessName')
-                                  .toLowerCase()
-                                  .contains(widget.category.toLowerCase())) {
+                                  .get('Category')
+                                  .contains(category)) {
                                 return listController.rating.docs[index]
                                         .get('BussinessName')
                                         .toLowerCase()

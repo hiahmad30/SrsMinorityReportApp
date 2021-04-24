@@ -149,6 +149,7 @@ class _SignupPageState extends State<SignupPage> {
         borderRadius: BorderRadius.circular(10),
       ),
       onPressed: () async {
+        FocusScope.of(context).unfocus();
         if (_emailController.text.isNotEmpty &&
             _passwordController.text.isNotEmpty &&
             _phoneController.text.isNotEmpty &&
