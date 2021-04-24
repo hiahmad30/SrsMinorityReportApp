@@ -285,18 +285,19 @@ class _DetailPageState extends State<DetailPage> {
             width: 20,
           ),
           RaisedButton(
-            onPressed: () {
+            onPressed: () async {
               if (u_id == "" || u_id == null) {
                 Alert(
                   context: context,
                   title: "Login First",
                   desc: "Please Login before adding review",
                 );
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) => LoginPage()));
+                await Get.to(LoginPage()).then((value) {
+                  setState(() {});
+                });
               } else {
                 Get.to(DetailEntry(
-                  categoryEntry: "",
+                  categoryEntry: widget.documentSnapshot.get("Category"),
                 ));
               }
             },
