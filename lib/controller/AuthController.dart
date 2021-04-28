@@ -93,7 +93,43 @@ class AuthController extends GetxController {
         displayName: displayName,
       );
       await _authResult.user.sendEmailVerification();
-
+      await Future.delayed(Duration(seconds: 10));
+      Get.back();
+      await Get.defaultDialog(
+        title: 'Wait for email',
+        content: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Container(
+              child: Text(
+                'Verification link is sent to $email',
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+        ),
+        textConfirm: 'Verified',
+        confirmTextColor: Colors.white,
+        onConfirm: () async {
+          await _authResult.user.reload();
+          if (_authResult.user.emailVerified) {
+            await _authResult.user.reload();
+            UserModel _user = UserModel(
+                uid: _authResult.user.uid,
+                email: _authResult.user.email,
+                displayName: displayName,
+                phoneNumber: phoneNumber,
+                photoUrl: '',
+                accountCreated: Timestamp.now(),
+                geoPoints: geoPoint);
+            String _returnString = await dbController.createUser(_user);
+            if (_returnString == "success") {
+              retVal = "success";
+              u_id = FirebaseAuth.instance.currentUser.uid;
+            }
+          }
+        },
+      );
       //TODO
       // await FirebaseAuth.instance.verifyPhoneNumber(
       //     phoneNumber: phoneNumber,
@@ -139,38 +175,23 @@ class AuthController extends GetxController {
       //     },
       //     timeout: const Duration(minutes: 1),
       //     codeAutoRetrievalTimeout: (String verificationId) {});
-      Get.back();
-      Get.snackbar('Email Sent', 'Verification link is sent to $email',
-          duration: Duration(seconds: 10));
-      timer = Timer.periodic(Duration(seconds: 30), (timer) async {
-        if (_authResult.user.emailVerified) {
-          timer.cancel();
-          await _authResult.user.reload();
-          UserModel _user = UserModel(
-              uid: _authResult.user.uid,
-              email: _authResult.user.email,
-              displayName: displayName,
-              phoneNumber: phoneNumber,
-              photoUrl: null,
-              accountCreated: Timestamp.now(),
-              geoPoints: geoPoint);
-          String _returnString = await dbController.createUser(_user);
-          if (_returnString == "success") {
-            retVal = "success";
-            u_id = FirebaseAuth.instance.currentUser.uid;
-          }
-        } else {
-          // timer.cancel();
-          // _authResult.user.delete();
-          // Get.defaultDialog(
-          //     title: 'Email verification failed',
-          //     content: Padding(
-          //       padding: const EdgeInsets.all(10.0),
-          //       child: Text(
-          //           'Your email can not be verified. please type correct email.'),
-          //     ));
-        }
-      });
+      // Get.back();
+      // Get.snackbar('Email Sent', 'Verification link is sent to $email',
+      //     duration: Duration(seconds: 10));
+
+      //   timer = Timer.periodic(Duration(seconds: 10), (timer) async {
+      // else {
+      // timer.cancel();
+      // _authResult.user.delete();
+      // Get.defaultDialog(
+      //     title: 'Email verification failed',
+      //     content: Padding(
+      //       padding: const EdgeInsets.all(10.0),
+      //       child: Text(
+      //           'Your email can not be verified. please type correct email.'),
+      //     ));
+      //  }
+      //  });
     } on PlatformException catch (e) {
       retVal = e.message;
     } catch (error) {
@@ -178,7 +199,7 @@ class AuthController extends GetxController {
       Get.back();
       Get.snackbar("Error", error.message.toString(),
           snackPosition: SnackPosition.BOTTOM);
-      timer.cancel();
+//timer.cancel();
       return null;
     }
     return retVal;
@@ -202,7 +223,7 @@ class AuthController extends GetxController {
     await FirebaseAuth.instance.signOut();
     u_id = null;
     update();
-    Get.offAll(FirstPage());
+    // Get.offAll(FirstPage());
   }
 
   Future verifyEmail() {}
