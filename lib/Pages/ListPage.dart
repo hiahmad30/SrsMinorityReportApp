@@ -53,7 +53,7 @@ class _RatingListState extends State<RatingList> {
 
   @override
   Widget build(BuildContext context) {
-    String category = widget.category != null ? widget.category : '';
+    // String category = widget.category != null ? widget.category : '';
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -67,7 +67,9 @@ class _RatingListState extends State<RatingList> {
                   tooltip: 'SignOut',
                   icon: Icon(Icons.login_outlined),
                   onPressed: () async {
-                    await auth.signouUser();
+                    await auth.signouUser().then((value) {
+                      setState(() {});
+                    });
                   })
               : Container(),
         ],
@@ -131,7 +133,9 @@ class _RatingListState extends State<RatingList> {
                                 });
                               } else {
                                 Get.to(DetailEntry(
-                                  categoryEntry: category,
+                                  categoryEntry: widget.category != null
+                                      ? widget.category
+                                      : '',
                                 ));
                               }
                             },
@@ -166,7 +170,9 @@ class _RatingListState extends State<RatingList> {
                             itemBuilder: (BuildContext context, int index) {
                               if (listController.rating.docs[index]
                                   .get('Category')
-                                  .contains(category)) {
+                                  .contains(widget.category != null
+                                      ? widget.category
+                                      : '')) {
                                 return listController.rating.docs[index]
                                         .get('BussinessName')
                                         .toLowerCase()
@@ -198,7 +204,7 @@ class _RatingListState extends State<RatingList> {
   }
 
   Widget _CardList(BuildContext context, DocumentSnapshot document) {
-    var a = document.get("photoUrl");
+    String a = document.get("photoUrl");
     // double radioGroupV = db.calculateBlackExp(
     //     int.parse(document.get("blackExperience").toString()));
 
@@ -222,11 +228,7 @@ class _RatingListState extends State<RatingList> {
           ListTile(
             //  focusColor: Colors.black,
             // leading: Icon(Icons.arrow_drop_down_circle),
-            onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) =>
-                        DetailPage(documentSnapshot: document))),
+            onTap: () => Get.to(() => DetailPage(documentSnapshot: document)),
             title: Column(
               // mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,

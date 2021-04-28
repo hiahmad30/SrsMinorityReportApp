@@ -15,11 +15,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "244698211631-97il2b64nqlsgtt8omqvdta8b2kcs437.apps.googleusercontent.com",
+          "client_id": "244698211631-i6pinp9l1js4vslmbu7mfv3l3er04afu.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.EngrA.SRSRatingSystem",
-            "certificate_hash": "a3fef6b81e24c8c25a605f65b8e2d70540060e4a"
+            "certificate_hash": "ec466c8a6eb8c46e1956bcafaa4080a993076dfc"
           }
         },
         {

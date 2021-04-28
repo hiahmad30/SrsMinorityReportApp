@@ -50,11 +50,13 @@ class _SignupPageState extends State<SignupPage> {
       if (_returnString == "success") {
         {
           Get.back();
-          Get.offAll(() => RatingList());
+          Get.back();
+          Get.back();
+          //  Get.offAll(() => RatingList());
         }
       } else {
         await FirebaseAuth.instance.currentUser.delete();
-        Get.back();
+        //   Get.back();
       }
     } catch (error) {
       print(error.toString());
