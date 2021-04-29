@@ -25,8 +25,8 @@ class DatabaseController extends GetxController {
     return retVal;
   }
 
-  Future<String> createBussinessList(RatingModel bussinesslist) async {
-    String retVal = "error";
+  Future<bool> createBussinessList(RatingModel bussinesslist) async {
+    bool retVal = false;
     var bList = _firestore.collection("Bussiness List");
     try {
       await bList.doc().set({
@@ -45,14 +45,15 @@ class DatabaseController extends GetxController {
         'Contact': bussinesslist.phone,
         'rating': bussinesslist.ratingBar,
         'RatingCreated': Timestamp.now(),
+      }).then((value) {
+        retVal = true;
       });
-      retVal = "success";
+
+      return retVal;
     } catch (error) {
       print(error.toString());
-      return null;
+      return false;
     }
-    print(bList.doc().id);
-    return retVal;
   }
 
   // getReview();

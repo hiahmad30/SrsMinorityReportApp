@@ -9,9 +9,7 @@ class ListController extends GetxController {
   Future<void> onInit() async {
     // await db.open();
     // String id = Get.find<AuthController>().firebaseUser.uid;
-    ratingList.bindStream(FirebaseFirestore.instance
-        .collection("Bussiness List")
-        .snapshots()); //id)); //Stream Comming from
+    //id)); //Stream Comming from
     super.onInit();
   }
 

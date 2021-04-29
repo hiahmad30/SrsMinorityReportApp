@@ -71,23 +71,18 @@ class _DetailEntryState extends State<DetailEntry> {
     try {
       // Make random image name.
       int randomNumber = Random().nextInt(100000);
-      String imageLocation = 'images/image${randomNumber}.jpg';
+      String imageLocation = 'images/image$randomNumber.jpg';
 
       // Upload image to firebase.
       final Reference storageReference =
           FirebaseStorage.instance.ref().child(imageLocation);
       final UploadTask uploadTask = storageReference.putFile(image);
-      await uploadTask.whenComplete(() {
-        _addPathToDatabase(imageLocation);
+      await uploadTask.whenComplete(() async {
+        await _addPathToDatabase(imageLocation);
       });
     } catch (e) {
       print(e.message);
     }
-  }
-
-  Future<void> deletPic() {
-    pic = null;
-    if (mounted) setState(() {});
   }
 
   Future<void> _addPathToDatabase(String text) async {
@@ -100,6 +95,11 @@ class _DetailEntryState extends State<DetailEntry> {
     } catch (e) {
       print(e.message);
     }
+  }
+
+  void deletPic() {
+    pic = null;
+    if (mounted) setState(() {});
   }
 
   RatingModel _ratingModel = new RatingModel();
@@ -121,7 +121,7 @@ class _DetailEntryState extends State<DetailEntry> {
   }
 
   Future getAllData() async {
-    String result;
+    bool result;
 
     setState(() {
       _nameC.text.isEmpty ? _validateName = true : _validateName = false;
@@ -164,7 +164,7 @@ class _DetailEntryState extends State<DetailEntry> {
         print(e.toString());
       }
     }
-    if (result == "success") {
+    if (result == true) {
       await _uploadImageToFirebase(pic).then((value) async {
         clearAllTxt();
         await showMyDialog(context, "Success", "Data is saved successfully");
