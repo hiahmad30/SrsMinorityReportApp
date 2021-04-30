@@ -168,11 +168,23 @@ class _RatingListState extends State<RatingList> {
                         return ListView.builder(
                             itemCount: listController.rating.docs.length,
                             itemBuilder: (BuildContext context, int index) {
-                              if (listController.rating.docs[index]
-                                  .get('Category')
-                                  .contains(widget.category != null
-                                      ? widget.category
-                                      : '')) {
+                              if (widget.category != null) {
+                                if (listController.rating.docs[index]
+                                        .get('Category') ==
+                                    widget.category) {
+                                  return listController.rating.docs[index]
+                                          .get('BussinessName')
+                                          .toLowerCase()
+                                          .contains(searchController.text
+                                              .toLowerCase())
+                                      ? _CardList(
+                                          context,
+                                          listController.rating.docs[index],
+                                        )
+                                      : Container();
+                                } else
+                                  return Container();
+                              } else {
                                 return listController.rating.docs[index]
                                         .get('BussinessName')
                                         .toLowerCase()
@@ -183,8 +195,7 @@ class _RatingListState extends State<RatingList> {
                                         listController.rating.docs[index],
                                       )
                                     : Container();
-                              } else
-                                Container();
+                              }
                             });
                       } else {
                         return Container(

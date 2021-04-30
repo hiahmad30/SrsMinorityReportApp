@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 import 'package:minorityreport/Models/ratingModel.dart';
 import 'package:minorityreport/Pages/ListPage.dart';
 import 'package:minorityreport/Utils/Consts.dart';
+import 'package:minorityreport/ViewModel/loadinWidget.dart';
 import 'package:minorityreport/controller/dbController.dart';
 
 class DetailEntry extends StatefulWidget {
@@ -122,7 +123,7 @@ class _DetailEntryState extends State<DetailEntry> {
 
   Future getAllData() async {
     bool result;
-
+    Get.dialog(LoadingWidget());
     setState(() {
       _nameC.text.isEmpty ? _validateName = true : _validateName = false;
       _addressLine1C.text.isEmpty ? _validateAdd = true : _validateAdd = false;
@@ -142,6 +143,7 @@ class _DetailEntryState extends State<DetailEntry> {
         //   !_validatesD //&&
         //  !_validateEm
         ) {
+      await _uploadImageToFirebase(pic);
       try {
         _ratingModel = RatingModel(
             bussinessName: _nameC.text,
@@ -159,19 +161,17 @@ class _DetailEntryState extends State<DetailEntry> {
             photoUrl: _uploadedFileURL,
             blackExperience: _radiogropValue,
             ratingBar: _rating);
+
         result = await _databaseService.createBussinessList(_ratingModel);
       } catch (e) {
         print(e.toString());
       }
     }
     if (result == true) {
-      await _uploadImageToFirebase(pic).then((value) async {
-        clearAllTxt();
-        await showMyDialog(context, "Success", "Data is saved successfully");
-        Get.off(RatingList(
-          category: widget.categoryEntry,
-        ));
-      });
+      clearAllTxt();
+      Get.back();
+      await showMyDialog(context, "Success", "Data is saved successfully");
+      Get.back();
     } else {
       //  clearAllTxt();
       Get.snackbar(

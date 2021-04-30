@@ -63,9 +63,11 @@ class _DetailPageState extends State<DetailPage> {
           DialogButton(
             onPressed: () async {
               if (reviewContr.text.isNotEmpty) {
-                addNewReviewdb(context);
                 _avgRating = _rating;
+                await addNewReviewdb(context);
+                getReview();
                 await updatereview();
+                setState(() {});
               }
             },
             child: Text(
@@ -78,9 +80,10 @@ class _DetailPageState extends State<DetailPage> {
 
   Future<void> getReview() async {
     int tem = 0;
+
     try {
-      _avgRating =
-          double.parse((widget.documentSnapshot.get("rating").toString()));
+      _avgRating = 0;
+      // double.parse((widget.documentSnapshot.get("rating").toString()));
       await _firebaseFirestore
           .collection("Reviews")
           .where("BussinessId", isEqualTo: widget.documentSnapshot.id)
@@ -88,8 +91,10 @@ class _DetailPageState extends State<DetailPage> {
           .then((value) async {
         value.docs.forEach((element) {
           var temp = element.data()["Rating"];
-          if (_avgRating != 0 && tem > 0) _avgRating += temp;
-          tem++;
+          if (temp != null) {
+            _avgRating += temp;
+            tem++;
+          }
         });
         if (tem != 0) _avgRating = _avgRating / tem;
         await updatereview();
@@ -115,7 +120,10 @@ class _DetailPageState extends State<DetailPage> {
       _avgRating =
           double.parse((widget.documentSnapshot.get("rating").toString()));
       print("Uid " + u_id);
-      await _firebaseFirestore.collection("Reviews").doc(u_id).set({
+      await _firebaseFirestore
+          .collection("Reviews")
+          .doc(widget.documentSnapshot.id + "-" + u_id)
+          .set({
         "Rating": _rating,
         "BName": widget.documentSnapshot.get("BussinessName"),
         "BussinessId": widget.documentSnapshot.id,

@@ -112,7 +112,7 @@ class AuthController extends GetxController {
         confirmTextColor: Colors.white,
         onConfirm: () async {
           await _authResult.user.reload();
-          if (_authResult.user.emailVerified) {
+          if (FirebaseAuth.instance.currentUser.emailVerified) {
             await _authResult.user.reload();
             UserModel _user = UserModel(
                 uid: _authResult.user.uid,
@@ -126,6 +126,7 @@ class AuthController extends GetxController {
             if (_returnString == "success") {
               retVal = "success";
               u_id = FirebaseAuth.instance.currentUser.uid;
+              Get.back();
             }
           }
         },

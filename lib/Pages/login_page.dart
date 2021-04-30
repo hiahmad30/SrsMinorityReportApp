@@ -119,7 +119,7 @@ class _LoginPageState extends State<LoginPage> {
             style: TextStyle(color: MyColors.PrimaryColor),
           ),
           onPressed: () {
-            Get.to(LoginemailorPhone());
+            Get.to(() => LoginemailorPhone());
           },
         ),
       ],
