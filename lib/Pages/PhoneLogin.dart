@@ -23,9 +23,10 @@ class _PhoneLoginState extends State<PhoneLogin> {
   FirebaseAuth _auth = FirebaseAuth.instance;
 
   Future<void> verifyPhone() async {
-    final PhoneCodeSent smsOTPSent = (String verId, [int forceCodeResend]) {
+    final PhoneCodeSent smsOTPSent =
+        (String verId, [int forceCodeResend]) async {
       this.verificationId = verId;
-      smsOTPDialog(context).then((value) {
+      await smsOTPDialog(context).then((value) {
         print('sign in');
       });
     };
@@ -35,6 +36,7 @@ class _PhoneLoginState extends State<PhoneLogin> {
           codeAutoRetrievalTimeout: (String verId) {
             //Starts the phone number verification process for the given phone number.
             //Either sends an SMS with a 6 digit code to the phone number specified, or sign's the user in and [verificationCompleted] is called.
+
             this.verificationId = verId;
           },
           codeSent:
